@@ -5,3 +5,12 @@ node_js:
 
 notifications:
   email: false
+
+# https://docs.travis-ci.com/user/deployment/heroku/
+deploy:
+  provider: heroku
+  api_key:
+    secure: NzeaqAQRNY0DTC+OZu4Xazbkr5U+R1FXY0mFzJYkLpPHK43bNKMcKC4ocbh/Z9rDWwSBXkCATIJ6G+ddqmYg6c9hF/gYrGA2/cjIkfn71cOY7UBsZAYhDnKfrMOXg9bllM+g0DRZTtuPjiDlzWiGAOZHNh3n1atwnAHLBxORZDcOgb8jfeeTT2WHHQGnz6Cqcqa3+znVPAIzKfCHAjFEKNKsYXnNkupH9AVUvKeF2CrmKmCABtXFbiE0WWkgRjb9JMhUaFC+ktplmhn75p8C3SnVUILe1ZrlBzFypafhZIvvgsoLuLoxcJgwK/YEjJNwrBkzz91AukC7FO8/k9XhD7pzFqL5ERaOD+bVo7rK++hDnYBr2qf56m/YZ8eSEWOg7EzW0YTQ3LURx75t8jROiG6hYPgUQa2ir2k62zzDPSa+re9jyFOac3HWSsJJdftnTnICZq0RdGBgE5DLAEfq9HQ2apKJcQwY87GYggqgF1simE4kUsc6a/aAP2EMBIg8Vs+s1WAi0VVwTZv4v7i0knChyeGyBRdaOcROpYDss/BuPUGt26l+tXGD3GMZiUjA8EYonO7LPkU1WdPUBAtv+6WbaOuE6VcTFTlxJm2H1pQ5ppyL2BF+Mj4yEROBZfk6vI12W7NX3MK8QSEWIl6xTvC+Dxv13ogJr/JxT6YnFts=
+  app: welovecoding
+  on:
+    repo: welovecoding/welovecoding
