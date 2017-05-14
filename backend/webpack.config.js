@@ -48,12 +48,6 @@ const sourceMap = (process.env.TEST || process.env.NODE_ENV !== 'production')
   : [];
 
 const basePlugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      __DEV__: process.env.NODE_ENV !== 'production',
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-    }
-  }),
   new webpack.NoEmitOnErrorsPlugin()
 ].concat(sourceMap);
 

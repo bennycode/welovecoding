@@ -2,14 +2,14 @@ import * as express from 'express';
 import * as path from 'path';
 
 const app = express();
+// Heroku sets the port on $PORT
 const port = process.env.PORT || 8080;
 
-// app.get('/', (_, response) => {
-//   response.send('<p>Hello from Travis CI!</p>');
-// });
+app.get('/', (_, response) => {
+  response.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
 // serve frontend
-console.log(__dirname);
 app.use(express.static(path.join(__dirname, 'frontend')));
 
 const server = app.listen(port, () => {
