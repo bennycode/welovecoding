@@ -1,19 +1,20 @@
 {
   "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
   "dependencies": {
-    "express": "4.15.2"
+    "@welovecoding/backend": "./backend",
+    "@welovecoding/frontend": "./frontend"
   },
   "devDependencies": {
-    "@types/node": "6.x"
   },
-  "name": "welovecoding",
+  "name": "@welovecoding/welovecoding",
   "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/welovecoding/welovecoding.git"
   },
   "scripts": {
-    "start": "node src/server.js"
+    "preinstall": "./build.sh",
+    "start": "cd backend && npm run start-prod"
   },
   "version": "0.0.1"
 }

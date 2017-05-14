@@ -85,6 +85,11 @@ const plugins = basePlugins
 
   module.exports = {
     entry: applicationEntries,
+    target: 'node',
+    node: {
+      __dirname: false,
+      __filename: false
+    },
 
     output: {
       path: path.join(__dirname, 'dist'),
