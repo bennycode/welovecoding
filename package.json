@@ -1,0 +1,16 @@
+{
+  "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
+  "dependencies": {
+    "express": "4.15.2"
+  },
+  "name": "welovecoding",
+  "private": true,
+  "repository": {
+    "type": "git",
+	"url": "git+https://github.com/welovecoding/welovecoding.git"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "version": "0.0.1"
+}
