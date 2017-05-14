@@ -3,11 +3,14 @@
   "dependencies": {
     "express": "4.15.2"
   },
+  "devDependencies": {
+    "@types/node": "6.x"
+  },
   "name": "welovecoding",
   "private": true,
   "repository": {
     "type": "git",
-	"url": "git+https://github.com/welovecoding/welovecoding.git"
+    "url": "git+https://github.com/welovecoding/welovecoding.git"
   },
   "scripts": {
     "start": "node src/server.js"
