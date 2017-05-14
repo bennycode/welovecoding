@@ -8,7 +8,7 @@ cd backend && npm install && npm run build
 cd $CURRENT
 
 # build frontend
-cd frontend && npm install && npm run build
+cd frontend && npm install && npm install --only=dev && npm run build
 
 cd $CURRENT
 
