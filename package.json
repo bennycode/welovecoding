@@ -14,7 +14,7 @@
     "url": "git+https://github.com/welovecoding/welovecoding.git"
   },
   "scripts": {
-    "preinstall": "./build.sh",
+    "preinstall": "node ./build.js",
     "start": "cd backend && npm run start-prod"
   },
   "version": "0.0.1"
