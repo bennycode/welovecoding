@@ -5,6 +5,7 @@
     "@welovecoding/frontend": "./frontend"
   },
   "devDependencies": {
+    "fs-extra": "3.0.1"
   },
   "name": "@welovecoding/welovecoding",
   "private": true,
@@ -13,7 +14,7 @@
     "url": "git+https://github.com/welovecoding/welovecoding.git"
   },
   "scripts": {
-    "preinstall": "./build.sh",
+    "postinstall": "node ./build.js",
     "start": "cd backend && npm run start-prod"
   },
   "version": "0.0.1"
