@@ -5,6 +5,7 @@
     "@welovecoding/frontend": "./frontend"
   },
   "devDependencies": {
+    "fs-extra": "3.0.1"
   },
   "name": "@welovecoding/welovecoding",
   "private": true,
