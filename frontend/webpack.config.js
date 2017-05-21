@@ -1,7 +1,6 @@
-const path              = require('path');
-const webpack           = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJSPlugin    = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -13,12 +12,12 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 const loaders = {};
 
-loaders.tslint =  {
+loaders.tslint = {
   test: /\.(tsx?)$/,
   enforce: 'pre',
   loader: 'tslint-loader',
-  options: { /* Loader options go here */ }
-}
+  options: {/* Loader options go here */}
+};
 
 loaders.tsx = {
   test: /\.(tsx?)$/,
@@ -92,7 +91,7 @@ loaders.image = {
 //
 
 const sourceMap = (process.env.TEST || process.env.NODE_ENV !== 'production')
-  ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.tsx?$/ })]
+  ? [new webpack.SourceMapDevToolPlugin({filename: null, test: /\.tsx?$/})]
   : [];
 
 const basePlugins = [
@@ -109,7 +108,7 @@ const basePlugins = [
   }),
   new webpack.NoEmitOnErrorsPlugin(),
   new CopyWebpackPlugin([
-    { from: 'assets', to: 'assets' }
+    {from: 'assets', to: 'assets'}
   ]),
   extractSass
 ].concat(sourceMap);
@@ -128,69 +127,69 @@ const prodPlugins = [
 const plugins = basePlugins
   .concat(IS_PRODUCTION ? prodPlugins : devPlugins);
 
-  //
-  // ENTRY
-  //
+//
+// ENTRY
+//
 
-  const applicationEntries = IS_PRODUCTION ? ['./src/index'] : [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://0.0.0.0:8081',
-    'webpack/hot/only-dev-server',
-    './src/index'
-  ];
+const applicationEntries = IS_PRODUCTION ? ['./src/index'] : [
+  'react-hot-loader/patch',
+  'webpack-dev-server/client?http://0.0.0.0:8081',
+  'webpack/hot/only-dev-server',
+  './src/index'
+];
 
-  let devtool = 'inline-source-map';
+let devtool = 'inline-source-map';
 
-  if (IS_PRODUCTION) {
-    devtool = 'source-map';
-  }
+if (IS_PRODUCTION) {
+  devtool = 'source-map';
+}
 
-  module.exports = {
-    entry: applicationEntries,
+module.exports = {
+  entry: applicationEntries,
 
-    output: {
-      path: path.join(__dirname, 'dist'),
-      filename: '[name].[hash].js',
-      publicPath: '/',
-      sourceMapFilename: '[name].[hash].js.map',
-      chunkFilename: '[id].chunk.js'
-    },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].[hash].js',
+    publicPath: '/',
+    sourceMapFilename: '[name].[hash].js.map',
+    chunkFilename: '[id].chunk.js'
+  },
 
-    devtool: devtool,
+  devtool: devtool,
 
-    resolve: {
-      modules: [
+  resolve: {
+    modules: [
       path.resolve('./'),
-        'node_modules'
-      ],
-      extensions: [
-        '.scss',
-        '.tsx',
-        '.ts',
-        '.js',
-        '.json'
-      ]
-    },
+      'node_modules'
+    ],
+    extensions: [
+      '.scss',
+      '.tsx',
+      '.ts',
+      '.js',
+      '.json'
+    ]
+  },
 
-    plugins: plugins,
+  plugins: plugins,
 
-    devServer: {
-      headers: {'Access-Control-Allow-Origin': '*'},
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      stats: {colors: true},
-      port: 8081,
-    },
+  devServer: {
+    headers: {'Access-Control-Allow-Origin': '*'},
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    stats: {colors: true},
+    port: 8081,
+  },
 
-    module: {
-      rules: [
-        loaders.scss,
-        loaders.tsx,
-        loaders.tslint,
-        loaders.image,
-        loaders.ttfeot,
-        loaders.woff
-      ]
-    }
-  };
+  module: {
+    rules: [
+      loaders.scss,
+      loaders.tsx,
+      loaders.tslint,
+      loaders.image,
+      loaders.ttfeot,
+      loaders.woff
+    ]
+  }
+};
