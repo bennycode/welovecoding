@@ -175,7 +175,12 @@ const plugins = basePlugins
     plugins: plugins,
 
     devServer: {
-      historyApiFallback: { index: '/' }
+      headers: {'Access-Control-Allow-Origin': '*'},
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      stats: {colors: true},
+      port: 8081,
     },
 
     module: {
