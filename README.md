@@ -8,4 +8,5 @@ Website for free programming tutorials and screencasts.
 npm run dev
 ```
 
+- Backend will be accessible on http://localhost:8080/
 - Frontend will be accessible on http://localhost:8081/
