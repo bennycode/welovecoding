@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "module": "commonjs",
     "outDir": "dist/",
     "baseUrl": "./",

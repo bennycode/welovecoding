@@ -1,21 +1,22 @@
 import * as express from 'express';
+import * as http from 'http';
 import * as path from 'path';
 
-const app = express();
-const port = process.env.PORT || 8080;
+const app: express.Application = express();
+const port: number = process.env.PORT || 8080;
 
-app.get('/', (_, response) => {
+app.get('/', (request: express.Request, response: express.Response): void => {
   response.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
-app.get('/rest', (_, response) => {
+app.get('/rest', (request: express.Request, response: express.Response): void => {
   response.setHeader('Content-Type', 'application/json');
   response.send(JSON.stringify({data: 'Hello, World!'}));
 });
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-const server = app.listen(port, () => {
-  const port = server.address().port;
+const server: http.Server = app.listen(port, () => {
+  const port: number = server.address().port;
   console.log(`Server is running. Try http://localhost:${port}/`);
 });
