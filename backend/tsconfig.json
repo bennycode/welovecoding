@@ -19,8 +19,7 @@
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": false,
-    "inlineSourceMap": true,
-    "noEmitHelpers": true
+    "inlineSourceMap": true
   },
   "exclude": [
     "node_modules",
