@@ -20,7 +20,9 @@
       fetch('rest', {
         method: 'get'
       }).then((response) => {
-        console.log('Hello backend!');
+        return response.json();
+      }).then((payload) => {
+        console.log('Hello from backend', payload);
       }).catch((error) => {
         console.error(error.message);
       });
