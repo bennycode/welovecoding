@@ -18,7 +18,9 @@ renderApp(App);
 
 if (module.hot) {
   module.hot.accept(
-    './App',
-    () => renderApp(App)
+    ['./App.tsx'],
+    () => {
+      renderApp((require('./App') as any).default);
+    }
   );
 }
