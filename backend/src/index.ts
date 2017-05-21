@@ -11,7 +11,7 @@ app.get('/', (request: express.Request, response: express.Response): void => {
 
 app.get('/rest', (request: express.Request, response: express.Response): void => {
   response.setHeader('Content-Type', 'application/json');
-  response.send(JSON.stringify({data: 'Hello, World!'}));
+  response.send(JSON.stringify({data: 'I run without webpack. 😛'}));
 });
 
 app.use(express.static(path.join(__dirname, 'frontend')));
