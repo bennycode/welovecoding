@@ -22,5 +22,6 @@
     "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
     "build": "cross-env NODE_ENV=production && webpack",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js"
-  }
+  },
+  "version": "0.0.0"
 }
