@@ -1,14 +1,16 @@
 {
-  "compileOnSave": false,
   "buildOnSave": false,
+  "compileOnSave": false,
   "compilerOptions": {
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "module": "commonjs",
     "outDir": "dist/",
     "baseUrl": "./",
-    "paths" : {
-      "src/*": ["./src/*"]
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ]
     },
     "target": "es6",
     "jsx": "react",
@@ -20,12 +22,12 @@
     "inlineSourceMap": true,
     "noEmitHelpers": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/*.ts"
-  ],
   "exclude": [
     "node_modules",
     "dist"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/*.ts"
   ]
 }
