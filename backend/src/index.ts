@@ -8,8 +8,9 @@ app.get('/', (_, response) => {
   response.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
-app.get('/test', (_, response) => {
-  response.send('Testing...\n');
+app.get('/rest', (_, response) => {
+  response.setHeader('Content-Type', 'application/json');
+  response.send(JSON.stringify({data: 'Hello, World!'}));
 });
 
 app.use(express.static(path.join(__dirname, 'frontend')));

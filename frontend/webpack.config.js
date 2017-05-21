@@ -133,8 +133,6 @@ const plugins = basePlugins
 
 const applicationEntries = IS_PRODUCTION ? ['./src/index'] : [
   'react-hot-loader/patch',
-  'webpack-dev-server/client?http://0.0.0.0:8081',
-  'webpack/hot/only-dev-server',
   './src/index'
 ];
 
@@ -174,12 +172,14 @@ module.exports = {
   plugins: plugins,
 
   devServer: {
-    headers: {'Access-Control-Allow-Origin': '*'},
     historyApiFallback: true,
     hot: true,
     inline: true,
     stats: {colors: true},
     port: 8081,
+    proxy: {
+      '/rest': 'http://localhost:8080'
+    }
   },
 
   module: {
