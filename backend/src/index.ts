@@ -9,6 +9,10 @@ app.get('/', (_, response) => {
   response.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
+app.get('/test', (_, response) => {
+  response.send('Testing...\n');
+});
+
 // serve frontend
 app.use(express.static(path.join(__dirname, 'frontend')));
 
