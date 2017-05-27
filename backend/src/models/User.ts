@@ -35,6 +35,21 @@ const defaultAttachOptions = {
 };
 const options = defaultAttachOptions;
 
+/**
+ * Initially this table had the fields:
+ * - ID            BIGINT(20)
+ * - ADMIN         TINYINT(1)
+ * - CREATED       DATETIME
+ * - EMAIL         VARCHAR(255)
+ * - LASTMODIFIED  DATETIME
+ * - NAME          VARCHAR(255)
+ * - SLUG          VARCHAR(255)
+ * - CREATOR_ID    BIGINT(20)
+ * - LASTEDITOR_ID BIGINT(20)
+ */
+
+
+
 @Table({
   timestamps: true
 })
