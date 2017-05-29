@@ -49,6 +49,13 @@ const options = defaultAttachOptions;
  */
 
 
+/**
+ * DISCLAIMER:
+ * A LOT OF CODE HERE WAS COPIED FROM https://github.com/madhurjain/passport-local-sequelize
+ * BECAUSE OF THE FACT, THAT NOT TESTS ARE AVAILABLE YET, THIS CODE MIGHT HAVE SOME WEIRDNESS.
+ * I JUST MADE IT WORK WITH sequelize-typescript.
+ * THIS SHOULD BE CHANGED AS SOON AS SOME TESTS ARE THERE.
+ */
 
 @Table({
   timestamps: true
