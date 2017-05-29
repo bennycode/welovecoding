@@ -264,9 +264,6 @@ class User extends Model<User> {
       queryParameters[options.usernameField] = username;
 
       const query = this.find({ where: queryParameters });
-      // if (options.selectFields) {
-      //     query.select(options.selectFields);
-      // }
       query.then(function (user) {
         cb(null, user);
       });

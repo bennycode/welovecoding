@@ -27,7 +27,7 @@ const CATEGORIES = ['java', 'python', 'elm'];
 function populateCategories () {
   console.log('POPULATING CATEGORIES');
   CATEGORIES.forEach(name => {
-    const category = new Category​​({name});
+    const category = new Category({name});
     category.save();
   });
 }
@@ -35,6 +35,7 @@ function populateCategories () {
 const AUTHORS = ['gronkh', 'coolyoutubeguy', 'thecomputerchannel'];
 
 function populateAuthors () {
+  console.log('POPULATING AUTHORS');
   AUTHORS.forEach(name => {
     const author = new Author({username: name, channelUrl: `https://youtube.com/u/${name}`});
     author.save();

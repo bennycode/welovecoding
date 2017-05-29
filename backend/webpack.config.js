@@ -1,12 +1,13 @@
-const path              = require('path');
-const webpack           = require('webpack');
-const fs                = require('fs');
-const _                 = require('lodash');
+const path = require('path');
+const webpack = require('webpack');
+const fs = require('fs');
+const _ = require('lodash');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 let nodeModules = {};
 
+// needed to make webpack work with node
 fs.readdirSync('node_modules')
   .filter(function(x) {
     return ['.bin'].indexOf(x) === -1;

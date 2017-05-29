@@ -1,12 +1,12 @@
-import * as express      from "express";
-import * as path         from "path";
-import * as bodyParser   from 'body-parser';
-import * as passport     from 'passport';
+import * as express from "express";
+import * as path from "path";
+import * as bodyParser from 'body-parser';
+import * as passport from 'passport';
 import * as cookieParser from 'cookie-parser';
-import * as session      from 'express-session';
+import * as session from 'express-session';
 
-import sequelize         from 'src/models';
-import User              from 'src/models/User';
+import sequelize from 'src/models';
+import User from 'src/models/User';
 
 sequelize;
 
@@ -20,7 +20,7 @@ export default class Server {
     this.api();
   }
 
-  middleware (): void {
+  middleware(): void {
 
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(cookieParser());
@@ -47,7 +47,6 @@ export default class Server {
     // curl --data 'username=tom&password=mypassword' http://localhost:8080/login
     this.app.post('/login',
       function (req, res, next) {
-        // console.log('LOGIN', req.body.username, req.body.password);
         return passport.authenticate('local', {
           failureRedirect: '/no',
           successRedirect: '/yesss'

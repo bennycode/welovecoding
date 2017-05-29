@@ -1,5 +1,5 @@
 /**
- * DROP ALL TABLES ARE CRATE THEM AGAIN
+ * DROP ALL TABLES AND CREATE THEM AGAIN
  */
 import sequelize from 'src/models';
 
