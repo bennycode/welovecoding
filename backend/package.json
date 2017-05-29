@@ -1,26 +1,59 @@
 {
-  "dependencies": {
-    "concurrently": "3.4.0",
-    "cross-env": "5.0.0",
-    "express": "4.15.3",
-    "nodemon": "1.11.0"
-  },
-  "devDependencies": {
-    "@types/express": "4.0.35",
-    "@types/node": "7.0.21",
-    "ts-loader": "2.1.0",
-    "tslint": "5.2.0",
-    "tslint-loader": "3.5.3",
-    "typescript": "2.3.2"
-  },
   "main": "index.js",
   "name": "@welovecoding/backend",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
-    "build": "cross-env NODE_ENV=production && tsc",
-    "start-prod": "cross-env NODE_PATH=./dist && node dist/index.js"
+    "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
+    "build": "cross-env NODE_ENV=production && webpack",
+    "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
+    "database:populate": "cross-env NODE_PATH=./dist && node dist/populate_database.ts.js",
+    "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js"
   },
-  "version": "0.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/welovecoding/welovecoding.git"
+  },
+  "keywords": [
+    "tutorials",
+    "computer",
+    "science"
+  ],
+  "bugs": {
+    "url": "https://github.com/welovecoding/welovecoding/issues"
+  },
+  "homepage": "https://github.com/welovecoding/welovecoding#readme",
+  "devDependencies": {
+    "concurrently": "3.4.0",
+    "nodemon": "1.11.0",
+    "sqlite3": "3.1.8"
+  },
+  "dependencies": {
+    "@types/body-parser": "1.16.3",
+    "@types/express": "4.0.35",
+    "@types/express-session": "1.15.0",
+    "@types/node": "7.0.18",
+    "@types/passport-local": "1.0.30",
+    "@types/sequelize": "4.0.55",
+    "bluebird": "3.5.0",
+    "body-parser": "1.17.2",
+    "cookie-parser": "1.4.3",
+    "concurrently": "3.4.0",
+    "cross-env": "5.0.0",
+    "crypto": "0.0.3",
+    "express": "4.15.2",
+    "express-session": "1.15.3",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "nodemon": "1.11.0",
+    "reflect-metadata": "0.1.10",
+    "sequelize": "3.30.4",
+    "sequelize-typescript": "0.3.1",
+    "ts-loader": "2.0.3",
+    "tslint": "5.2.0",
+    "tslint-loader": "3.5.3",
+    "typescript": "2.3.2",
+    "webpack": "2.5.1"
+  }
 }
