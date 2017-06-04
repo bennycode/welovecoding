@@ -1,9 +1,10 @@
-import * as express from "express";
-import * as path from "path";
 import * as bodyParser from 'body-parser';
-import * as passport from 'passport';
 import * as cookieParser from 'cookie-parser';
+import * as express from 'express';
+import * as passport from 'passport';
+import * as path from 'path';
 import * as session from 'express-session';
+import User from 'src/models/User';
 
 export default class Server {
   public app: express.Application;
@@ -23,11 +24,9 @@ export default class Server {
     this.app.use(passport.initialize());
     this.app.use(passport.session());
 
-    /*
      passport.use(User.createStrategy());
      passport.serializeUser(User.serializeUser());
      passport.deserializeUser(User.deserializeUser());
-     */
   }
 
   public api(): void {
@@ -40,7 +39,7 @@ export default class Server {
       response.send(JSON.stringify({data: 'I run with webpack.'}));
     });
 
-    // curl --data 'username=tom&password=mypassword' http://localhost:8080/login
+    // curl --data "username=tom&password=mypassword" http://localhost:8080/login
     this.app.post('/login',
       function (req, res, next) {
         return passport.authenticate('local', {
