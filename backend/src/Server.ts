@@ -4,6 +4,7 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
+import CategoryDTO from "src/api/v1/dto/CategoryDTO";
 import User from 'src/models/User';
 
 export default class Server {
@@ -34,6 +35,8 @@ export default class Server {
       response.json({data: 'Hello, World!'});
     });
 
+    this.setupLegacyAPI();
+
     // curl --data "username=tom&password=mypassword" http://localhost:8080/login
     this.app.post('/login',
       function (req, res, next) {
@@ -46,6 +49,34 @@ export default class Server {
         res.redirect('/');
       }
     );
+  }
+
+  private setupLegacyAPI() {
+    // Fake data
+    const categories = [];
+    let category = undefined;
+
+    category = new CategoryDTO(1, "Windows Phone");
+    category.color = "#19A2DE";
+    categories.push(category);
+
+    category = new CategoryDTO(2, "Java");
+    category.color = "#E61400";
+    categories.push(category);
+
+    category = new CategoryDTO(2, "PHP");
+    category.color = "#643EBF";
+    categories.push(category);
+
+    // Sort result
+    categories.sort(function (category: CategoryDTO, anotherCategory: CategoryDTO) {
+      return category.name.localeCompare(anotherCategory.name);
+    });
+
+    // Issue response
+    this.app.get('/rest/service/v1/categories', (request: express.Request, response: express.Response): void => {
+      response.json(categories);
+    });
   }
 
   public config(): void {
