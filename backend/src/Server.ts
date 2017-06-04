@@ -21,7 +21,6 @@ export default class Server {
   }
 
   middleware(): void {
-
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(cookieParser());
     this.app.use(session({ secret: 'super-secret' }));
@@ -41,7 +40,7 @@ export default class Server {
 
     this.app.get('/rest', (request: express.Request, response: express.Response): void => {
       response.setHeader('Content-Type', 'application/json');
-      response.send(JSON.stringify({data: 'I run without webpack. 😛'}));
+      response.send(JSON.stringify({data: 'I run with webpack.'}));
     });
 
     // curl --data 'username=tom&password=mypassword' http://localhost:8080/login
