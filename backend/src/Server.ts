@@ -16,18 +16,18 @@ export default class Server {
   }
 
   middleware(): void {
-    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.urlencoded({extended: true}));
     this.app.use(cookieParser());
-    this.app.use(session({ secret: 'super-secret' }));
+    this.app.use(session({secret: 'super-secret'}));
 
-    /*
     this.app.use(passport.initialize());
     this.app.use(passport.session());
 
-    passport.use(User.createStrategy());
-    passport.serializeUser(User.serializeUser());
-    passport.deserializeUser(User.deserializeUser());
-    */
+    /*
+     passport.use(User.createStrategy());
+     passport.serializeUser(User.serializeUser());
+     passport.deserializeUser(User.deserializeUser());
+     */
   }
 
   public api(): void {
@@ -48,7 +48,7 @@ export default class Server {
           successRedirect: '/yesss'
         })(req, res, next);
       },
-      function(_, res) {
+      function (_, res) {
         res.redirect('/');
       }
     );
