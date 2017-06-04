@@ -57,9 +57,7 @@ const options = defaultAttachOptions;
  * THIS SHOULD BE CHANGED AS SOON AS SOME TESTS ARE THERE.
  */
 
-@Table({
-  timestamps: true
-})
+@Table({timestamps: true})
 class User extends Model<User> {
   @Column({
     allowNull: false
@@ -327,6 +325,6 @@ class User extends Model<User> {
       return new LocalStrategy(options, User.authenticate());
   };
 
-};
+}
 
 export default User;

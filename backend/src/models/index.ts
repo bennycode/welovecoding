@@ -8,9 +8,7 @@ import User from './User';
 import Video from './Video';
 
 // connect to the database
-const sequelize = new Sequelize({
-  ...db
-});
+const sequelize = new Sequelize({...db});
 
 sequelize.addModels([Author, Category, Comment, Playlist, User, Video]);
 

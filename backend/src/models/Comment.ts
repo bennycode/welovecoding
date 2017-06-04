@@ -7,9 +7,7 @@ import Playlist from './Playlist';
  * Initially this looked different, there was a commentbag, TODO explain more
  */
 
-@Table({
-  timestamps: true
-})
+@Table({timestamps: true})
 class Comment extends Model<Comment> {
   @Column
   text: string;
@@ -34,6 +32,6 @@ class Comment extends Model<Comment> {
 
   @BelongsTo(() => Playlist, 'playlistId')
   playlist: Playlist;
-};
+}
 
 export default Comment;

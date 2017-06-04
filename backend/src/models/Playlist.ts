@@ -4,7 +4,7 @@ const levels = {
   'beginner': 'beginner',
   'intermediate': 'intermediate',
   'expert': 'expert'
-}
+};
 
 type Level = keyof typeof levels;
 
@@ -27,9 +27,7 @@ type Level = keyof typeof levels;
  * - LASTEDITOR_ID (BIGINT(20))
  */
 
-@Table({
-  timestamps: true
-})
+@Table({timestamps: true})
 class Playlist extends Model<Playlist> {
   @Column
   slug: string;
@@ -46,6 +44,6 @@ class Playlist extends Model<Playlist> {
   @Column
   provider: string;
 
-};
+}
 
 export default Playlist;

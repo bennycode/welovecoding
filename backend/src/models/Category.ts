@@ -12,9 +12,7 @@ import {Table, Column, Model} from 'sequelize-typescript';
  * - LASTEDITOR_ID (BIGINT(20))
  */
 
-@Table({
-  timestamps: true
-})
+@Table({timestamps: true})
 class Category extends Model<Category> {
   @Column({
     allowNull: false
@@ -29,6 +27,6 @@ class Category extends Model<Category> {
 
   @Column
   description: string;
-};
+}
 
 export default Category;

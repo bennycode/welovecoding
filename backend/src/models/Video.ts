@@ -20,9 +20,7 @@ import Author from './Author';
  * - ORDERING        (INT(11))
  */
 
-@Table({
-  timestamps: true
-})
+@Table({timestamps: true})
 class Video extends Model<Video> {
   @Column
   name: string;
@@ -42,6 +40,6 @@ class Video extends Model<Video> {
 
   @BelongsTo(() => Author, 'authorId')
   author: Author;
-};
+}
 
 export default Video;
