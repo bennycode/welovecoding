@@ -5,11 +5,6 @@ import * as passport from 'passport';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 
-import sequelize from 'src/models';
-import User from 'src/models/User';
-
-sequelize;
-
 export default class Server {
   public app: express.Application;
 
