@@ -25,12 +25,14 @@ export default class Server {
     this.app.use(cookieParser());
     this.app.use(session({ secret: 'super-secret' }));
 
+    /*
     this.app.use(passport.initialize());
     this.app.use(passport.session());
 
     passport.use(User.createStrategy());
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
+    */
   }
 
   public api(): void {
