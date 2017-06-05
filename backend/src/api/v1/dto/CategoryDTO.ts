@@ -5,8 +5,8 @@ import PlaylistDTO from "src/api/v1/dto/PlaylistDTO";
 // http://www.welovecoding.com/rest/service/v1/categories
 export default class CategoryDTO extends BaseDTO {
   public color: string;
-  private _playlists: Array<PlaylistDTO>;
-  public availableLanguages: Array<string>;
+  private _playlists: Array<PlaylistDTO> = [];
+  public availableLanguages: Array<string> = [];
 
   constructor(id: number, name: string) {
     super(id, name);
@@ -24,5 +24,15 @@ export default class CategoryDTO extends BaseDTO {
     });
 
     return numberOfVideos;
+  }
+
+  toJSON(): Object {
+    return {
+      id: this.id,
+      name: this.name,
+      color: this.color,
+      numberOfVideos: this.numberOfVideos,
+      availableLanguages: this.availableLanguages
+    }
   }
 }
