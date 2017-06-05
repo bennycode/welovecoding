@@ -9,11 +9,10 @@ export default class PlaylistDTO extends BaseDTO {
   public language: string;
   public owner: AuthorDTO;
   public providerName: string;
-  private videos: Array<string>;
+  private videos: Array<string> = [];
 
   constructor(id: number, name: string) {
     super(id, name);
-    this.videos = [];
   }
 
   get numberOfVideos(): number {

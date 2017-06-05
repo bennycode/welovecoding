@@ -58,15 +58,15 @@ export default class Server {
 
     category = new CategoryDTO(1, "Windows Phone");
     category.color = "#19A2DE";
-    categories.push(category);
+    categories.push(category.toJSON());
 
     category = new CategoryDTO(2, "Java");
     category.color = "#E61400";
-    categories.push(category);
+    categories.push(category.toJSON());
 
     category = new CategoryDTO(2, "PHP");
     category.color = "#643EBF";
-    categories.push(category);
+    categories.push(category.toJSON());
 
     // Sort result
     categories.sort(function (category: CategoryDTO, anotherCategory: CategoryDTO) {
