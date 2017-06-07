@@ -1,5 +1,7 @@
 # We Love Coding
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/welovecoding/welovecoding.svg)](https://greenkeeper.io/)
+
 Website for free programming tutorials and screencasts.
 
 ## Development environment
