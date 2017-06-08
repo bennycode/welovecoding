@@ -1,0 +1,10 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "quotemark": [
+      "single",
+      "avoid-escape"
+    ],
+    "no-var-requires": false
+  }
+}
