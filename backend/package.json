@@ -29,7 +29,8 @@
   "devDependencies": {
     "concurrently": "3.4.0",
     "nodemon": "1.11.0",
-    "sqlite3": "3.1.8"
+    "sqlite3": "3.1.8",
+    "supertest": "3.0.0"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "main": "index.js",
