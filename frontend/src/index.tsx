@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import App from './App';
 
-require('../assets/index.scss')
+require('../assets/index.scss');
 
 function renderApp(RootComponent) {
   ReactDOM.render(
