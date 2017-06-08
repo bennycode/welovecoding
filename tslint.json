@@ -5,6 +5,21 @@
       "single",
       "avoid-escape"
     ],
-    "no-var-requires": false
+    "no-var-requires": false,
+    "arrow-parens": false,
+    "only-arrow-functions": [
+      false
+    ],
+    "member-access": false,
+    "member-ordering": [
+      "field-first"
+    ],
+    // TODO: these should be activated at one point
+    "ordered-imports": [false],
+    "object-literal-sort-keys": false,
+    "no-console": [
+      false
+    ],
+    "no-shadowed-variable": false
   }
 }

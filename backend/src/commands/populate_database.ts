@@ -1,5 +1,4 @@
-import sequelize from 'src/models';
-sequelize;
+import 'src/models';
 import User from 'src/models/User';
 import Category from 'src/models/Category';
 import Video from 'src/models/Video';
@@ -7,24 +6,24 @@ import Author from 'src/models/Author';
 
 const NAMES = ['tom', 'benny', 'roland'];
 
-function populateUsers () {
+function populateUsers() {
   console.log('POPULATING USERS');
   NAMES.forEach(name => {
     const user = new User({username: name, email: `${name}@welovecoding.com`});
-    User.register(user, 'mypassword', (err, user) => {
+    User.register(user, 'mypassword', (err, newUser) => {
       console.log('err', err);
       if (err) {
         // TODO: error handling
         return;
       }
-      user.save();
+      newUser.save();
     });
   });
 }
 
 const CATEGORIES = ['java', 'python', 'elm'];
 
-function populateCategories () {
+function populateCategories() {
   console.log('POPULATING CATEGORIES');
   CATEGORIES.forEach(name => {
     const category = new Category({name});
@@ -34,22 +33,30 @@ function populateCategories () {
 
 const AUTHORS = ['gronkh', 'coolyoutubeguy', 'thecomputerchannel'];
 
-function populateAuthors () {
+function populateAuthors() {
   console.log('POPULATING AUTHORS');
   AUTHORS.forEach(name => {
-    const author = new Author({username: name, channelUrl: `https://youtube.com/u/${name}`});
+    const author = new Author({
+      username: name,
+      channelUrl: `https://youtube.com/u/${name}`,
+    });
     author.save();
   });
 }
 
-const VIDEOS = ['Java Tutorial 1', 'Turing Machine', 'Lambda Calculus', 'Badass Math'];
+const VIDEOS = [
+  'Java Tutorial 1',
+  'Turing Machine',
+  'Lambda Calculus',
+  'Badass Math',
+];
 
-function populateVideos () {
+function populateVideos() {
   console.log('POPULATING VIDEOS');
   VIDEOS.forEach(name => {
     const video = new Video({
       name,
-      slug: name
+      slug: name,
     });
     video.save();
     Author.all().then(authors => {

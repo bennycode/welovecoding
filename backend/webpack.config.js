@@ -47,7 +47,10 @@ loaders.tsx = {
 //
 
 const sourceMap = (process.env.TEST || process.env.NODE_ENV !== 'production')
-  ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.tsx?$/ })]
+  ? [new webpack.SourceMapDevToolPlugin({
+    filename: null, // is inlined
+    test: /\.tsx?$/
+  })]
   : [];
 
 const basePlugins = [

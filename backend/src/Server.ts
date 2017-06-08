@@ -4,9 +4,8 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
-import sequelize from 'src/models';
+import 'src/models';
 import User from 'src/models/User';
-sequelize;
 
 export default class Server {
   public app: express.Application;
@@ -18,7 +17,7 @@ export default class Server {
     this.api();
   }
 
-  middleware(): void {
+  public middleware(): void {
     this.app.use(bodyParser.urlencoded({extended: true}));
     this.app.use(cookieParser());
     this.app.use(session({secret: 'super-secret'}));
@@ -32,21 +31,25 @@ export default class Server {
   }
 
   public api(): void {
-    this.app.get('/rest', (request: express.Request, response: express.Response): void => {
-      response.json({data: 'Hello, World!'});
-    });
+    this.app.get(
+      '/rest',
+      (request: express.Request, response: express.Response): void => {
+        response.json({data: 'Hello, World!'});
+      },
+    );
 
     // curl --data "username=tom&password=mypassword" http://localhost:8080/login
-    this.app.post('/login',
-      function (req, res, next) {
+    this.app.post(
+      '/login',
+      function(req, res, next) {
         return passport.authenticate('local', {
           failureRedirect: '/no',
-          successRedirect: '/yesss'
+          successRedirect: '/yesss',
         })(req, res, next);
       },
-      function (_, res) {
+      function(_, res) {
         res.redirect('/');
-      }
+      },
     );
   }
 

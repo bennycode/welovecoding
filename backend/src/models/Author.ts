@@ -15,7 +15,7 @@ import {Table, Column, Model} from 'sequelize-typescript';
  */
 
 @Table({
-  timestamps: true
+  timestamps: true,
 })
 class Author extends Model<Author> {
   @Column({allowNull: false})
@@ -24,11 +24,9 @@ class Author extends Model<Author> {
   @Column({allowNull: false})
   channelUrl: string;
 
-  @Column
-  name: string;
+  @Column name: string;
 
-  @Column
-  website: string;
+  @Column website: string;
 }
 
 export default Author;
