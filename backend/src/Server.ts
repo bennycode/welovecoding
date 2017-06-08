@@ -6,6 +6,7 @@ import * as path from 'path';
 import * as session from 'express-session';
 import sequelize from 'src/models';
 import CategoryDTO from "src/api/v1/dto/CategoryDTO";
+import sequelize from 'src/models';
 import User from 'src/models/User';
 sequelize;
 
@@ -71,9 +72,7 @@ export default class Server {
     categories.push(category.toJSON());
 
     // Sort result
-    categories.sort(function (category: CategoryDTO, anotherCategory: CategoryDTO) {
-      return category.name.localeCompare(anotherCategory.name);
-    });
+    categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) => category.name.localeCompare(anotherCategory.name));
 
     // Issue response
     this.app.get('/rest/service/v1/categories', (request: express.Request, response: express.Response): void => {
