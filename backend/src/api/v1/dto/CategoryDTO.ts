@@ -6,14 +6,25 @@ import PlaylistDTO from "./PlaylistDTO";
 export default class CategoryDTO extends BaseDTO {
   public color: string;
   private _playlists: Array<PlaylistDTO> = [];
-  public availableLanguages: Array<string> = [];
 
   constructor(id: number, name: string) {
     super(id, name);
   }
 
+  public addPlaylist(playlist: PlaylistDTO) {
+    this._playlists.push(playlist);
+  }
+
+  get playlists(): Array<PlaylistDTO> {
+    return this._playlists;
+  }
+
   set playlists(value: Array<PlaylistDTO>) {
     this._playlists = value;
+  }
+
+  get availableLanguages(): Array<string> {
+    return [...new Set(this._playlists.map(playlist => playlist.language))];
   }
 
   get numberOfVideos(): number {

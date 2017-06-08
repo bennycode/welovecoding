@@ -5,6 +5,7 @@ import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
 import CategoryDTO from "./api/v1/dto/CategoryDTO";
+import PlaylistDTO from "./api/v1/dto/PlaylistDTO";
 import sequelize from './models';
 import User from './models/User';
 sequelize;
@@ -58,19 +59,23 @@ export default class Server {
   }
 
   private setupLegacyAPI() {
-    // Fake data
+    // Mock categories
     const categories = [];
-    let category = undefined;
+    let category;
 
     category = new CategoryDTO(1, "Windows Phone");
     category.color = "#19A2DE";
     categories.push(category.toJSON());
 
+    const playlist: PlaylistDTO = new PlaylistDTO(4, "Java Tutorials von Anfang an");
+    playlist.language = "German";
+
     category = new CategoryDTO(2, "Java");
     category.color = "#E61400";
+    category.addPlaylist(playlist);
     categories.push(category.toJSON());
 
-    category = new CategoryDTO(2, "PHP");
+    category = new CategoryDTO(3, "PHP");
     category.color = "#643EBF";
     categories.push(category.toJSON());
 
