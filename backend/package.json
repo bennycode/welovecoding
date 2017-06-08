@@ -40,12 +40,12 @@
     "url": "git+https://github.com/welovecoding/welovecoding.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
     "build": "cross-env NODE_ENV=production && webpack",
-    "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "database:populate": "cross-env NODE_PATH=./dist && node dist/populate_database.ts.js",
-    "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js"
+    "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js",
+    "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
+    "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "version": "0.0.0"
 }
