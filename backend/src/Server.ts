@@ -4,9 +4,9 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
-import CategoryDTO from "src/api/v1/dto/CategoryDTO";
-import sequelize from 'src/models';
-import User from 'src/models/User';
+import CategoryDTO from "./api/v1/dto/CategoryDTO";
+import sequelize from './models';
+import User from './models/User';
 sequelize;
 
 export default class Server {
