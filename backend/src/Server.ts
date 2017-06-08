@@ -22,7 +22,11 @@ export default class Server {
   middleware(): void {
     this.app.use(bodyParser.urlencoded({extended: true}));
     this.app.use(cookieParser());
-    this.app.use(session({secret: 'super-secret'}));
+    this.app.use(session({
+      resave: false,
+      saveUninitialized: false,
+      secret: 'super-secret'
+    }));
 
     this.app.use(passport.initialize());
     this.app.use(passport.session());
