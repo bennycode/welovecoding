@@ -47,6 +47,7 @@
     "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js",
     "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
+    "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
     "test": "jasmine"
   },
   "version": "0.0.0"
