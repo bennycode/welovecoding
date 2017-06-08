@@ -1,5 +1,5 @@
-import BaseDTO from "src/api/v1/dto/BaseDTO";
-import PlaylistDTO from "src/api/v1/dto/PlaylistDTO";
+import BaseDTO from "./BaseDTO";
+import PlaylistDTO from "./PlaylistDTO";
 
 // https://github.com/bennyn/wlc-webapp/blob/wlc-webapp/0.0.36/src/main/java/com/welovecoding/tutorial/api/v1/dto/CategoryDTO.java
 // http://www.welovecoding.com/rest/service/v1/categories

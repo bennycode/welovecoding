@@ -1,5 +1,5 @@
-import AuthorDTO from "src/api/v1/dto/AuthorDTO";
-import BaseDTO from "src/api/v1/dto/BaseDTO";
+import AuthorDTO from "./AuthorDTO";
+import BaseDTO from "./BaseDTO";
 
 export default class PlaylistDTO extends BaseDTO {
   public categoryName: string;

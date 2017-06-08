@@ -1,4 +1,4 @@
-import BaseDTO from "src/api/v1/dto/BaseDTO";
+import BaseDTO from "./BaseDTO";
 
 export default class AuthorDTO extends BaseDTO {
   public id: number;
