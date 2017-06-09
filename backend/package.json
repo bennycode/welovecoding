@@ -20,7 +20,7 @@
     "reflect-metadata": "0.1.10",
     "sequelize": "3.30.4",
     "sequelize-typescript": "0.3.1",
-    "source-map-support": "^0.4.15",
+    "source-map-support": "0.4.15",
     "ts-loader": "2.0.3",
     "typescript": "2.3.2",
     "webpack": "2.5.1"
@@ -28,10 +28,10 @@
   "devDependencies": {
     "concurrently": "3.4.0",
     "nodemon": "1.11.0",
-    "prettier": "^1.4.4",
+    "prettier": "1.4.4",
     "sqlite3": "3.1.8",
-    "tslint": "^5.2.0",
-    "tslint-loader": "^3.5.3"
+    "tslint": "5.2.0",
+    "tslint-loader": "3.5.3"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "main": "index.js",
