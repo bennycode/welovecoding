@@ -4,3 +4,4 @@ dist
 /npm-debug.log*
 *.sqlite
 .DS_Store
+.env

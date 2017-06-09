@@ -9,7 +9,11 @@ const NAMES = ['tom', 'benny', 'roland'];
 function populateUsers() {
   console.log('POPULATING USERS');
   NAMES.forEach(name => {
-    const user = new User({username: name, email: `${name}@welovecoding.com`});
+    const user = new User({
+      username: name,
+      email: `${name}@welovecoding.com`,
+      provider: User.PROVIDERS.local,
+    });
     User.register(user, 'mypassword', (err, newUser) => {
       console.log('err', err);
       if (err) {

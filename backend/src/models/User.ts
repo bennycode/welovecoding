@@ -1,10 +1,17 @@
-import {Table, Column, Model} from 'sequelize-typescript';
+import {Table, Column, Model, DataType} from 'sequelize-typescript';
 import * as util from 'util';
 import * as crypto from 'crypto';
 import * as _ from 'lodash';
 import {Strategy} from 'passport-local';
 
 const LocalStrategy = Strategy;
+
+const providers = {
+  local: 'local',
+  google: 'google',
+};
+
+type Provider = keyof typeof providers;
 
 // The default option values
 const defaultAttachOptions = {
@@ -59,15 +66,16 @@ const options = defaultAttachOptions;
 
 @Table({timestamps: true})
 class User extends Model<User> {
-  @Column({
-    allowNull: false,
-  })
-  email: string;
+  @Column email: string;
 
-  @Column({
-    allowNull: false,
-  })
-  username: string;
+  @Column username: string;
+
+  @Column(DataType.ENUM(...Object.keys(providers)))
+  provider: Provider;
+
+  @Column providerId: string;
+
+  @Column(DataType.JSON) providerData: object;
 
   @Column hash: string;
 
@@ -168,6 +176,8 @@ class User extends Model<User> {
     );
   }
 
+  static PROVIDERS = providers;
+
   static authenticate() {
     const self = User;
     return function(username, password, cb) {
@@ -187,6 +197,7 @@ class User extends Model<User> {
 
   static serializeUser() {
     return function(user, cb) {
+      // Change this to not use the username
       cb(null, user.get(options.usernameField));
     };
   }
@@ -292,7 +303,6 @@ class User extends Model<User> {
   }
 
   static findByUsername(username, cb) {
-    console.log('hey, find by username');
     const queryParameters = {};
 
     // if specified, convert the username to lowercase
