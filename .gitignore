@@ -1,8 +1,8 @@
-/.idea
-node_modules
-dist
-/npm-debug.log*
 *.sqlite
 .DS_Store
 .env
+/.idea
+/npm-debug.log*
+dist
+node_modules
 package-lock.js
