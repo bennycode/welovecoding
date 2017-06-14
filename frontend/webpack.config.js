@@ -16,7 +16,9 @@ loaders.tslint = {
   test: /\.(tsx?)$/,
   enforce: 'pre',
   loader: 'tslint-loader',
-  options: {/* Loader options go here */}
+  options: {
+    configFile: path.resolve('../tslint.json')
+  }
 };
 
 loaders.tsx = {

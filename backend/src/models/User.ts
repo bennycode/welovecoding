@@ -23,7 +23,8 @@ const defaultAttachOptions = {
   missingFieldError: 'Field %s is not set',
   missingPasswordError: 'Password argument not set!',
   missingUsernameError: 'Field %s is not set',
-  noSaltValueStoredError: 'Authentication not possible. No salt value stored in db!',
+  noSaltValueStoredError:
+    'Authentication not possible. No salt value stored in db!',
   resetPasswordKeyField: 'resetPasswordKey',
   resetPasswordkeylen: 8,
   saltField: 'salt',
@@ -31,7 +32,7 @@ const defaultAttachOptions = {
   selectFields: false,
   userExistsError: 'User already exists with %s',
   usernameField: 'username',
-  usernameLowerCase: false
+  usernameLowerCase: false,
 };
 const options = defaultAttachOptions;
 
@@ -48,7 +49,6 @@ const options = defaultAttachOptions;
  * - LASTEDITOR_ID BIGINT(20)
  */
 
-
 /**
  * DISCLAIMER:
  * A LOT OF CODE HERE WAS COPIED FROM https://github.com/madhurjain/passport-local-sequelize
@@ -60,67 +60,71 @@ const options = defaultAttachOptions;
 @Table({timestamps: true})
 class User extends Model<User> {
   @Column({
-    allowNull: false
+    allowNull: false,
   })
   email: string;
 
   @Column({
-    allowNull: false
+    allowNull: false,
   })
   username: string;
 
-  @Column
-  hash: string;
+  @Column hash: string;
 
-  @Column
-  salt: string;
+  @Column salt: string;
 
-  @Column
-  activationKey: string;
+  @Column activationKey: string;
 
-  @Column
-  resetPasswordKey: string;
+  @Column resetPasswordKey: string;
 
-  @Column
-  verified: boolean;
+  @Column verified: boolean;
 
-  setPassword (password, cb) {
+  setPassword(password, cb) {
     if (!password) {
       return cb(new Error(options.missingPasswordError));
     }
 
     const self = this;
 
-    crypto.randomBytes(options.saltlen, function (err, buf) {
+    crypto.randomBytes(options.saltlen, function(err, buf) {
       if (err) {
         return cb(err);
       }
 
       const salt = buf.toString('hex');
 
-      crypto.pbkdf2(password, salt, options.iterations, options.keylen, options.digest, function (err, hashRaw) {
-        if (err) {
-          return cb(err);
-        }
+      crypto.pbkdf2(
+        password,
+        salt,
+        options.iterations,
+        options.keylen,
+        options.digest,
+        function(err, hashRaw) {
+          if (err) {
+            return cb(err);
+          }
 
-        // TODO: type
-        self.set(options.hashField, new Buffer(hashRaw as any as string, 'binary').toString('hex'));
-        self.set(options.saltField, salt);
+          // TODO: type
+          self.set(
+            options.hashField,
+            new Buffer((hashRaw as any) as string, 'binary').toString('hex'),
+          );
+          self.set(options.saltField, salt);
 
-        cb(null, self);
-      });
+          cb(null, self);
+        },
+      );
     });
   }
 
-  setActivationKey (cb) {
-
+  setActivationKey(cb) {
     const self = this;
 
     if (!options.activationRequired) {
       return cb(null, self);
     }
 
-    crypto.randomBytes(options.activationkeylen, function (err, buf) {
+    crypto.randomBytes(options.activationkeylen, function(err, buf) {
       if (err) {
         return cb(err);
       }
@@ -131,61 +135,72 @@ class User extends Model<User> {
     });
   }
 
-  authenticate (password, cb) {
+  authenticate(password, cb) {
     const self = this;
 
     // prevent to throw error from crypto.pbkdf2
     if (!this.get(options.saltField)) {
-      return cb(null, false, { message: options.noSaltValueStoredError });
+      return cb(null, false, {message: options.noSaltValueStoredError});
     }
 
-    crypto.pbkdf2(password, this.get(options.saltField), options.iterations, options.keylen, options.digest, function (err, hashRaw) {
-      if (err) {
-        return cb(err);
-      }
+    crypto.pbkdf2(
+      password,
+      this.get(options.saltField),
+      options.iterations,
+      options.keylen,
+      options.digest,
+      function(err, hashRaw) {
+        if (err) {
+          return cb(err);
+        }
 
-      // TODO types
-      const hash = new Buffer(hashRaw as any as string, 'binary').toString('hex');
+        // TODO types
+        const hash = new Buffer((hashRaw as any) as string, 'binary').toString(
+          'hex',
+        );
 
-      if (hash === self.get(options.hashField)) {
-        return cb(null, self);
-      } else {
-        return cb(null, false, { message: options.incorrectPasswordError });
-      }
-    });
+        if (hash === self.get(options.hashField)) {
+          return cb(null, self);
+        } else {
+          return cb(null, false, {message: options.incorrectPasswordError});
+        }
+      },
+    );
   }
 
-  static authenticate () {
+  static authenticate() {
     const self = User;
-    return function (username, password, cb) {
-      self.findByUsername(username, function (err, user) {
-        if (err) { return cb(err); }
+    return function(username, password, cb) {
+      self.findByUsername(username, function(err, user) {
+        if (err) {
+          return cb(err);
+        }
 
         if (user) {
           return user.authenticate(password, cb);
         } else {
-          return cb(null, false, { message: options.incorrectUsernameError });
+          return cb(null, false, {message: options.incorrectUsernameError});
         }
       });
     };
   }
 
-  static serializeUser () {
-    return function (user, cb) {
+  static serializeUser() {
+    return function(user, cb) {
       cb(null, user.get(options.usernameField));
     };
   }
 
-  static deserializeUser () {
+  static deserializeUser() {
     const self = User;
-    return function (username, cb) {
+    return function(username, cb) {
       self.findByUsername(username, cb);
     };
   }
 
-  static register (user, password, cb) {
-    const self = User,
-      fields = {};
+  static register(user, password, cb) {
+    const self = User;
+    const fields = {};
     // TODO: check this
     if (user instanceof User) {
       // Do nothing
@@ -200,131 +215,163 @@ class User extends Model<User> {
     }
 
     if (!user.get(options.usernameField)) {
-      return cb(new Error(util.format(options.missingUsernameError, options.usernameField)));
+      return cb(
+        new Error(
+          util.format(options.missingUsernameError, options.usernameField),
+        ),
+      );
     }
 
-    self.findByUsername(user.get(options.usernameField), function (err, existingUser) {
-      if (err) { return cb(err); }
-
-      if (existingUser) {
-        return cb(new Error(util.format(options.userExistsError, user.get(options.usernameField))));
+    self.findByUsername(user.get(options.usernameField), function(
+      err,
+      existingUser,
+    ) {
+      if (err) {
+        return cb(err);
       }
 
-      user.setPassword(password, function (err, user) {
+      if (existingUser) {
+        return cb(
+          new Error(
+            util.format(
+              options.userExistsError,
+              user.get(options.usernameField),
+            ),
+          ),
+        );
+      }
+
+      user.setPassword(password, function(err, user) {
         if (err) {
           return cb(err);
         }
 
-        user.setActivationKey(function (err, user) {
+        user.setActivationKey(function(err, user) {
           if (err) {
             return cb(err);
           }
 
-          user.save()
-          .then(function() {
-            cb(null, user);
-          })
-          .catch(function (err) {
-            return cb(err);
-          });
-
+          user
+            .save()
+            .then(function() {
+              cb(null, user);
+            })
+            .catch(function(err) {
+              return cb(err);
+            });
         });
-
       });
     });
   }
 
-  static activate (username, password, activationKey, cb) {
-      const self = User;
-      const auth = self.authenticate();
-      auth(username, password, function (err, user, info) {
-
-        if (err) { return cb(err); }
-
-        if (!user) { return cb(info); }
-
-        if (user.get(options.activationKeyField) === activationKey) {
-          user.updateAttributes({ verified: true, activationKey: 'null' })
-          .then(function() {
-            return cb(null, user);
-          })
-          .catch(function (err) {
-            return cb(err);
-          });
-        } else {
-          return cb({ message: options.invalidActivationKeyError });
-        }
-      });
-  }
-
-  static findByUsername (username, cb) {
-      console.log('hey, find by username');
-      const queryParameters = {};
-
-      // if specified, convert the username to lowercase
-      if (options.usernameLowerCase) {
-        username = username.toLowerCase();
+  static activate(username, password, activationKey, cb) {
+    const self = User;
+    const auth = self.authenticate();
+    auth(username, password, function(err, user, info) {
+      if (err) {
+        return cb(err);
       }
 
-      queryParameters[options.usernameField] = username;
+      if (!user) {
+        return cb(info);
+      }
 
-      const query = this.find({ where: queryParameters });
-      query.then(function (user) {
-        cb(null, user);
-      });
-      query.catch(function (err) {
-        cb(err);
-      });
-  };
-
-  static setResetPasswordKey (username, cb) {
-      const self = User;
-      self.findByUsername(username, function (err, user) {
-        if (err) { return cb(err); }
-        if (!user) { return cb({ message: options.incorrectUsernameError }); }
-
-        crypto.randomBytes(options.resetPasswordkeylen, function (err, buf) {
-          if (err) { return cb(err); }
-          const randomHex = buf.toString('hex');
-          user.set(options.resetPasswordKeyField, randomHex);
-          user.save()
+      if (user.get(options.activationKeyField) === activationKey) {
+        user
+          .updateAttributes({verified: true, activationKey: 'null'})
           .then(function() {
             return cb(null, user);
           })
-          .catch(function (err) {
+          .catch(function(err) {
             return cb(err);
           });
-        });
-      });
-  };
+      } else {
+        return cb({message: options.invalidActivationKeyError});
+      }
+    });
+  }
 
-  static resetPassword (username, password, resetPasswordKey, cb) {
+  static findByUsername(username, cb) {
+    console.log('hey, find by username');
+    const queryParameters = {};
+
+    // if specified, convert the username to lowercase
+    if (options.usernameLowerCase) {
+      username = username.toLowerCase();
+    }
+
+    queryParameters[options.usernameField] = username;
+
+    const query = this.find({where: queryParameters});
+    query.then(function(user) {
+      cb(null, user);
+    });
+    query.catch(function(err) {
+      cb(err);
+    });
+  }
+
+  static setResetPasswordKey(username, cb) {
     const self = User;
-    self.findByUsername(username, function (err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb({ message: options.incorrectUsernameError }); }
-      if (user.get(options.resetPasswordKeyField) === resetPasswordKey) {
-        user.setPassword(password, function (err, user) {
-          if (err) { return cb(err); }
-          user.set(options.resetPasswordKeyField, null);
-          user.save()
+    self.findByUsername(username, function(err, user) {
+      if (err) {
+        return cb(err);
+      }
+      if (!user) {
+        return cb({message: options.incorrectUsernameError});
+      }
+
+      crypto.randomBytes(options.resetPasswordkeylen, function(err, buf) {
+        if (err) {
+          return cb(err);
+        }
+        const randomHex = buf.toString('hex');
+        user.set(options.resetPasswordKeyField, randomHex);
+        user
+          .save()
           .then(function() {
-            cb(null, user);
+            return cb(null, user);
           })
-          .catch(function (err) {
+          .catch(function(err) {
             return cb(err);
           });
+      });
+    });
+  }
+
+  static resetPassword(username, password, resetPasswordKey, cb) {
+    const self = User;
+    self.findByUsername(username, function(err, user) {
+      if (err) {
+        return cb(err);
+      }
+      if (!user) {
+        return cb({message: options.incorrectUsernameError});
+      }
+      if (user.get(options.resetPasswordKeyField) === resetPasswordKey) {
+        user.setPassword(password, function(err, user) {
+          if (err) {
+            return cb(err);
+          }
+          user.set(options.resetPasswordKeyField, null);
+          user
+            .save()
+            .then(function() {
+              cb(null, user);
+            })
+            .catch(function(err) {
+              return cb(err);
+            });
         });
       } else {
-        return cb({ message: options.invalidResetPasswordKeyError });
+        return cb({message: options.invalidResetPasswordKeyError});
       }
     });
-  };
+  }
 
-  static createStrategy () {
-      return new LocalStrategy(options, User.authenticate());
-  };
-
+  static createStrategy() {
+    return new LocalStrategy(options, User.authenticate());
+  }
 }
 
 export default User;

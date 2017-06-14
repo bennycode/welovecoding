@@ -1,4 +1,10 @@
-import {Table, Column, Model, BelongsTo, ForeignKey} from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  BelongsTo,
+  ForeignKey,
+} from 'sequelize-typescript';
 import User from './User';
 import Video from './Video';
 import Playlist from './Playlist';
@@ -9,8 +15,7 @@ import Playlist from './Playlist';
 
 @Table({timestamps: true})
 class Comment extends Model<Comment> {
-  @Column
-  text: string;
+  @Column text: string;
 
   @ForeignKey(() => User)
   @Column

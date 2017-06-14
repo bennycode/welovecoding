@@ -8,28 +8,30 @@
     "@types/sequelize": "4.0.55",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
-    "cookie-parser": "1.4.3",
     "concurrently": "3.4.0",
+    "cookie-parser": "1.4.3",
     "cross-env": "5.0.0",
     "crypto": "0.0.3",
     "express": "4.15.2",
     "express-session": "1.15.3",
+    "nodemon": "1.11.0",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
-    "nodemon": "1.11.0",
     "reflect-metadata": "0.1.10",
     "sequelize": "3.30.4",
     "sequelize-typescript": "0.3.1",
+    "source-map-support": "0.4.15",
     "ts-loader": "2.0.3",
-    "tslint": "5.2.0",
-    "tslint-loader": "3.5.3",
     "typescript": "2.3.2",
     "webpack": "2.5.1"
   },
   "devDependencies": {
     "concurrently": "3.4.0",
     "nodemon": "1.11.0",
-    "sqlite3": "3.1.8"
+    "prettier": "1.4.4",
+    "sqlite3": "3.1.8",
+    "tslint": "5.2.0",
+    "tslint-loader": "3.5.3"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "main": "index.js",
@@ -45,7 +47,10 @@
     "build": "cross-env NODE_ENV=production && webpack",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "database:populate": "cross-env NODE_PATH=./dist && node dist/populate_database.ts.js",
-    "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js"
+    "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js",
+    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
+    "prettier:check": "npm run prettier:base -- --list-different './src/**/*.ts' './src/**/*.tsx'",
+    "prettier:write": "npm run prettier:base -- --write './src/**/*.ts' './src/**/*.tsx'"
   },
   "version": "0.0.0"
 }
