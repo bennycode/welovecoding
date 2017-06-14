@@ -16,7 +16,6 @@
     "express": "4.15.2",
     "express-session": "1.15.3",
     "mkdirp": "^0.5.1",
-    "nodemon": "1.11.0",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
     "reflect-metadata": "0.1.10",
@@ -31,12 +30,14 @@
   },
   "devDependencies": {
     "@types/jest": "19.2.4",
-    "concurrently": "3.4.0",
     "jest": "20.0.4",
     "nodemon": "1.11.0",
-    "sqlite3": "^3.1.8",
+    "sqlite3": "3.1.8",
     "supertest": "3.0.0",
     "ts-jest": "20.0.6"
+  },
+  "engines": {
+    "node": "8.0.0"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "jest": {
@@ -47,15 +48,12 @@
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "json"
     ],
     "moduleNameMapper": {
       "src/(.*)": "<rootDir>/src/$1"
-    },
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
+    }
   },
   "main": "index.js",
   "name": "@welovecoding/backend",
@@ -71,7 +69,7 @@
     "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
-    "test": "jest"
+    "test": "cross-env NODE_PATH=./src && jest"
   },
   "version": "0.0.0"
 }

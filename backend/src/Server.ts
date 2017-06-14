@@ -6,9 +6,8 @@ import * as path from 'path';
 import * as session from 'express-session';
 import CategoryDTO from "src/api/v1/dto/CategoryDTO";
 import PlaylistDTO from "src/api/v1/dto/PlaylistDTO";
-import sequelize from 'src/models';
+import 'src/models';
 import User from 'src/models/User';
-sequelize;
 
 export default class Server {
   public app: express.Application;
