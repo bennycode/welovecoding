@@ -4,6 +4,8 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
+import CategoryDTO from 'src/api/v1/dto/CategoryDTO';
+import PlaylistDTO from 'src/api/v1/dto/PlaylistDTO';
 import 'src/models';
 import User from 'src/models/User';
 
@@ -20,7 +22,13 @@ export default class Server {
   public middleware(): void {
     this.app.use(bodyParser.urlencoded({extended: true}));
     this.app.use(cookieParser());
-    this.app.use(session({secret: 'super-secret'}));
+    this.app.use(
+      session({
+        resave: false,
+        saveUninitialized: false,
+        secret: 'super-secret',
+      }),
+    );
 
     this.app.use(passport.initialize());
     this.app.use(passport.session());
@@ -38,6 +46,8 @@ export default class Server {
       },
     );
 
+    this.setupLegacyAPI();
+
     // curl --data "username=tom&password=mypassword" http://localhost:8080/login
     this.app.post(
       '/login',
@@ -49,6 +59,44 @@ export default class Server {
       },
       function(_, res) {
         res.redirect('/');
+      },
+    );
+  }
+
+  private setupLegacyAPI() {
+    // Mock categories
+    const categories = [];
+    let category;
+
+    category = new CategoryDTO(1, 'Windows Phone');
+    category.color = '#19A2DE';
+    categories.push(category.toJSON());
+
+    const playlist: PlaylistDTO = new PlaylistDTO(
+      4,
+      'Java Tutorials von Anfang an',
+    );
+    playlist.language = 'German';
+
+    category = new CategoryDTO(2, 'Java');
+    category.color = '#E61400';
+    category.addPlaylist(playlist);
+    categories.push(category.toJSON());
+
+    category = new CategoryDTO(3, 'PHP');
+    category.color = '#643EBF';
+    categories.push(category.toJSON());
+
+    // Sort result
+    categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) =>
+      category.name.localeCompare(anotherCategory.name),
+    );
+
+    // Issue response
+    this.app.get(
+      '/rest/service/v1/categories',
+      (request: express.Request, response: express.Response): void => {
+        response.json(categories);
       },
     );
   }
