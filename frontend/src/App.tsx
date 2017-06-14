@@ -18,6 +18,14 @@ export default function App() {
         <hr />
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
+        <Route
+          path="/auth/google/success"
+          component={() => <h1>Google Auth Success!</h1>}
+        />
+        <Route
+          path="/auth/google/failure"
+          component={() => <h1>Google Auth Fail!</h1>}
+        />
       </div>
     </Router>
   );

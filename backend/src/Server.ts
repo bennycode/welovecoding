@@ -55,8 +55,6 @@ export default class Server {
             },
             defaults: {
               email,
-              // TODO: remove username here and change the User model to not use the username for serialisation
-              username: 'test',
             } as User,
           })
             .then(function([user, created]) {

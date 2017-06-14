@@ -70,6 +70,13 @@ class User extends Model<User> {
 
   @Column username: string;
 
+  // This UUID will be used for identification
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+  })
+  uuid: string;
+
   @Column(DataType.ENUM(...Object.keys(providers)))
   provider: Provider;
 
@@ -196,9 +203,8 @@ class User extends Model<User> {
   }
 
   static serializeUser() {
-    return function(user, cb) {
-      // Change this to not use the username
-      cb(null, user.get(options.usernameField));
+    return function(user: User, cb) {
+      cb(null, user.uuid);
     };
   }
 
