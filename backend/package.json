@@ -48,7 +48,7 @@
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "database:populate": "cross-env NODE_PATH=./dist && node dist/populate_database.ts.js",
     "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js",
-    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma='all' --no-bracket-spacing",
+    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
     "prettier:check": "npm run prettier:base -- --list-different './src/**/*.ts' './src/**/*.tsx'",
     "prettier:write": "npm run prettier:base -- --write './src/**/*.ts' './src/**/*.tsx'"
   },

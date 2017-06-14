@@ -35,7 +35,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --config webpack.config.js --open",
     "build": "cross-env NODE_ENV=production && webpack",
-    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma='all' --no-bracket-spacing",
+    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
     "prettier:check": "npm run prettier:base -- --list-different './src/**/*.ts' './src/**/*.tsx'",
     "prettier:write": "npm run prettier:base -- --write './src/**/*.ts' './src/**/*.tsx'"
   },
