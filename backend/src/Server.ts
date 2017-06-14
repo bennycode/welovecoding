@@ -1,16 +1,16 @@
+import 'src/models';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
-
-import 'src/models';
-import User from 'src/models/User';
+import CategoryDTO from 'src/api/v1/dto/CategoryDTO';
 import CONFIG_GOOGLE from 'src/config/google';
-
-import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+import PlaylistDTO from 'src/api/v1/dto/PlaylistDTO';
+import User from 'src/models/User';
 import {GoogleOAuthProfile} from 'src/types';
+import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 
 export default class Server {
   public app: express.Application;
@@ -27,8 +27,9 @@ export default class Server {
     this.app.use(cookieParser());
     this.app.use(
       session({
-        secret: 'super-secret',
+        resave: false,
         saveUninitialized: false,
+        secret: 'super-secret'
       }),
     );
 
@@ -79,6 +80,8 @@ export default class Server {
       },
     );
 
+    this.setupLegacyAPI();
+
     // curl --data "username=tom&password=mypassword" http://localhost:8080/auth/local
     this.app.post(
       '/auth/local',
@@ -126,6 +129,41 @@ export default class Server {
       // function(req, res) {
       //   return res.json({success: true, data: ''});
       // },
+    );
+  }
+
+  private setupLegacyAPI() {
+    // Mock categories
+    const categories = [];
+    let category;
+
+    category = new CategoryDTO(1, 'Windows Phone');
+    category.color = '#19A2DE';
+    categories.push(category.toJSON());
+
+    const playlist: PlaylistDTO = new PlaylistDTO(4, 'Java Tutorials von Anfang an');
+    playlist.language = 'German';
+
+    category = new CategoryDTO(2, 'Java');
+    category.color = '#E61400';
+    category.addPlaylist(playlist);
+    categories.push(category.toJSON());
+
+    category = new CategoryDTO(3, 'PHP');
+    category.color = '#643EBF';
+    categories.push(category.toJSON());
+
+    // Sort result
+    categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) =>
+      category.name.localeCompare(anotherCategory.name),
+    );
+
+    // Issue response
+    this.app.get(
+      '/rest/service/v1/categories',
+      (request: express.Request, response: express.Response): void => {
+        response.json(categories);
+      },
     );
   }
 
