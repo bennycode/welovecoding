@@ -6,20 +6,23 @@
     "@types/node": "7.0.18",
     "@types/passport-local": "1.0.30",
     "@types/sequelize": "4.0.55",
+    "@types/supertest": "2.0.0",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
-    "cookie-parser": "1.4.3",
     "concurrently": "3.4.0",
+    "cookie-parser": "1.4.3",
     "cross-env": "5.0.0",
     "crypto": "0.0.3",
     "express": "4.15.2",
     "express-session": "1.15.3",
+    "mkdirp": "^0.5.1",
+    "nodemon": "1.11.0",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
-    "nodemon": "1.11.0",
     "reflect-metadata": "0.1.10",
     "sequelize": "3.30.4",
     "sequelize-typescript": "0.3.1",
+    "sqlite": "^2.8.0",
     "ts-loader": "2.0.3",
     "tslint": "5.2.0",
     "tslint-loader": "3.5.3",
@@ -27,13 +30,33 @@
     "webpack": "2.5.1"
   },
   "devDependencies": {
+    "@types/jest": "19.2.4",
     "concurrently": "3.4.0",
-    "jasmine": "2.6.0",
+    "jest": "20.0.4",
     "nodemon": "1.11.0",
-    "sqlite3": "3.1.8",
-    "supertest": "3.0.0"
+    "sqlite3": "^3.1.8",
+    "supertest": "3.0.0",
+    "ts-jest": "20.0.6"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "moduleNameMapper": {
+      "src/(.*)": "<rootDir>/src/$1"
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  },
   "main": "index.js",
   "name": "@welovecoding/backend",
   "private": true,
@@ -48,7 +71,7 @@
     "start": "concurrently \"webpack --watch\" \"cross-env NODE_PATH=./dist nodemon dist/main.js\"",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
-    "test": "jasmine"
+    "test": "jest"
   },
   "version": "0.0.0"
 }

@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize-typescript';
-import db from '../config/database';
+import db from 'src/config/database';
 import Author from './Author';
 import Category from './Category';
 import Comment from './Comment';

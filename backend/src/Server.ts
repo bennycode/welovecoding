@@ -4,7 +4,6 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
-import sequelize from 'src/models';
 import CategoryDTO from "src/api/v1/dto/CategoryDTO";
 import PlaylistDTO from "src/api/v1/dto/PlaylistDTO";
 import sequelize from 'src/models';
