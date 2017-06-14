@@ -1,5 +1,5 @@
-import AuthorDTO from "./AuthorDTO";
-import BaseDTO from "./BaseDTO";
+import AuthorDTO from './AuthorDTO';
+import BaseDTO from './BaseDTO';
 
 export default class PlaylistDTO extends BaseDTO {
   public categoryName: string;
@@ -9,7 +9,7 @@ export default class PlaylistDTO extends BaseDTO {
   public language: string;
   public owner: AuthorDTO;
   public providerName: string;
-  private videos: Array<string> = [];
+  private videos: string[] = [];
 
   constructor(id: number, name: string) {
     super(id, name);

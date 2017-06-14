@@ -12,12 +12,13 @@
     "html-webpack-plugin": "2.28.0",
     "http-proxy-middleware": "0.17.4",
     "node-sass": "4.5.2",
+    "prettier": "^1.4.4",
     "react-hot-loader": "3.0.0-beta.7",
     "sass-loader": "6.0.5",
     "style-loader": "0.17.0",
     "ts-loader": "2.0.3",
-    "tslint": "5.2.0",
-    "tslint-loader": "3.5.3",
+    "tslint": "^5.2.0",
+    "tslint-loader": "^3.5.3",
     "typescript": "2.3.2",
     "uglifyjs-webpack-plugin": "0.4.3",
     "webpack": "2.5.1",
@@ -33,7 +34,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --config webpack.config.js --open",
-    "build": "cross-env NODE_ENV=production && webpack"
+    "build": "cross-env NODE_ENV=production && webpack",
+    "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
+    "prettier:check": "npm run prettier:base -- --list-different './src/**/*.ts' './src/**/*.tsx'",
+    "prettier:write": "npm run prettier:base -- --write './src/**/*.ts' './src/**/*.tsx'"
   },
   "version": "0.0.0"
+
 }

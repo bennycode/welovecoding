@@ -3,7 +3,8 @@
     "@welovecoding/backend": "./backend",
     "@welovecoding/frontend": "./frontend",
     "concurrently": "3.4.0",
-    "fs-extra": "3.0.1"
+    "fs-extra": "3.0.1",
+    "husky": "0.13.4"
   },
   "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
   "devDependencies": {},
@@ -16,7 +17,8 @@
   "scripts": {
     "dev": "concurrently \"cd ./backend && npm start\" \"cd ./frontend && npm start\"",
     "postinstall": "node ./build.js",
-    "start": "cd backend && npm run start-prod"
+    "start": "cd backend && npm run start-prod",
+    "precommit": "cd ./backend && tslint -c ../tslint.json 'src/**/*.ts' '../frontend/src/**/*.ts' '../frontend/src/**/*.tsx'"
   },
   "version": "0.0.1"
 }

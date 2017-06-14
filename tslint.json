@@ -1,0 +1,24 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "quotemark": [
+      "single",
+      "avoid-escape"
+    ],
+    "no-var-requires": false,
+    "arrow-parens": false,
+    "only-arrow-functions": [
+      false
+    ],
+    "member-access": false,
+    "member-ordering": [
+      "field-first"
+    ],
+    "ordered-imports": [false],
+    "object-literal-sort-keys": false,
+    "no-console": [
+      false
+    ],
+    "no-shadowed-variable": false
+  }
+}

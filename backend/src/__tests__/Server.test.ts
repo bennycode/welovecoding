@@ -5,7 +5,7 @@ describe('Server', () => {
   const instance = new Server();
 
   describe('/rest/service/v1/categories', () => {
-    it('returns categories', (done) => {
+    it('returns categories', done => {
       request(instance.app)
         .get('/rest/service/v1/categories')
         .expect(200)
@@ -18,11 +18,17 @@ describe('Server', () => {
 
             // Check order of properties
             const anyCategory = categories[0];
-            const propertyOrder = ['id', 'name', 'color', 'numberOfVideos', 'availableLanguages'];
+            const propertyOrder = [
+              'id',
+              'name',
+              'color',
+              'numberOfVideos',
+              'availableLanguages',
+            ];
             expect(Object.keys(anyCategory)).toEqual(propertyOrder);
 
             // Check HEX colors
-            categories.forEach((category) => {
+            categories.forEach(category => {
               expect(category.color.startsWith('#')).toBe(true);
             });
 

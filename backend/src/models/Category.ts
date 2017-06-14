@@ -15,18 +15,15 @@ import {Table, Column, Model} from 'sequelize-typescript';
 @Table({timestamps: true})
 class Category extends Model<Category> {
   @Column({
-    allowNull: false
+    allowNull: false,
   })
   name: string;
 
-  @Column
-  slug: string;
+  @Column slug: string;
 
-  @Column
-  color: string;
+  @Column color: string;
 
-  @Column
-  description: string;
+  @Column description: string;
 }
 
 export default Category;

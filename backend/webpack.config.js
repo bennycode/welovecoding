@@ -26,7 +26,9 @@ loaders.tslint =  {
   test: /\.(tsx?)$/,
   enforce: 'pre',
   loader: 'tslint-loader',
-  options: { /* Loader options go here */ }
+  options: {
+    configFile: path.resolve('../tslint.json')
+  }
 }
 
 loaders.tsx = {
@@ -45,7 +47,10 @@ loaders.tsx = {
 //
 
 const sourceMap = (process.env.TEST || process.env.NODE_ENV !== 'production')
-  ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.tsx?$/ })]
+  ? [new webpack.SourceMapDevToolPlugin({
+    filename: null, // is inlined
+    test: /\.tsx?$/
+  })]
   : [];
 
 const basePlugins = [

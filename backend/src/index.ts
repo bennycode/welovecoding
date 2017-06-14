@@ -1,4 +1,5 @@
-import Server from "./Server";
+import 'source-map-support/register';
+import Server from './Server';
 
 const port: number = process.env.PORT || 8080;
 const server: Server = new Server();
