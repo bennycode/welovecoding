@@ -101,7 +101,7 @@ const basePlugins = [
     'process.env': {
       __DEV__: process.env.NODE_ENV !== 'production',
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      BACKEND_URL: JSON.stringify(process.env.BACKEND_URL)
+      BACKEND_URL: JSON.stringify(process.env.BACKEND_URL || 'http://localhost:8080')
     }
   }),
   new HtmlWebpackPlugin({
