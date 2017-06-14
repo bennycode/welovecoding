@@ -39,9 +39,6 @@
     "tslint": "5.2.0",
     "tslint-loader": "3.5.3"
   },
-  "engines": {
-    "node": "8.0.0"
-  },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "jest": {
     "transform": {
@@ -49,10 +46,10 @@
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
-      "ts",
-      "tsx",
       "js",
-      "json"
+      "json",
+      "ts",
+      "tsx"
     ],
     "moduleNameMapper": {
       "src/(.*)": "<rootDir>/src/$1"
