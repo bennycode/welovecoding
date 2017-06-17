@@ -45,4 +45,3 @@ CREATE USER welovecodinguser WITH PASSWORD wlc2017;
 CREATE DATABASE welovecoding;
 GRANT ALL PRIVILEGES ON DATABASE "welovecoding" to welovecodinguser;
 ```
->>>>>>> feat: use postgres and have production/development envs
