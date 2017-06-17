@@ -1,6 +1,6 @@
-export const POSSIBLE_ENVS = {
+export const POSSIBLE_APP_ENVS = {
   PRODUCTION: 'production',
   STAGING: 'staging',
   DEVELOPMENT: 'development',
 };
-export const ENV = process.env.ENV || POSSIBLE_ENVS.DEVELOPMENT;
+export const APP_ENV = process.env.APP_ENV || POSSIBLE_APP_ENVS.DEVELOPMENT;

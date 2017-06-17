@@ -1,5 +1,5 @@
 import {ISequelizeConfig} from 'sequelize-typescript';
-import {ENV, POSSIBLE_ENVS} from 'src/config/environment';
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
 
 const POSTGRES_URL_REGEX = /postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/;
 
@@ -53,8 +53,8 @@ const production: ISequelizeConfig = {
 };
 
 export const databaseConfigs = {
-  [POSSIBLE_ENVS.DEVELOPMENT]: dev,
-  [POSSIBLE_ENVS.PRODUCTION]: production,
+  [POSSIBLE_APP_ENVS.DEVELOPMENT]: dev,
+  [POSSIBLE_APP_ENVS.PRODUCTION]: production,
 };
 
-export default databaseConfigs[ENV];
+export default databaseConfigs[APP_ENV];
