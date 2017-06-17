@@ -29,7 +29,7 @@ export default class Server {
       session({
         resave: false,
         saveUninitialized: false,
-        secret: 'super-secret'
+        secret: 'super-secret',
       }),
     );
 
