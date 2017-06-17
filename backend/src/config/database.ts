@@ -31,11 +31,7 @@ const dev: ISequelizeConfig = {
   },
   dialect: 'postgres',
   protocol: 'postgres',
-  username: 'welovecodinguser',
-  password: 'wlc2017',
-  host: '127.0.0.1',
-  port: 5432,
-  name: 'welovecoding',
+  ...getConfigFromUrl(process.env.DATABASE_URL),
 };
 
 const production: ISequelizeConfig = {

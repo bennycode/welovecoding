@@ -3,4 +3,5 @@ export const POSSIBLE_APP_ENVS = {
   STAGING: 'staging',
   DEVELOPMENT: 'development',
 };
-export const APP_ENV = process.env.APP_ENV || POSSIBLE_APP_ENVS.DEVELOPMENT;
+
+export const APP_ENV = process.env.APP_ENV;

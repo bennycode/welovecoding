@@ -1,5 +1,10 @@
 import 'source-map-support/register';
 import Server from './Server';
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
+
+if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) {
+  require('dotenv').config();
+}
 
 const port: number = process.env.PORT || 8080;
 const server: Server = new Server();
