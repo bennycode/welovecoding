@@ -41,7 +41,7 @@ echo "127.0.0.1 localwelovecoding.com" >> "C:\Windows\System32\drivers\etc\hosts
 1. install postgres
 2. execute in psql
 ```
-CREATE USER welovecodinguser WITH PASSWORD wlc2017;
+CREATE USER welovecodinguser WITH PASSWORD "wlc2017";
 CREATE DATABASE welovecoding;
 GRANT ALL PRIVILEGES ON DATABASE "welovecoding" to welovecodinguser;
 ```
