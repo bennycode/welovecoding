@@ -13,7 +13,7 @@ function getConfigFromUrl(url: string) {
       name: '',
     };
   }
-  const [username, password, host, port, name] = url.match(POSTGRES_URL_REGEX);
+  const [, username, password, host, port, name] = url.match(POSTGRES_URL_REGEX);
   return {
     username,
     password,
