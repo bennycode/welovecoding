@@ -17,7 +17,7 @@ function executeCommand(command) {
 Promise.resolve()
 .then(() => {
   // build backend
-  return executeCommand(`cd ${path.join(__dirname, 'backend')} && npm install && npm run build`);
+  return executeCommand(`cd ${path.join(__dirname, 'backend')} && npm install && npm install --only=dev && npm run build`);
 })
 .then(() => {
   // build frontend
