@@ -21,8 +21,18 @@ npm run dev
 - Backend will be accessible on http://localhost:8080/
 - Frontend will be accessible on http://localhost:8081/
 
-To make Google authentication work in the local dev environment, one needs to add a domain to `/etc/hosts` that is registered for the application at Google.
-For macOs/Linux do:
+### Google Authentication
+
+To make Google authentication work in the local development environment, one needs to add a domain to `/etc/hosts` that is registered for the application at Google.
+
+**macOS/Linux**
+
 ```bash
 sudo echo '127.0.0.1 localwelovecoding.com' >> /etc/hosts
+```
+
+**Windows**
+
+```batch
+echo "127.0.0.1 localwelovecoding.com" >> "C:\Windows\System32\drivers\etc\hosts"
 ```
