@@ -30,9 +30,19 @@ To make Google authentication work in the local development environment, one nee
 ```bash
 sudo echo '127.0.0.1 localwelovecoding.com' >> /etc/hosts
 ```
-
 **Windows**
 
 ```batch
 echo "127.0.0.1 localwelovecoding.com" >> "C:\Windows\System32\drivers\etc\hosts"
 ```
+
+### Create the database in postgres
+
+1. install postgres
+2. execute in psql
+```
+CREATE USER welovecodinguser WITH PASSWORD wlc2017;
+CREATE DATABASE welovecoding;
+GRANT ALL PRIVILEGES ON DATABASE "welovecoding" to welovecodinguser;
+```
+>>>>>>> feat: use postgres and have production/development envs

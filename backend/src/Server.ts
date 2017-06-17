@@ -141,7 +141,10 @@ export default class Server {
     category.color = '#19A2DE';
     categories.push(category.toJSON());
 
-    const playlist: PlaylistDTO = new PlaylistDTO(4, 'Java Tutorials von Anfang an');
+    const playlist: PlaylistDTO = new PlaylistDTO(
+      4,
+      'Java Tutorials von Anfang an',
+    );
     playlist.language = 'German';
 
     category = new CategoryDTO(2, 'Java');
