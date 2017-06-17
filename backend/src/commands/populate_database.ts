@@ -1,3 +1,9 @@
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
+
+if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) {
+  require('dotenv').config();
+}
+
 import 'src/models';
 import User from 'src/models/User';
 import Category from 'src/models/Category';

@@ -64,8 +64,8 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production && webpack",
-    "database:populate": "cross-env NODE_PATH=./dist && node dist/populate_database.ts.js",
-    "database:reset": "cross-env NODE_PATH=./dist && node dist/reset.ts.js",
+    "database:populate": "cross-env APP_ENV=development NODE_PATH=./dist node dist/populate_database.ts.js",
+    "database:reset": "cross-env APP_ENV=development NODE_PATH=./dist node dist/reset.ts.js",
     "start": "concurrently \"webpack --watch\" \"cross-env APP_ENV=development NODE_PATH=./dist nodemon dist/main.js\"",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
