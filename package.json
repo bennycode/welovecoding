@@ -1,13 +1,14 @@
 {
   "dependencies": {
     "@welovecoding/backend": "./backend",
-    "@welovecoding/frontend": "./frontend",
+    "@welovecoding/frontend": "./frontend"
+  },
+  "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
+  "devDependencies": {
     "concurrently": "3.4.0",
     "fs-extra": "3.0.1",
     "husky": "0.13.4"
   },
-  "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
-  "devDependencies": {},
   "name": "@welovecoding/welovecoding",
   "private": true,
   "repository": {
@@ -17,8 +18,8 @@
   "scripts": {
     "dev": "concurrently \"cd ./backend && npm start\" \"cd ./frontend && npm start\"",
     "postinstall": "node ./build.js",
-    "start": "cd backend && npm run start-prod",
-    "precommit": "cd ./backend && tslint -c ../tslint.json 'src/**/*.ts' '../frontend/src/**/*.ts' '../frontend/src/**/*.tsx'"
+    "precommit": "cd ./backend && tslint -c ../tslint.json 'src/**/*.ts' '../frontend/src/**/*.ts' '../frontend/src/**/*.tsx'",
+    "start": "cd backend && npm run start-prod"
   },
   "version": "0.0.1"
 }
