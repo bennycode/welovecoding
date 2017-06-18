@@ -1,8 +1,5 @@
 import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
-
-if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) {
-  require('dotenv').config();
-}
+if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) { require('dotenv').config(); }
 
 import 'src/models';
 import User from 'src/models/User';
@@ -31,7 +28,7 @@ function populateUsers() {
   });
 }
 
-const CATEGORIES = ['java', 'python', 'elm'];
+const CATEGORIES = ['Java', 'Python', 'Elm'];
 
 function populateCategories() {
   console.log('POPULATING CATEGORIES');
