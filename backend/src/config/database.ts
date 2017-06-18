@@ -13,7 +13,9 @@ function getConfigFromUrl(url: string) {
       name: '',
     };
   }
-  const [, username, password, host, port, name] = url.match(POSTGRES_URL_REGEX);
+  const [, username, password, host, port, name] = url.match(
+    POSTGRES_URL_REGEX,
+  );
   return {
     username,
     password,
@@ -34,6 +36,14 @@ const development: ISequelizeConfig = {
   ...getConfigFromUrl(process.env.DATABASE_URL),
 };
 
+const testing: ISequelizeConfig = {
+  username: 'welovecodinguser',
+  name: 'welovecoding',
+  password: 'wlc2017',
+  dialect: 'sqlite',
+  storage: './database.sqlite',
+};
+
 const production: ISequelizeConfig = {
   pool: {
     max: 5,
@@ -51,6 +61,7 @@ const production: ISequelizeConfig = {
 export const databaseConfigs = {
   [POSSIBLE_APP_ENVS.DEVELOPMENT]: development,
   [POSSIBLE_APP_ENVS.PRODUCTION]: production,
+  [POSSIBLE_APP_ENVS.TESTING]: testing,
 };
 
 export default databaseConfigs[APP_ENV];
