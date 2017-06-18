@@ -7,16 +7,13 @@
     "crypto": "0.0.3",
     "express": "4.15.2",
     "express-session": "1.15.3",
-    "mkdirp": "0.5.1",
     "passport": "0.3.2",
     "passport-google-oauth20": "1.0.0",
     "passport-local": "1.0.0",
     "pg": "6.2.4",
-    "reflect-metadata": "0.1.10",
     "sequelize": "3.30.4",
     "sequelize-typescript": "0.3.1",
     "source-map-support": "0.4.15",
-    "ts-loader": "2.0.3",
     "typescript": "2.3.2",
     "webpack": "2.5.1"
   },
@@ -36,6 +33,7 @@
     "prettier": "1.4.4",
     "supertest": "3.0.0",
     "ts-jest": "20.0.6",
+    "ts-loader": "2.0.3",
     "tslint": "5.2.0",
     "tslint-loader": "3.5.3"
   },
@@ -71,8 +69,8 @@
     "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
     "test": "cross-env NODE_PATH=./src && jest",
     "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
-    "prettier:check": "npm run prettier:base -- --list-different './src/**/*.ts' './src/**/*.tsx'",
-    "prettier:write": "npm run prettier:base -- --write './src/**/*.ts' './src/**/*.tsx'"
+    "prettier:check": "npm run prettier:base -- --list-different \"./src/**/*.ts\" \"./src/**/*.tsx\"",
+    "prettier:write": "npm run prettier:base -- --write \"./src/**/*.ts\" \"./src/**/*.tsx\""
   },
   "version": "0.0.0"
 }
