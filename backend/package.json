@@ -63,11 +63,11 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production && webpack",
     "database:populate": "cross-env APP_ENV=development NODE_PATH=./dist node dist/populate_database.ts.js",
-    "database:reset": "cross-env APP_ENV=development NODE_PATH=./dist node dist/reset.ts.js",
+    "database:reset": "cross-env APP_ENV=development NODE_PATH=./dist node dist/reset_database.ts.js",
     "start": "concurrently \"webpack --watch\" \"cross-env APP_ENV=development NODE_PATH=./dist nodemon dist/main.js\"",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
-    "test": "cross-env NODE_PATH=./src && jest",
+    "test": "cross-env APP_ENV=development NODE_PATH=./src && jest",
     "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
     "prettier:check": "npm run prettier:base -- --list-different \"./src/**/*.ts\" \"./src/**/*.tsx\"",
     "prettier:write": "npm run prettier:base -- --write \"./src/**/*.ts\" \"./src/**/*.tsx\""
