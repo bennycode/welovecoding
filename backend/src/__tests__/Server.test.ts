@@ -1,4 +1,6 @@
 import * as request from 'supertest';
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
+if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) { require('dotenv').config(); }
 import Server from 'src/Server';
 
 describe('Server', () => {
