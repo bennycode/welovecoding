@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/bluebird": "3.5.5",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
     "cookie-parser": "1.4.3",
@@ -68,7 +69,7 @@
     "start": "concurrently \"webpack --watch\" \"cross-env APP_ENV=development NODE_PATH=./dist nodemon dist/main.js\"",
     "start-prod": "cross-env NODE_PATH=./dist && node dist/main.js",
     "start-tsc": "concurrently \"tsc -w\" \"cross-env NODE_PATH=./dist nodemon dist/index.js\"",
-    "test": "cross-env APP_ENV=development NODE_PATH=./src && jest",
+    "test": "cross-env APP_ENV=testing NODE_PATH=./src jest",
     "prettier:base": "prettier --parser typescript --single-quote --trailing-comma=\"all\" --no-bracket-spacing",
     "prettier:check": "npm run prettier:base -- --list-different \"./src/**/*.ts\" \"./src/**/*.tsx\"",
     "prettier:write": "npm run prettier:base -- --write \"./src/**/*.ts\" \"./src/**/*.tsx\""

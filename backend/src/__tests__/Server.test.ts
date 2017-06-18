@@ -1,10 +1,23 @@
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
+
+if (APP_ENV === POSSIBLE_APP_ENVS.TESTING) {
+  require('dotenv').config();
+}
 import * as request from 'supertest';
 import Server from 'src/Server';
 
-describe('Server', () => {
-  const instance = new Server();
+import resetDatabase from 'src/util/database/reset_database';
+import {populateAll} from 'src/util/database/populate_database';
 
-  describe('/rest/service/v1/categories', () => {
+beforeEach(() => {
+  return resetDatabase().then(() => {
+    return populateAll();
+  });
+});
+
+describe('Server', () => {
+  test('/rest/service/v1/categories', () => {
+    const instance = new Server();
     it('returns categories', done => {
       request(instance.app)
         .get('/rest/service/v1/categories')

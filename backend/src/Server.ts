@@ -133,28 +133,29 @@ export default class Server {
   }
 
   private setupLegacyAPI() {
-    Category.all().then(categories => {
-      const legacyCategories = categories.map((category: Category) => {
-        const legacyCategory = new CategoryDTO(category.id, category.name);
-        legacyCategory.color = category.color;
-        return legacyCategory;
+    Category.all()
+      .then(categories => {
+        const legacyCategories = categories.map((category: Category) => {
+          const legacyCategory = new CategoryDTO(category.id, category.name);
+          legacyCategory.color = category.color;
+          return legacyCategory;
+        });
+        return legacyCategories;
+      })
+      .then(categories => {
+        // Sort result
+        categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) =>
+          category.name.localeCompare(anotherCategory.name),
+        );
+
+        // Issue response
+        this.app.get(
+          '/rest/service/v1/categories',
+          (request: express.Request, response: express.Response): void => {
+            response.json(categories);
+          },
+        );
       });
-      return legacyCategories;
-    }).then(categories => {
-
-      // Sort result
-      categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) =>
-        category.name.localeCompare(anotherCategory.name),
-      );
-
-      // Issue response
-      this.app.get(
-        '/rest/service/v1/categories',
-        (request: express.Request, response: express.Response): void => {
-          response.json(categories);
-        },
-      );
-    });
   }
 
   public config(): void {
