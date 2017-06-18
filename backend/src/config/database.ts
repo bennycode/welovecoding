@@ -23,7 +23,7 @@ function getConfigFromUrl(url: string) {
   };
 }
 
-const dev: ISequelizeConfig = {
+const development: ISequelizeConfig = {
   pool: {
     max: 5,
     min: 0,
@@ -49,7 +49,7 @@ const production: ISequelizeConfig = {
 };
 
 export const databaseConfigs = {
-  [POSSIBLE_APP_ENVS.DEVELOPMENT]: dev,
+  [POSSIBLE_APP_ENVS.DEVELOPMENT]: development,
   [POSSIBLE_APP_ENVS.PRODUCTION]: production,
 };
 
