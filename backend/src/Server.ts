@@ -45,7 +45,7 @@ export default class Server {
           clientID: CONFIG_GOOGLE.GOOGLE_CLIENT_ID,
           clientSecret: CONFIG_GOOGLE.GOOGLE_CLIENT_SECRET,
           // TODO
-          callbackURL: 'http://localwelovecoding.com:8080/auth/google/callback',
+          callbackURL: `${process.env.APP_URL_BACKEND}/auth/google/callback`,
           // passReqToCallback: true,
         },
         function(accessToken, refreshToken, profile: GoogleOAuthProfile, done) {
@@ -83,7 +83,7 @@ export default class Server {
 
     this.setupLegacyAPI();
 
-    // curl --data "username=tom&password=mypassword" http://localhost:8080/auth/local
+    // curl --data "username=tom&password=mypassword" http://localwelovecoding.com:8080/auth/local
     this.app.post(
       '/auth/local',
       function(req, res, next) {
@@ -120,8 +120,8 @@ export default class Server {
       passport.authenticate(
         'google',
         {
-          successRedirect: 'http://localhost:8081/auth/google/success',
-          failureRedirect: 'http://localhost:8081/auth/google/failure',
+          successRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/success`,
+          failureRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/success`,
         },
         // function(error) {
         //   // TODO: improve error handling
