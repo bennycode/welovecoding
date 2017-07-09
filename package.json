@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "concurrently \"cd ./backend && npm start\" \"cd ./frontend && npm start\"",
     "postinstall": "node ./build.js",
-    "precommit": "cd ./backend && tslint -c ../tslint.json 'src/**/*.ts' '../frontend/src/**/*.ts' '../frontend/src/**/*.tsx'",
+    "precommit": "cd ./backend && ./node_modules/.bin/tslint -c ../tslint.json 'src/**/*.ts' '../frontend/src/**/*.ts' '../frontend/src/**/*.tsx'",
     "start": "cd backend && npm run start-prod",
     "test": "cd ./backend && npm test"
   },
