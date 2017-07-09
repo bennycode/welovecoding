@@ -1,4 +1,4 @@
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = process.env.APP_URL_BACKEND;
 
 export default {
   BACKEND_URL,
