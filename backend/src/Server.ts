@@ -11,6 +11,7 @@ import User from 'src/models/User';
 import Category from 'src/models/Category';
 import {GoogleOAuthProfile} from 'src/types';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+import {PlusScopes, YouTubeScopes} from 'src/services/google/plus';
 
 export default class Server {
   public app: express.Application;
@@ -102,8 +103,9 @@ export default class Server {
         'google',
         {
           scope: [
-            'https://www.googleapis.com/auth/plus.login',
-            'https://www.googleapis.com/auth/plus.profile.emails.read',
+            PlusScopes.USERINFO_EMAIL,
+            PlusScopes.USERINFO_PROFILE,
+            YouTubeScopes.YOUTUBE_READONLY,
           ],
         },
         // function(error) {
