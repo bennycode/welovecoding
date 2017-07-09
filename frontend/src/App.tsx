@@ -1,18 +1,15 @@
 import * as React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Login from 'src/components/pages/auth/Login';
 import Home from 'src/components/pages/Home';
+import Header from 'src/components/modules/Header';
 
 export default function App() {
   return (
     <Router>
       <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/login">Login</Link></li>
-        </ul>
-        <hr />
+        <Header />
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route

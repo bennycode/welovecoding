@@ -1,0 +1,18 @@
+@import 'src/styles/constants';
+
+.wlc_header {
+  background-color: $color__white;
+  padding: $margin__2;
+}
+
+.wlc_header__button {
+  float: left;
+  margin-right: 5px;
+}
+
+.wlc_header__button-link--active {
+  .ms-Button {
+    background-color: $color__red;
+    color: $color__white;
+  }
+}
