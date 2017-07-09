@@ -7,8 +7,9 @@ if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) {
 
 import Server from './Server';
 
-const port: number = process.env.PORT || 8080;
+const PORT: number = parseInt(process.env.PORT, 10) || 8080;
+
 const server: Server = new Server();
-server.app.listen(port, () => {
-  console.log(`Server is running on port "${port}".`);
+server.app.listen(PORT, () => {
+  console.log(`Server is running on port "${PORT}".`);
 });
