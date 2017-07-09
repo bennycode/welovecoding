@@ -4,9 +4,9 @@
 export default class PlusScopes {
   // Know the list of people in your circles, your age range, and language
   public static PLUS_LOGIN = 'https://www.googleapis.com/auth/plus.login';
-  // 	Know who you are on Google
+  // Know who you are on Google
   public static PLUS_ME = 'https://www.googleapis.com/auth/plus.me';
-  // 	View your email address
+  // View your email address
   public static USERINFO_EMAIL = 'https://www.googleapis.com/auth/userinfo.email';
   // View your basic profile info
   public static USERINFO_PROFILE = 'https://www.googleapis.com/auth/userinfo.profile';
