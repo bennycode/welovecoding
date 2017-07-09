@@ -7,7 +7,7 @@ if (APP_ENV === POSSIBLE_APP_ENVS.DEVELOPMENT) {
 
 import Server from './Server';
 
-const PORT: number = parseInt(process.env.PORT) || 8080;
+const PORT: number = parseInt(process.env.PORT, 10) || 8080;
 
 const server: Server = new Server();
 server.app.listen(PORT, () => {
