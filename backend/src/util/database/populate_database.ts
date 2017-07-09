@@ -15,7 +15,7 @@ export function populateUsers() {
         username: name,
         email: `${name}@welovecoding.com`,
         provider: User.PROVIDERS.local,
-      }, {});
+      });
       return User.register(user, 'mypassword', (err, newUser) => {
         console.log('err', err);
         if (err) {

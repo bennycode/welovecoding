@@ -6,7 +6,7 @@
     "noUnusedParameters": false,
     "module": "commonjs",
     "outDir": "dist/",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
       "src/*": [
         "./src/*"
