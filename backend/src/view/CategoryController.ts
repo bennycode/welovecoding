@@ -1,10 +1,11 @@
+import Bluebird = require('bluebird');
 import Category from 'src/models/Category';
 import CategoryDTO from 'src/api/v1/dto/CategoryDTO';
 import {Router, Request, Response} from 'express';
 
 const router: Router = Router();
 
-function loadCategories() {
+function loadCategories(): Bluebird<CategoryDTO[]> {
   return Category.all()
     .then(categories => {
       const legacyCategories = categories.map((category: Category) => {
@@ -23,7 +24,7 @@ function loadCategories() {
 
 router.get('/', (request: Request, response: Response) => {
   loadCategories().then((categories: CategoryDTO[]) => {
-    return response.json(categories);
+    response.json(categories);
   });
 });
 
