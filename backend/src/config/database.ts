@@ -1,5 +1,5 @@
 import {ISequelizeConfig} from 'sequelize-typescript';
-import {APP_ENV, POSSIBLE_APP_ENVS} from 'config/environment';
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
 
 const POSTGRES_URL_REGEX = /postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/;
 

@@ -1,4 +1,4 @@
-import {APP_ENV, POSSIBLE_APP_ENVS} from 'config/environment';
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
 /**
  * DROP ALL TABLES AND CREATE THEM AGAIN
  */

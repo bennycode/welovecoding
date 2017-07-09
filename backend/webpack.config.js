@@ -44,7 +44,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    modules: [path.resolve('./src'), 'node_modules'],
+    modules: [path.resolve('./'), 'node_modules'],
     extensions: [
       '.ts',
       '.js',

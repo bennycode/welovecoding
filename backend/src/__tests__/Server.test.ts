@@ -1,4 +1,4 @@
-import {APP_ENV, POSSIBLE_APP_ENVS} from 'config/environment';
+import {APP_ENV, POSSIBLE_APP_ENVS} from 'src/config/environment';
 
 if (APP_ENV === POSSIBLE_APP_ENVS.TESTING) {
   require('dotenv').config();
@@ -6,8 +6,8 @@ if (APP_ENV === POSSIBLE_APP_ENVS.TESTING) {
 import * as request from 'supertest';
 import Server from 'Server';
 
-import resetDatabase from 'util/database/reset_database';
-import {populateAll} from 'util/database/populate_database';
+import resetDatabase from 'src/util/database/reset_database';
+import {populateAll} from 'src/util/database/populate_database';
 
 beforeEach(() => {
   return resetDatabase().then(() => {
