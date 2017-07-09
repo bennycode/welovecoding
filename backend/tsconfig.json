@@ -6,11 +6,8 @@
     "noUnusedParameters": false,
     "module": "commonjs",
     "outDir": "dist/",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "src/*": [
-        "./src/*"
-      ]
     },
     "target": "es6",
     "jsx": "react",

@@ -1,17 +1,17 @@
-import 'src/models';
+import 'models';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
-import CategoryDTO from 'src/api/v1/dto/CategoryDTO';
-import CONFIG_GOOGLE from 'src/config/google';
-import User from 'src/models/User';
-import Category from 'src/models/Category';
-import {GoogleOAuthProfile} from 'src/types';
+import CategoryDTO from 'api/v1/dto/CategoryDTO';
+import CONFIG_GOOGLE from 'config/google';
+import User from 'models/User';
+import Category from 'models/Category';
+import {GoogleOAuthProfile} from 'types';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
-import {PlusScopes, YouTubeScopes} from 'src/services/google/plus';
+import {PlusScopes, YouTubeScopes} from 'services/google/plus';
 
 export default class Server {
   public app: express.Application;

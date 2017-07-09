@@ -1,8 +1,8 @@
-import 'src/models';
-import User from 'src/models/User';
-import Category from 'src/models/Category';
-import Video from 'src/models/Video';
-import Author from 'src/models/Author';
+import 'models';
+import User from 'models/User';
+import Category from 'models/Category';
+import Video from 'models/Video';
+import Author from 'models/Author';
 import * as bluebird from 'bluebird';
 
 const NAMES = ['tom', 'benny', 'roland'];
