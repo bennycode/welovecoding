@@ -7,7 +7,7 @@
   "devDependencies": {
     "concurrently": "3.5.0",
     "fs-extra": "3.0.1",
-    "husky": "0.13.4"
+    "husky": "0.14.0"
   },
   "name": "@welovecoding/welovecoding",
   "private": true,
