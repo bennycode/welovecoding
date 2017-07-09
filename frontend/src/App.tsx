@@ -1,11 +1,8 @@
 import * as React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-import Login from 'src/pages/auth/Login';
-
-function Home() {
-  return <h2>Homeeee</h2>;
-}
+import Login from 'src/components/pages/auth/Login';
+import Home from 'src/components/pages/Home';
 
 export default function App() {
   return (
