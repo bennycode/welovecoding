@@ -121,7 +121,7 @@ export default class Server {
         'google',
         {
           successRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/success`,
-          failureRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/success`,
+          failureRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/failure`,
         },
         // function(error) {
         //   // TODO: improve error handling
