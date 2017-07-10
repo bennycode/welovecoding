@@ -5,23 +5,22 @@ const _ = require('lodash');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-let nodeModules = [];
+let nodeModules = {};
 
-// needed to make webpack work with node
 fs.readdirSync('node_modules')
   .filter(function(x) {
     return ['.bin'].indexOf(x) === -1;
   })
-  .forEach(function(mod) {
-    nodeModules.push(mod);
+  .forEach(function(module) {
+    nodeModules[module] = `require('${module}')`;
   });
 
 fs.readdirSync('../node_modules')
   .filter(function(x) {
     return ['.bin'].indexOf(x) === -1;
   })
-  .forEach(function(mod) {
-    nodeModules.push(mod);
+  .forEach(function(module) {
+    nodeModules[module] = `require('${module}')`;
   });
 
 module.exports = {
@@ -31,9 +30,7 @@ module.exports = {
     reset_database: './src/commands/reset_database',
   },
   target: 'node',
-  externals: [
-    ...nodeModules,
-  ],
+  externals: nodeModules,
   devtool: 'source-map',
   devServer: {
     historyApiFallback: { index: '/' }
