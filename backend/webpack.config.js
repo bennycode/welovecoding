@@ -5,7 +5,7 @@ const _ = require('lodash');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-let nodeModules = {};
+let nodeModules = [];
 
 fs.readdirSync('node_modules')
   .filter(function(x) {

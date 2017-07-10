@@ -5,13 +5,11 @@ import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as session from 'express-session';
-import CategoryDTO from 'src/api/v1/dto/CategoryDTO';
 import CONFIG_GOOGLE from 'src/config/google';
 import User from 'src/models/User';
-import Category from 'src/models/Category';
-import {GoogleOAuthProfile} from 'src/types';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
-import {PlusScopes, YouTubeScopes} from 'src/services/google/plus';
+import {PlusProfile, PlusScopes, YouTubeScopes} from 'src/services/google/oauth';
+import {CategoryController} from "src/view/CategoryController";
 
 export default class Server {
   public app: express.Application;
@@ -48,7 +46,7 @@ export default class Server {
           callbackURL: `${process.env.APP_URL_BACKEND}/auth/google/callback`,
           // passReqToCallback: true,
         },
-        function(accessToken, refreshToken, profile: GoogleOAuthProfile, done) {
+        function(accessToken, refreshToken, profile: PlusProfile, done) {
           const email = profile.emails[0].value;
           User.findOrCreate<User>({
             where: {
@@ -81,7 +79,7 @@ export default class Server {
       },
     );
 
-    this.setupLegacyAPI();
+    this.app.use('/rest/service/v1/categories', CategoryController);
 
     // curl --data "username=tom&password=mypassword" http://localwelovecoding.com:8080/auth/local
     this.app.post(
@@ -132,32 +130,6 @@ export default class Server {
       //   return res.json({success: true, data: ''});
       // },
     );
-  }
-
-  private setupLegacyAPI() {
-    Category.all()
-      .then(categories => {
-        const legacyCategories = categories.map((category: Category) => {
-          const legacyCategory = new CategoryDTO(category.id, category.name);
-          legacyCategory.color = category.color;
-          return legacyCategory;
-        });
-        return legacyCategories;
-      })
-      .then(categories => {
-        // Sort result
-        categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) =>
-          category.name.localeCompare(anotherCategory.name),
-        );
-
-        // Issue response
-        this.app.get(
-          '/rest/service/v1/categories',
-          (request: express.Request, response: express.Response): void => {
-            response.json(categories);
-          },
-        );
-      });
   }
 
   public config(): void {
