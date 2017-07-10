@@ -1,12 +1,12 @@
 {
   "dependencies": {
     "@welovecoding/backend": "./backend",
-    "@welovecoding/frontend": "./frontend"
+    "@welovecoding/frontend": "./frontend",
+    "fs-extra": "3.0.1"
   },
   "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
   "devDependencies": {
     "concurrently": "3.5.0",
-    "fs-extra": "3.0.1",
     "husky": "0.14.3"
   },
   "engines": {
