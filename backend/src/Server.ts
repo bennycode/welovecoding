@@ -7,9 +7,8 @@ import * as path from 'path';
 import * as session from 'express-session';
 import CONFIG_GOOGLE from 'src/config/google';
 import User from 'src/models/User';
-import {GoogleOAuthProfile} from 'src/types';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
-import {PlusScopes, YouTubeScopes} from 'src/services/google/plus';
+import {PlusProfile, PlusScopes, YouTubeScopes} from 'src/services/google/oauth';
 import {CategoryController} from "src/view/CategoryController";
 
 export default class Server {
@@ -47,7 +46,7 @@ export default class Server {
           callbackURL: `${process.env.APP_URL_BACKEND}/auth/google/callback`,
           // passReqToCallback: true,
         },
-        function(accessToken, refreshToken, profile: GoogleOAuthProfile, done) {
+        function(accessToken, refreshToken, profile: PlusProfile, done) {
           const email = profile.emails[0].value;
           User.findOrCreate<User>({
             where: {
