@@ -1,11 +1,11 @@
-export interface GoogleOAuthProfile {
+interface PlusProfile {
   ageRange: {
     min: number;
   };
   circledByCount: number;
   cover: any;
   displayName: string;
-  emails: Array<{value: string; type: string}>;
+  emails: Array<{ value: string; type: string }>;
   etag: string;
   gender: string;
   id: string;
@@ -24,3 +24,5 @@ export interface GoogleOAuthProfile {
   url: string;
   verified: boolean;
 }
+
+export default PlusProfile;
