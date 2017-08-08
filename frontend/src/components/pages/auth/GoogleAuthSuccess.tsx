@@ -16,12 +16,10 @@ class GoogleAuthSuccess extends React.Component<
   GoogleAuthSuccessOwnProps & GoogleAuthSuccessDispatchProps
 > {
   componentWillMount() {
-    console.log('mount', this.props);
     const query = new URLSearchParams(this.props.location.search);
     const token = query.get('token');
     if (token) {
       this.props.loginViaToken(token).then(res => {
-        console.log('RES', res);
         if (res.data.success === true) {
           this.props.history.push('/user/profile');
         }
@@ -31,7 +29,6 @@ class GoogleAuthSuccess extends React.Component<
     }
   }
   render() {
-    console.log(this.props);
     return (
       <Grid>
         <Row>

@@ -3,6 +3,7 @@ import {Grid, Row, Col} from 'react-flexbox-grid';
 import {connect} from 'react-redux';
 import {Button, TextField} from 'office-ui-fabric-react';
 import {Card, Divider} from 'src/components/modules/Layout';
+import {RouteComponentProps} from 'react-router';
 import {manualLogin} from 'src/state/auth';
 import Alert from 'src/components/modules/Alert';
 
@@ -11,6 +12,7 @@ import CONFIG from 'src/config';
 class LocalLogin extends React.Component<
   {
     manualLogin: typeof manualLogin;
+    history: any;
   },
   {
     password: string;
@@ -45,9 +47,8 @@ class LocalLogin extends React.Component<
       this.state.username,
       this.state.password,
     ) as any).then(res => {
-      console.log(res);
-      if (res.success) {
-        // redirect
+      if (res.data.success) {
+        this.props.history.push('/user/profile');
       } else {
         this.setState({
           error: res.message,
@@ -89,7 +90,7 @@ interface LoginDispatchProps {
   manualLogin: typeof manualLogin;
 }
 
-const Login: React.StatelessComponent<LoginDispatchProps> = ({manualLogin}) => {
+const Login: React.StatelessComponent<LoginDispatchProps & RouteComponentProps<{}>> = ({manualLogin, history}) => {
   return (
     <Grid>
       <Row>
@@ -100,7 +101,7 @@ const Login: React.StatelessComponent<LoginDispatchProps> = ({manualLogin}) => {
               {'Login with Google'}
             </Button>
             <Divider />
-            <LocalLogin manualLogin={manualLogin} />
+            <LocalLogin manualLogin={manualLogin} history={history}/>
           </Card>
         </Col>
       </Row>

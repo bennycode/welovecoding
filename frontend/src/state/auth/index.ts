@@ -62,7 +62,6 @@ function makeUserRequest(method, data, api = '/login') {
 }
 
 function handleLoginSuccess(dispatch, response) {
-  console.log(response);
   if (response.data.success) {
     dispatch(
       loginSuccess({
@@ -87,6 +86,9 @@ function handleLoginException(_, response) {
 
 export function loginViaToken(token) {
   return dispatch => {
+
+    dispatch(beginLogin());
+
     return axios({
       method: 'get',
       url: CONFIG.API.AUTH_TOKEN_LOGIN,
@@ -95,7 +97,7 @@ export function loginViaToken(token) {
       },
     })
       .then(res => handleLoginSuccess(dispatch, res))
-      .catch(response => handleLoginException(dispatch, response));
+      .catch(res => handleLoginException(dispatch, res));
   };
 }
 
@@ -108,8 +110,8 @@ export function manualLogin(username, password) {
     dispatch(beginLogin());
 
     return makeUserRequest('post', data, CONFIG.API.AUTH_LOCAL_LOGIN)
-      .then(response => handleLoginSuccess(dispatch, response))
-      .catch(response => handleLoginException(dispatch, response));
+      .then(res => handleLoginSuccess(dispatch, res))
+      .catch(res => handleLoginException(dispatch, res));
   };
 }
 
