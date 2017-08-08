@@ -94,7 +94,6 @@ export default class Server {
     // curl --data "username=tom&password=mypassword" http://localhost:8080/auth/local
     this.app.options('/auth/local', cors());
     this.app.post('/auth/local', cors(), function(req, res, next) {
-      console.log(req.body);
       return passport.authenticate(
         'local',
         {
@@ -113,11 +112,13 @@ export default class Server {
             if (loginErr) {
               return res.json({success: true, message: loginErr});
             }
-            console.log(user);
             return res.json({
               success: true,
-              email: user.email,
-              token: generateToken(user),
+              data: {
+                email: user.email,
+                username: user.username,
+                token: generateToken(user),
+              },
             });
           });
         },
@@ -126,9 +127,8 @@ export default class Server {
 
     this.app.options('/auth/token', cors());
     this.app.get('/auth/token', cors(), function(req, res) {
-      const token = req.headers.token;
-      jwt.verify(token, SECRET, (err, decoded) => {
-        console.log(decoded);
+      const token = req.headers.token as string;
+      jwt.verify(token, SECRET, (err, decoded: {id: number}) => {
         if (err) {
           console.log('JWT error: ', err);
           res.json({success: false});
@@ -138,6 +138,7 @@ export default class Server {
               success: true,
               data: {
                 email: user.email,
+                username: user.username,
                 token,
               },
             });
