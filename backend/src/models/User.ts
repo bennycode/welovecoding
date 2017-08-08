@@ -39,6 +39,7 @@ const defaultAttachOptions = {
   selectFields: false,
   userExistsError: 'User already exists with %s',
   usernameField: 'username',
+  passwordField: 'password',
   usernameLowerCase: false,
 };
 const options = defaultAttachOptions;
@@ -84,7 +85,8 @@ class User extends Model<User> {
 
   @Column(DataType.JSON) providerData: object;
 
-  @Column hash: string;
+  @Column(DataType.STRING(1024))
+  hash: string;
 
   @Column salt: string;
 
@@ -386,7 +388,14 @@ class User extends Model<User> {
   }
 
   static createStrategy() {
-    return new LocalStrategy(options, User.authenticate());
+    return new LocalStrategy(
+      {
+        usernameField: options.usernameField,
+        passwordField: options.passwordField,
+        passReqToCallback: false,
+      },
+      User.authenticate(),
+    );
   }
 }
 

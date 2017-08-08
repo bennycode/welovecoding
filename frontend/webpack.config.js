@@ -39,6 +39,15 @@ const extractSass = new ExtractTextPlugin({
   disable: !IS_PRODUCTION
 });
 
+loaders.css = {
+  test: /\.css$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: 'css-loader'
+  }),
+  include: /flexboxgrid/
+};
+
 loaders.scss = {
   test: /\.scss$/,
   use: extractSass.extract({
@@ -186,6 +195,7 @@ module.exports = {
 
   module: {
     rules: [
+      loaders.css,
       loaders.scss,
       loaders.tsx,
       loaders.tslint,

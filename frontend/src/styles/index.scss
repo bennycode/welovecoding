@@ -1,0 +1,15 @@
+@import './constants';
+@import './fabric-ui-override';
+@import './fonts/roboto/roboto';
+@import './typography';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eee;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  padding: 0;
+  margin: 0;
+}

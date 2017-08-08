@@ -1,0 +1,9 @@
+@import './constants';
+
+$button_border-radius: 5px;
+
+// BUTTONS
+
+.ms-Button {
+  border-radius: $button_border-radius;
+}

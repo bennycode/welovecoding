@@ -1,15 +1,31 @@
 import 'src/models';
+import * as jwt from 'jsonwebtoken';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
+import * as cors from 'cors';
 import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
-import * as session from 'express-session';
 import CONFIG_GOOGLE from 'src/config/google';
 import User from 'src/models/User';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 import {PlusProfile, PlusScopes, YouTubeScopes} from 'src/services/google/oauth';
 import {CategoryController} from "src/view/CategoryController";
+
+const SECRET = 'mycoolsecret';
+// const authenticate = expressJwt({secret: SECRET});
+
+function generateToken(user: User) {
+  return jwt.sign(
+    {
+      id: user.id,
+    } as object,
+    SECRET,
+    {
+      expiresIn: '120 minutes',
+    },
+  );
+}
 
 export default class Server {
   public app: express.Application;
@@ -23,17 +39,11 @@ export default class Server {
 
   public middleware(): void {
     this.app.use(bodyParser.urlencoded({extended: true}));
+    this.app.use(bodyParser.json());
     this.app.use(cookieParser());
-    this.app.use(
-      session({
-        resave: false,
-        saveUninitialized: false,
-        secret: 'super-secret',
-      }),
-    );
 
     this.app.use(passport.initialize());
-    this.app.use(passport.session());
+
     // Local
     passport.use(User.createStrategy());
     // Google
@@ -81,19 +91,61 @@ export default class Server {
 
     this.app.use('/rest/service/v1/categories', CategoryController);
 
-    // curl --data "username=tom&password=mypassword" http://localwelovecoding.com:8080/auth/local
-    this.app.post(
-      '/auth/local',
-      function(req, res, next) {
-        return passport.authenticate('local', {
-          failureRedirect: '/no',
-          successRedirect: '/yesss',
-        })(req, res, next);
-      },
-      function(_, res) {
-        res.redirect('/');
-      },
-    );
+    // curl --data "username=tom&password=mypassword" http://localhost:8080/auth/local
+    this.app.options('/auth/local', cors());
+    this.app.post('/auth/local', cors(), function(req, res, next) {
+      return passport.authenticate(
+        'local',
+        {
+          session: false,
+        },
+        function(error, user: User, info) {
+          // TODO: improve error handling
+          if (error) {
+            console.log('AUTH ERROR', error);
+            return next(error);
+          }
+          if (!user) {
+            return res.json({success: false, message: info.message});
+          }
+          req.logIn(user, loginErr => {
+            if (loginErr) {
+              return res.json({success: true, message: loginErr});
+            }
+            return res.json({
+              success: true,
+              data: {
+                email: user.email,
+                username: user.username,
+                token: generateToken(user),
+              },
+            });
+          });
+        },
+      )(req, res, next);
+    });
+
+    this.app.options('/auth/token', cors());
+    this.app.get('/auth/token', cors(), function(req, res) {
+      const token = req.headers.token as string;
+      jwt.verify(token, SECRET, (err, decoded: {id: number}) => {
+        if (err) {
+          console.log('JWT error: ', err);
+          res.json({success: false});
+        } else {
+          User.findById(decoded.id).then((user: User) => {
+            res.json({
+              success: true,
+              data: {
+                email: user.email,
+                username: user.username,
+                token,
+              },
+            });
+          });
+        }
+      });
+    });
 
     this.app.get(
       '/auth/google',
@@ -106,30 +158,35 @@ export default class Server {
             YouTubeScopes.YOUTUBE_READONLY,
           ],
         },
-        // function(error) {
-        //   // TODO: improve error handling
-        //   console.log('GOOGLE AUTH ERROR', error);
-        // },
+        function(error) {
+          // TODO: improve error handling
+          if (error) {
+            console.log('GOOGLE AUTH ERROR', error);
+          }
+        },
       ),
+      function(req, res) {
+        return res.json({
+          success: false,
+        });
+      },
     );
 
-    this.app.get(
-      '/auth/google/callback',
-      passport.authenticate(
-        'google',
-        {
-          successRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/success`,
-          failureRedirect: `${process.env.APP_URL_FRONTEND}/auth/google/failure`,
-        },
-        // function(error) {
-        //   // TODO: improve error handling
-        //   console.log('GOOGLE AUTH CALLBACK ERROR', error);
-        // },
-      ),
-      // function(req, res) {
-      //   return res.json({success: true, data: ''});
-      // },
-    );
+    this.app.get('/auth/google/callback', function(req, res, next) {
+      passport.authenticate('google', {}, function(error, user: User) {
+        // TODO: improve error handling
+        const token = generateToken(user);
+        if (error) {
+          console.log('GOOGLE AUTH CALLBACK ERROR', error);
+          res.redirect(`${process.env.APP_URL_FRONTEND}/auth/google/failure`);
+        } else {
+          res.redirect(
+            `${process.env.APP_URL_FRONTEND}/auth/google/success?token=${token}`,
+          );
+        }
+        next();
+      })(req, res, next);
+    });
   }
 
   public config(): void {
