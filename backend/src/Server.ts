@@ -6,13 +6,11 @@ import * as cors from 'cors';
 import * as express from 'express';
 import * as passport from 'passport';
 import * as path from 'path';
-// import * as expressJwt from 'express-jwt';
-import CategoryDTO from 'src/api/v1/dto/CategoryDTO';
 import CONFIG_GOOGLE from 'src/config/google';
 import User from 'src/models/User';
-import Category from 'src/models/Category';
-import {GoogleOAuthProfile} from 'src/types';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+import {PlusProfile, PlusScopes, YouTubeScopes} from 'src/services/google/oauth';
+import {CategoryController} from "src/view/CategoryController";
 
 const SECRET = 'mycoolsecret';
 // const authenticate = expressJwt({secret: SECRET});
@@ -55,10 +53,10 @@ export default class Server {
           clientID: CONFIG_GOOGLE.GOOGLE_CLIENT_ID,
           clientSecret: CONFIG_GOOGLE.GOOGLE_CLIENT_SECRET,
           // TODO
-          callbackURL: 'http://localwelovecoding.com:8080/auth/google/callback',
+          callbackURL: `${process.env.APP_URL_BACKEND}/auth/google/callback`,
           // passReqToCallback: true,
         },
-        function(accessToken, refreshToken, profile: GoogleOAuthProfile, done) {
+        function(accessToken, refreshToken, profile: PlusProfile, done) {
           const email = profile.emails[0].value;
           User.findOrCreate<User>({
             where: {
@@ -91,7 +89,7 @@ export default class Server {
       },
     );
 
-    this.setupLegacyAPI();
+    this.app.use('/rest/service/v1/categories', CategoryController);
 
     // curl --data "username=tom&password=mypassword" http://localhost:8080/auth/local
     this.app.options('/auth/local', cors());
@@ -154,8 +152,9 @@ export default class Server {
         'google',
         {
           scope: [
-            'https://www.googleapis.com/auth/plus.login',
-            'https://www.googleapis.com/auth/plus.profile.emails.read',
+            PlusScopes.USERINFO_EMAIL,
+            PlusScopes.USERINFO_PROFILE,
+            YouTubeScopes.YOUTUBE_READONLY,
           ],
         },
         function(error) {
@@ -178,41 +177,15 @@ export default class Server {
         const token = generateToken(user);
         if (error) {
           console.log('GOOGLE AUTH CALLBACK ERROR', error);
-          res.redirect('http://localhost:8081/auth/google/failure');
+          res.redirect(`${process.env.APP_URL_FRONTEND}/auth/google/failure`);
         } else {
           res.redirect(
-            `http://localhost:8081/auth/google/success?token=${token}`,
+            `${process.env.APP_URL_FRONTEND}/auth/google/success?token=${token}`,
           );
         }
         next();
       })(req, res, next);
     });
-  }
-
-  private setupLegacyAPI() {
-    Category.all()
-      .then(categories => {
-        const legacyCategories = categories.map((category: Category) => {
-          const legacyCategory = new CategoryDTO(category.id, category.name);
-          legacyCategory.color = category.color;
-          return legacyCategory;
-        });
-        return legacyCategories;
-      })
-      .then(categories => {
-        // Sort result
-        categories.sort((category: CategoryDTO, anotherCategory: CategoryDTO) =>
-          category.name.localeCompare(anotherCategory.name),
-        );
-
-        // Issue response
-        this.app.get(
-          '/rest/service/v1/categories',
-          (request: express.Request, response: express.Response): void => {
-            response.json(categories);
-          },
-        );
-      });
   }
 
   public config(): void {

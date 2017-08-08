@@ -4,24 +4,20 @@
 
 Website for free programming tutorials and screencasts.
 
-## Environment Variables
-
-```
-# To make authentication via google work, one needs valid oauth credentials
-GOOGLE_CLIENT_ID
-GOOGLE_CLIENT_SECRET
-```
-
 ## Development environment
 
-```bash
-npm run dev
+### 1. Create Postgres database
+
+1. Install [PostgreSQL](https://www.postgresql.org/)
+2. Execute in `psql`
 ```
+CREATE USER welovecodinguser WITH PASSWORD "wlc2017";
+CREATE DATABASE welovecoding;
+GRANT ALL PRIVILEGES ON DATABASE "welovecoding" to welovecodinguser;
+```
+3. Keep Postgres running
 
-- Backend will be accessible on http://localhost:8080/
-- Frontend will be accessible on http://localhost:8081/
-
-### Google Authentication
+### 2. Setup virtual host
 
 To make Google authentication work in the local development environment, one needs to add a domain to `/etc/hosts` that is registered for the application at Google.
 
@@ -32,16 +28,19 @@ sudo echo '127.0.0.1 localwelovecoding.com' >> /etc/hosts
 ```
 **Windows**
 
-```batch
-echo "127.0.0.1 localwelovecoding.com" >> "C:\Windows\System32\drivers\etc\hosts"
+1. Open "C:\Windows\System32\drivers\etc\hosts"
+1. Add "127.0.0.1 localwelovecoding.com"
+
+### 3. Setup environment variables
+
+Make sure that you have a `.env` configuration file located in `backend/.env`.  
+
+### 4. Run npm scripts
+
+```bash
+npm install
+npm run dev
 ```
 
-### Create the database in postgres
-
-1. install postgres
-2. execute in psql
-```
-CREATE USER welovecodinguser WITH PASSWORD "wlc2017";
-CREATE DATABASE welovecoding;
-GRANT ALL PRIVILEGES ON DATABASE "welovecoding" to welovecodinguser;
-```
+- Backend will be accessible at http://localhost:8080/
+- Frontend will be accessible at http://localhost:8081/
