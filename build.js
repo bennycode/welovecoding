@@ -14,14 +14,15 @@ function executeCommand(command) {
   });
 }
 
+const npmLimit = `alias npm='node --max_old_space_size=1500 /usr/bin/npm'`;
 Promise.resolve()
 .then(() => {
   // build backend
-  return executeCommand(`cd ${path.join(__dirname, 'backend')} && npm install && npm install --only=dev && npm run build`);
+  return executeCommand(`${npmLimit} && cd ${path.join(__dirname, 'backend')} && npm install && npm install --only=dev && npm run build`);
 })
 .then(() => {
   // build frontend
-  return executeCommand(`cd ${path.join(__dirname, 'frontend')} && npm install && npm install --only=dev && npm run build`);
+  return executeCommand(`${npmLimit} && cd ${path.join(__dirname, 'frontend')} && npm install && npm install --only=dev && npm run build`);
 })
 .then(() => {
   // copy frontend dist to backend
