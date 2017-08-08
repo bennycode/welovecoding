@@ -1,16 +1,13 @@
 import * as React from 'react';
-import {
-  Grid,
-  Row,
-  Col,
-} from 'react-flexbox-grid';
-import {
-  NavLink,
-} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Grid, Row, Col} from 'react-flexbox-grid';
+import {RouteComponentProps} from 'react-router';
+import {NavLink, withRouter} from 'react-router-dom';
 
-import {
-  Button,
-} from 'office-ui-fabric-react';
+import {Button} from 'office-ui-fabric-react';
+
+import {StoreState} from 'src/state/store';
+import {AuthState} from 'src/state/auth';
 
 import './Header.scss';
 
@@ -51,29 +48,56 @@ const NavigationButton: React.StatelessComponent = ({children}) => {
   );
 };
 
-const Header: React.StatelessComponent<{}> = () => {
-  return (
-    <div className="wlc_header">
-      <Grid>
-        <Row>
-          <Col>
-            {MENU.map(menuItem => (
-              <NavLink
-                to={menuItem.path}
-                key={menuItem.path}
-                activeClassName="wlc_header__button-link--active"
-                exact
-              >
-                <NavigationButton>
-                  {menuItem.name}
-                </NavigationButton>
-              </NavLink>
-            ))}
-          </Col>
-        </Row>
-      </Grid>
-    </div>
-  );
-};
+interface HeaderStateProps {
+  auth: AuthState;
+}
 
-export default Header;
+type HeaderOwnProps = RouteComponentProps<{}>;
+
+class Header extends React.Component<HeaderStateProps & HeaderOwnProps> {
+  render() {
+    const {auth} = this.props;
+    return (
+      <div className="wlc_header">
+        <Grid>
+          <Row>
+            <Col>
+              {MENU.map(menuItem =>
+                <NavLink
+                  to={menuItem.path}
+                  key={menuItem.path}
+                  activeClassName="wlc_header__button-link--active"
+                  exact
+                >
+                  <NavigationButton>
+                    {menuItem.name}
+                  </NavigationButton>
+                </NavLink>,
+              )}
+              {auth.authenticated
+                ? <NavLink
+                    to={'/user/profile'}
+                    activeClassName="wlc_header__button-link--active"
+                    exact
+                  >
+                    <NavigationButton>
+                      {auth.email}
+                    </NavigationButton>
+                  </NavLink>
+                : null}
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
+}
+
+// bug with withRouter and redux, must be exported as any currently
+export default withRouter(
+  connect<HeaderStateProps, {}, HeaderOwnProps>((state: StoreState) => {
+    return {
+      auth: state.auth,
+    };
+  }, {})(Header),
+) as any;

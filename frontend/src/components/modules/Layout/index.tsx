@@ -12,7 +12,7 @@ export const Card: React.StatelessComponent = ({children}) => {
 };
 
 export const Divider: React.StatelessComponent<{
-  negativeMargin?: number,
+  negativeMargin?: number;
 }> = ({negativeMargin}) => {
   const className = classNames('wlc_divider', {
     'wlc_divider--n1': negativeMargin === 1,
@@ -20,7 +20,5 @@ export const Divider: React.StatelessComponent<{
     'wlc_divider--n3': negativeMargin === 3,
     'wlc_divider--n4': negativeMargin === 4,
   });
-  return (
-    <hr className={className} />
-  );
+  return <hr className={className} />;
 };

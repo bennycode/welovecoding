@@ -1,21 +1,95 @@
 import * as React from 'react';
-import {
-  Grid,
-  Row,
-  Col,
-} from 'react-flexbox-grid';
-import {
-  Button,
-  TextField,
-} from 'office-ui-fabric-react';
-import {
-  Card,
-  Divider,
-} from 'src/components/modules/Layout';
+import {Grid, Row, Col} from 'react-flexbox-grid';
+import {connect} from 'react-redux';
+import {Button, TextField} from 'office-ui-fabric-react';
+import {Card, Divider} from 'src/components/modules/Layout';
+import {manualLogin} from 'src/state/auth';
+import Alert from 'src/components/modules/Alert';
 
 import CONFIG from 'src/config';
 
-const Login: React.StatelessComponent = () => {
+class LocalLogin extends React.Component<
+  {
+    manualLogin: typeof manualLogin;
+  },
+  {
+    password: string;
+    username: string;
+    error: string;
+  }
+> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      username: '',
+      error: '',
+    };
+    this.changePassword = this.changePassword.bind(this);
+    this.changeUsername = this.changeUsername.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  changeUsername(username) {
+    this.setState({
+      username,
+    });
+  }
+  changePassword(password) {
+    this.setState({
+      password,
+    });
+  }
+  onSubmit(event) {
+    event.preventDefault();
+    (this.props.manualLogin(
+      this.state.username,
+      this.state.password,
+    ) as any).then(res => {
+      console.log(res);
+      if (res.success) {
+        // redirect
+      } else {
+        this.setState({
+          error: res.message,
+        });
+      }
+    });
+  }
+  render() {
+    return (
+      <div>
+        <h2>{'Login with username/password'}</h2>
+        <form
+          method="post"
+          action={CONFIG.API.AUTH_LOCAL_LOGIN}
+          onSubmit={this.onSubmit}
+        >
+          <TextField
+            required
+            label="Benutzername"
+            name="username"
+            onChanged={this.changeUsername}
+          />
+          <TextField
+            required
+            label="Password"
+            type="password"
+            name="password"
+            onChanged={this.changePassword}
+          />
+          <Button type="submit">{'Submit'}</Button>
+          {this.state.error !== '' ? <Alert>{this.state.error}</Alert> : null}
+        </form>
+      </div>
+    );
+  }
+}
+
+interface LoginDispatchProps {
+  manualLogin: typeof manualLogin;
+}
+
+const Login: React.StatelessComponent<LoginDispatchProps> = ({manualLogin}) => {
   return (
     <Grid>
       <Row>
@@ -26,12 +100,7 @@ const Login: React.StatelessComponent = () => {
               {'Login with Google'}
             </Button>
             <Divider />
-            <h2>{'Login with username/password'}</h2>
-            <form method="post" action={CONFIG.API.AUTH_LOCAL_LOGIN}>
-              <TextField required label="Benutzername" />
-              <TextField required label="Password" type="password"/>
-              <Button type="submit">{'Submit'}</Button>
-            </form>
+            <LocalLogin manualLogin={manualLogin} />
           </Card>
         </Col>
       </Row>
@@ -39,4 +108,6 @@ const Login: React.StatelessComponent = () => {
   );
 };
 
-export default Login;
+export default connect<{}, LoginDispatchProps, any>(() => ({}), {manualLogin})(
+  Login,
+);

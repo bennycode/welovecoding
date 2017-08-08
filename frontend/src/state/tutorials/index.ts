@@ -13,11 +13,15 @@ export function getCategories() {
   };
 }
 
-const initialState = {
+export interface TutorialsState {
+  categories: any[];
+}
+
+const initialState: TutorialsState = {
   categories: [],
 };
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state: TutorialsState = initialState, action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
       return {
