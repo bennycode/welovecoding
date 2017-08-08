@@ -18,7 +18,7 @@
     "source-map-support": "0.4.15",
     "sqlite": "2.8.0",
     "typescript": "2.4.1",
-    "webpack": "3.1.0"
+    "webpack": "2.4.1"
   },
   "devDependencies": {
     "@types/bluebird": "3.5.8",
