@@ -14,15 +14,27 @@ function executeCommand(command) {
   });
 }
 
-const npmLimit = `alias npm='node --max_old_space_size=1500 /usr/bin/npm'`;
+const npmAlias = 'yarn';
+// const npmAlias = 'node --max_old_space_size=1400 /usr/bin/npm';
+
 Promise.resolve()
 .then(() => {
   // build backend
-  return executeCommand(`${npmLimit} && cd ${path.join(__dirname, 'backend')} && npm install && npm install --only=dev && npm run build`);
+  const goToDirectory = `cd ${path.join(__dirname, 'backend')}`;
+  const install = `${npmAlias} install`;
+  // --only=dev is for npm and --production=false is for yarn
+  const installDev = `${npmAlias} install --only=dev --production=false`;
+  const build = `${npmAlias} run build`
+  return executeCommand([goToDirectory, install, installDev, build].join(' && '));
 })
 .then(() => {
   // build frontend
-  return executeCommand(`${npmLimit} && cd ${path.join(__dirname, 'frontend')} && npm install && npm install --only=dev && npm run build`);
+  const goToDirectory = `cd ${path.join(__dirname, 'frontend')}`;
+  const install = `${npmAlias} install`;
+  // --only=dev is for npm and --production=false is for yarn
+  const installDev = `${npmAlias} install --only=dev --production=false`;
+  const build = `${npmAlias} run build`
+  return executeCommand([goToDirectory, install, installDev, build].join(' && '));
 })
 .then(() => {
   // copy frontend dist to backend

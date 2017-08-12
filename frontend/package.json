@@ -46,6 +46,9 @@
     "webpack": "2.4.1",
     "webpack-dev-server": "2.5.1"
   },
+  "engines": {
+    "node": "8.3.0"
+  },
   "main": "index.js",
   "name": "@welovecoding/frontend",
   "private": true,

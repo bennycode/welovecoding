@@ -41,6 +41,9 @@
     "tslint-loader": "3.5.3",
     "tslint": "5.5.0"
   },
+  "engines": {
+    "node": "8.3.0"
+  },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "main": "index.js",
   "name": "@welovecoding/backend",
