@@ -51,7 +51,7 @@ class LocalLogin extends React.Component<
         this.props.history.push('/user/profile');
       } else {
         this.setState({
-          error: res.message,
+          error: res.data.message,
         });
       }
     });

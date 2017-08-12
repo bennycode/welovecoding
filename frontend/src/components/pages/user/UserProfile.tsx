@@ -15,7 +15,7 @@ const UserProfile = ({email}: UserProfileStateProps & UserProfileOwnProps) => {
   return (
     <Grid>
       <Row>
-        <Col>
+        <Col xs={12}>
           <Card>
             <h1>{`Hey User ${email}, you are signed in!`}</h1>
           </Card>
