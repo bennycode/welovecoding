@@ -10,7 +10,7 @@
     "husky": "0.14.3"
   },
   "engines": {
-    "node": "8.1.3"
+    "node": "8.3.0"
   },
   "name": "@welovecoding/welovecoding",
   "private": true,
@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "concurrently \"cd ./backend && npm start\" \"cd ./frontend && npm start\"",
-    "postinstall": "node ./build.js",
+    "postinstall": "node --max-old-space-size=1500 ./build.js",
     "precommit": "cd ./backend && ./node_modules/.bin/tslint -c ../tslint.json 'src/**/*.ts' '../frontend/src/**/*.ts' '../frontend/src/**/*.tsx'",
     "start": "cd backend && npm run start-prod",
     "test": "cd ./backend && npm test"

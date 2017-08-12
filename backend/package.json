@@ -18,7 +18,7 @@
     "source-map-support": "0.4.15",
     "sqlite": "2.8.0",
     "typescript": "2.4.1",
-    "webpack": "3.1.0"
+    "webpack": "2.4.1"
   },
   "devDependencies": {
     "@types/bluebird": "3.5.8",
@@ -40,6 +40,9 @@
     "ts-loader": "2.2.2",
     "tslint-loader": "3.5.3",
     "tslint": "5.5.0"
+  },
+  "engines": {
+    "node": "8.3.0"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "main": "index.js",
