@@ -32,9 +32,9 @@ export default class Server {
 
   constructor() {
     this.app = express();
-    this.config();
     this.middleware();
     this.api();
+    this.frontend();
   }
 
   public middleware(): void {
@@ -189,7 +189,10 @@ export default class Server {
     });
   }
 
-  public config(): void {
+  public frontend(): void {
     this.app.use(express.static(path.join(__dirname, 'frontend')));
+    this.app.get('*', function(req, res){
+      res.status(200).sendFile(path.join(__dirname, 'frontend', 'index.html'));
+    });
   }
 }
