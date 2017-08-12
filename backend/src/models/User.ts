@@ -3,6 +3,9 @@ import * as util from 'util';
 import * as crypto from 'crypto';
 import * as _ from 'lodash';
 import {Strategy} from 'passport-local';
+import CONFIG_GOOGLE from 'src/config/google';
+import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+import {PlusProfile} from 'src/services/google/oauth';
 
 const LocalStrategy = Strategy;
 
@@ -387,7 +390,7 @@ class User extends Model<User> {
     });
   }
 
-  static createStrategy() {
+  static createLocalStrategy() {
     return new LocalStrategy(
       {
         usernameField: options.usernameField,
@@ -395,6 +398,34 @@ class User extends Model<User> {
         passReqToCallback: false,
       },
       User.authenticate(),
+    );
+  }
+
+  static createGoogleStrategy(callbackURL: string) {
+    return new GoogleStrategy(
+      {
+        clientID: CONFIG_GOOGLE.GOOGLE_CLIENT_ID,
+        clientSecret: CONFIG_GOOGLE.GOOGLE_CLIENT_SECRET,
+        callbackURL,
+      },
+      function(accessToken, refreshToken, profile: PlusProfile, done) {
+        const email = profile.emails[0].value;
+        User.findOrCreate<User>({
+          where: {
+            provider: User.PROVIDERS.google,
+            providerId: profile.id,
+          },
+          defaults: {
+            email,
+          } as User,
+        })
+          .then(function([user, created]) {
+            return done(null, user);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      },
     );
   }
 }
