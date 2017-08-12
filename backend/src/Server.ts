@@ -11,15 +11,13 @@ import CategoryRoutes from 'src/routes/CategoryRoutes';
 import UserRoutes from 'src/routes/UserRoutes';
 import TestRoutes from 'src/routes/TestRoutes';
 
-// const authenticate = expressJwt({secret: SECRET});
-
 export default class Server {
   public app: express.Application;
 
   constructor() {
     this.app = express();
     this.middleware();
-    this.api();
+    this.routes();
     this.frontend();
   }
 
@@ -33,7 +31,7 @@ export default class Server {
     passport.use(User.createGoogleStrategy(`${process.env.APP_URL_BACKEND}/auth/google/callback`));
   }
 
-  public api(): void {
+  public routes(): void {
     this.app.use(TestRoutes);
     this.app.use(CategoryRoutes);
     this.app.use(UserRoutes);
