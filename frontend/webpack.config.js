@@ -148,7 +148,7 @@ const prodPlugins = [
       screw_ie8: true,
       warnings: false
     }
-  }),,
+  }),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
