@@ -1,0 +1,59 @@
+@import 'src/styles/constants';
+
+$button__border-radius: 16px;
+
+.wlc_btn {
+  font-size: $font__size_s;
+  border: none;
+  background-color: $color__white;
+  border-radius: 16px;
+  color: $color__grey--dark;
+  padding: 4px 8px;
+  margin-right: 5px;
+  text-decoration: none;
+
+  &:hover {
+    outline: none;
+    background-color: $color__grey;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.wlc_button--primary {
+  background-color: $color__red;
+  color: $color__white;
+
+  &:hover {
+    background-color: darken($color__red, 20%);
+  }
+}
+
+.wlc_button--info {
+  background-color: $color__blue;
+  color: $color__white;
+
+  &:hover {
+    background-color: darken($color__blue, 20%);
+  }
+}
+
+.wlc_button--success {
+  background-color: $color__green;
+  color: $color__white;
+
+  &:hover {
+    background-color: darken($color__green, 20%);
+  }
+}
+
+.wlc_button--warning {
+  background-color: $color__orange;
+  color: $color__white;
+
+  &:hover {
+    background-color: darken($color__orange, 20%);
+  }
+}

@@ -14,26 +14,47 @@ const MENU = [
   {
     name: 'Home',
     path: '/',
+    authenticated: false,
   },
   {
     name: 'Tutorials',
     path: '/tutorials',
+    authenticated: true,
   },
   {
     name: 'E-books',
     path: '/ebooks',
+    authenticated: true,
   },
   {
     name: 'Mach mit!',
     path: '/join',
+    authenticated: true,
   },
   {
     name: 'Sponsoren',
     path: '/sponsors',
+    authenticated: true,
+  },
+  {
+    name: 'Styleguide',
+    path: '/styleguide',
+    authenticated: true,
+  },
+  {
+    name: 'User Profile',
+    path: '/user/profile',
+    authenticated: true,
+  },
+  {
+    name: 'Logout',
+    path: '/logout',
+    authenticated: true,
   },
   {
     name: 'Login',
     path: '/login',
+    authenticated: false,
   },
 ];
 
@@ -62,7 +83,7 @@ class Header extends React.Component<HeaderStateProps & HeaderOwnProps> {
               <img src={logos.male} />
             </div>
             <div className="wlc_header-nav">
-              {MENU.map(menuItem =>
+              {MENU.filter(m => m.authenticated === auth.authenticated).map(menuItem =>
                 <NavLink
                   to={menuItem.path}
                   key={menuItem.path}
@@ -75,17 +96,6 @@ class Header extends React.Component<HeaderStateProps & HeaderOwnProps> {
                   </NavigationButton>
                 </NavLink>,
               )}
-              {auth.authenticated
-                ? <NavLink
-                    to={'/user/profile'}
-                    activeClassName="wlc_header__button-link--active"
-                    exact
-                  >
-                    <NavigationButton>
-                      {auth.email}
-                    </NavigationButton>
-                  </NavLink>
-                : null}
             </div>
           </div>
         </Grid>

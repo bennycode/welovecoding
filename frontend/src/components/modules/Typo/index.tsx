@@ -42,6 +42,24 @@ const H1: React.StatelessComponent<TypoProps> = ({size = 'xl', children}) => {
   );
 };
 
+const H2: React.StatelessComponent<TypoProps> = ({size = 'l', children}) => {
+  return (
+    <h2 className={SIZES[size]}>
+      {children}
+    </h2>
+  );
+};
+
+const H3: React.StatelessComponent<TypoProps> = ({size = 'mPlus', children}) => {
+  return (
+    <h3 className={SIZES[size]}>
+      {children}
+    </h3>
+  );
+};
+
 export default Object.assign(Typo, {
   H1,
+  H2,
+  H3,
 });
