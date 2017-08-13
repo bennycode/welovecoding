@@ -86,7 +86,6 @@ function handleLoginException(_, response) {
 
 export function loginViaToken(token) {
   return dispatch => {
-
     dispatch(beginLogin());
 
     return axios({

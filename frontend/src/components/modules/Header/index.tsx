@@ -1,13 +1,12 @@
 import * as React from 'react';
+import {Grid} from 'src/components/modules/Grid';
 import {connect} from 'react-redux';
-import {Grid, Row, Col} from 'react-flexbox-grid';
 import {RouteComponentProps} from 'react-router';
 import {NavLink, withRouter} from 'react-router-dom';
 
-import {Button} from 'office-ui-fabric-react';
-
 import {StoreState} from 'src/state/store';
 import {AuthState} from 'src/state/auth';
+import {logos} from 'src/constants/assets';
 
 import './Header.scss';
 
@@ -40,11 +39,9 @@ const MENU = [
 
 const NavigationButton: React.StatelessComponent = ({children}) => {
   return (
-    <div className="wlc_header__button">
-      <Button>
-        {children}
-      </Button>
-    </div>
+    <span>
+      {children}
+    </span>
   );
 };
 
@@ -58,14 +55,18 @@ class Header extends React.Component<HeaderStateProps & HeaderOwnProps> {
   render() {
     const {auth} = this.props;
     return (
-      <div className="wlc_header">
+      <div className="wlc_header-container">
         <Grid>
-          <Row>
-            <Col>
+          <div className="wlc_header">
+            <div className="wlc_header-logo">
+              <img src={logos.male} />
+            </div>
+            <div className="wlc_header-nav">
               {MENU.map(menuItem =>
                 <NavLink
                   to={menuItem.path}
                   key={menuItem.path}
+                  className="wlc_header__link"
                   activeClassName="wlc_header__button-link--active"
                   exact
                 >
@@ -85,8 +86,8 @@ class Header extends React.Component<HeaderStateProps & HeaderOwnProps> {
                     </NavigationButton>
                   </NavLink>
                 : null}
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Grid>
       </div>
     );

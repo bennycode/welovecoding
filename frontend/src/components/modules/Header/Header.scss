@@ -1,18 +1,49 @@
 @import 'src/styles/constants';
 
 .wlc_header {
-  background-color: $color__white;
-  padding: $margin__2;
+  padding: $margin__2 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.wlc_header__button {
-  float: left;
+.wlc_header-container {
+  background-color: $color__white;
+}
+
+.wlc_header-nav {
+}
+
+.wlc_header-logo {
+  height: 30px;
+  img {
+    height: 100%;
+  }
+}
+
+.wlc_header__link {
+  font-size: $font__size_s;
+  border: none;
+  background-color: $color__white;
+  border-radius: 16px;
+  color: $color__grey--dark;
+  padding: 4px 8px;
   margin-right: 5px;
+  text-decoration: none;
+
+  &:hover {
+    outline: none;
+    color: $color__white;
+    background-color: darken($color__red, 20%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
 }
 
 .wlc_header__button-link--active {
-  .ms-Button {
-    background-color: $color__red;
-    color: $color__white;
-  }
+  background-color: $color__red;
+  color: $color__white;
 }

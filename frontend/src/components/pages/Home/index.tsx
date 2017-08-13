@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'src/components/modules/Grid';
 import Typo from 'src/components/modules/Typo';
 import {Card} from 'src/components/modules/Layout';
 
@@ -10,7 +10,7 @@ const Home: React.StatelessComponent<{}> = () => {
         <Col xs={12}>
           <Card>
             <Typo.H1>
-              {'Hey'}
+              {'Home'}
             </Typo.H1>
           </Card>
         </Col>

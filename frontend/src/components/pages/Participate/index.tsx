@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {Card} from 'src/components/modules/Layout';
 
 const Participate: React.StatelessComponent = () => {
@@ -8,7 +8,9 @@ const Participate: React.StatelessComponent = () => {
       <Row>
         <Col xs={12}>
           <Card>
-            <h1>{'Participate'}</h1>
+            <h1>
+              {'Participate'}
+            </h1>
           </Card>
         </Col>
       </Row>

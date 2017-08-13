@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {RouteComponentProps} from 'react-router';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {connect} from 'react-redux';
 import {Card} from 'src/components/modules/Layout';
 import {StoreState} from 'src/state/store';

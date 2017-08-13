@@ -2,7 +2,7 @@ import * as React from 'react';
 import {RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
 import {loginViaToken} from 'src/state/auth';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {Card} from 'src/components/modules/Layout';
 import {Spinner, SpinnerSize} from 'office-ui-fabric-react';
 
