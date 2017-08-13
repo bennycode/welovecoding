@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as Cookies from 'cookies-js';
 import CONFIG from 'src/config';
 
 const MANUAL_LOGIN_USER = 'auth/MANUAL_LOGIN_USER';
@@ -37,9 +38,9 @@ function logoutSuccess() {
   return {type: LOGOUT_SUCCESS_USER};
 }
 
-function logoutError() {
-  return {type: LOGOUT_ERROR_USER};
-}
+// function logoutError() {
+//   return {type: LOGOUT_ERROR_USER};
+// }
 
 function beginRegister() {
   return {type: REGISTER_USER};
@@ -63,6 +64,11 @@ function makeUserRequest(method, data, api = '/login') {
 
 function handleLoginSuccess(dispatch, response) {
   if (response.data.success) {
+    // we will save it as a cookie, so we can later sign the user in on the backend
+    Cookies.set('jwt-token', response.data.data.token, {
+      // domain: CONFIG.BACKEND_URL,
+      // secure: true,
+    });
     dispatch(
       loginSuccess({
         username: response.data.data.username,
@@ -71,6 +77,7 @@ function handleLoginSuccess(dispatch, response) {
       }),
     );
   } else {
+    Cookies.expire('jwt-token');
     dispatch(loginError());
   }
   return response;
@@ -118,21 +125,27 @@ export function manualLogout() {
   return dispatch => {
     dispatch(beginLogout());
 
-    return axios
-      .get('/logout')
-      .then(response => {
-        if (response.data.success) {
-          dispatch(logoutSuccess());
-        } else {
-          dispatch(logoutError());
-        }
-      })
-      .catch(response => {
-        if (response instanceof Error) {
-          // Something happened during logout that triggered an Error
-          console.log('Error', response.message);
-        }
-      });
+    // because we use jwt tokens, we don't actually sign out from the backend
+    // we just delete the jwt-token.
+    // We would need to implement some blacklist-feature to actually logout from the backend
+    // return axios
+    //   .get('/logout')
+    //   .then(response => {
+    //     Cookies.expire('jwt-token');
+    //     if (response.data.success) {
+    //       dispatch(logoutSuccess());
+    //     } else {
+    //       dispatch(logoutError());
+    //     }
+    //   })
+    //   .catch(response => {
+    //     if (response instanceof Error) {
+    //       // Something happened during logout that triggered an Error
+    //       console.log('Error', response.message);
+    //     }
+    //   });
+    Cookies.expire('jwt-token');
+    dispatch(logoutSuccess());
   };
 }
 

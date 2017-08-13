@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {loginViaToken} from 'src/state/auth';
 import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {Card} from 'src/components/modules/Layout';
-import {Spinner, SpinnerSize} from 'office-ui-fabric-react';
+import Spinner from 'src/components/modules/Spinner';
 
 type GoogleAuthSuccessOwnProps = RouteComponentProps<{}>;
 
@@ -34,7 +34,7 @@ class GoogleAuthSuccess extends React.Component<
         <Row>
           <Col xs={12} sm={6} xsOffset={3}>
             <Card>
-              <Spinner size={SpinnerSize.large} label={'Checking...'} />
+              <Spinner />
             </Card>
           </Col>
         </Row>

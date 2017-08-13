@@ -10,7 +10,7 @@ const Home: React.StatelessComponent<{}> = () => {
         <Col xs={12}>
           <Card>
             <Typo.H1>
-              {'Home'}
+              {'Nothing to see here yet.'}
             </Typo.H1>
           </Card>
         </Col>

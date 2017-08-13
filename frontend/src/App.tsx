@@ -1,47 +1,93 @@
 import * as React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
-import Login from 'src/components/pages/auth/Login';
-import GoogleAuthSuccess from 'src/components/pages/auth/GoogleAuthSuccess';
-import UserProfile from 'src/components/pages/user/UserProfile';
+import {connect} from 'react-redux';
+import {RouteComponentProps} from 'react-router';
+import {withRouter} from 'react-router-dom';
+import * as Cookies from 'cookies-js';
 import Header from 'src/components/modules/Header';
+import {Grid, Row, Col} from 'src/components/modules/Grid';
+import {Card} from 'src/components/modules/Layout';
+import Spinner from 'src/components/modules/Spinner';
+import {StoreState} from 'src/state/store';
+import {AuthState, loginViaToken} from 'src/state/auth';
 
-import Home from 'src/components/pages/Home';
-import Tutorials from 'src/components/pages/Tutorials';
-import Participate from 'src/components/pages/Participate';
-import Sponsors from 'src/components/pages/Sponsors';
-import Ebooks from 'src/components/pages/Ebooks';
+interface AppStateProps {
+  auth: AuthState;
+}
 
-import Authenticated from './Authenticated';
+interface AppDispatchProps {
+  loginViaToken: typeof loginViaToken;
+}
 
-export default function App() {
+interface AppState {
+  loading: boolean;
+}
+
+interface AppOwnProps extends RouteComponentProps<{}> {
+  children: React.ReactNode;
+}
+
+const AppLoading: React.StatelessComponent<{}> = () => {
   return (
-    <Router>
+    <Grid>
+      <Row>
+        <Col xs={12} sm={6} xsOffset={3}>
+          <Card>
+            <Spinner />
+          </Card>
+        </Col>
+      </Row>
+    </Grid>
+  );
+};
+
+class App extends React.Component<AppStateProps & AppDispatchProps & AppOwnProps, AppState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+  }
+  componentWillMount() {
+    const jwtToken = Cookies.get('jwt-token');
+    if (jwtToken !== undefined) {
+      (this.props.loginViaToken(jwtToken) as any)
+        .then(() => {
+          this.setState({
+            loading: false,
+          });
+        })
+        .catch(() => {
+          this.setState({
+            loading: false,
+          });
+        });
+    } else {
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+  render() {
+    return (
       <div>
         <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/tutorials" component={Tutorials} />
-          <Route exact path="/join" component={Participate} />
-          <Route exact path="/sponsors" component={Sponsors} />
-          <Route exact path="/ebooks" component={Ebooks} />
-          <Route exact path="/login" component={Login} />
-          <Route
-            path="/auth/google/success"
-            exact
-            component={GoogleAuthSuccess}
-          />
-          <Authenticated>
-            <Switch>
-              <Route exact path="/user/profile" component={UserProfile} />
-            </Switch>
-          </Authenticated>
-          <Route
-            path="/auth/google/failure"
-            component={() => <h1>Google Auth Fail!</h1>}
-          />
-        </Switch>
+        {this.state.loading ? <AppLoading /> : null}
+        <div style={{display: this.state.loading ? 'none' : 'block'}}>
+        </div>
+        {this.props.children}
       </div>
-    </Router>
-  );
+    );
+  }
 }
+
+// with router is needed, so the component updates when the location is changed
+export default withRouter(connect<AppStateProps, AppDispatchProps, AppOwnProps>(
+  (state: StoreState) => {
+    return {
+      auth: state.auth,
+    };
+  },
+  {
+    loginViaToken,
+  },
+)(App)) as any;

@@ -6,7 +6,7 @@ import {AppContainer} from 'react-hot-loader';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import App from './App';
+import Root from './Root';
 import store from 'src/state/store';
 
 import 'src/styles/index.scss';
@@ -22,10 +22,10 @@ function renderApp(RootComponent) {
   );
 }
 
-renderApp(App);
+renderApp(Root);
 
 if (module.hot) {
-  module.hot.accept(['./App.tsx'], () => {
-    renderApp((require('./App') as any).default);
+  module.hot.accept(['./Root.tsx'], () => {
+    renderApp((require('./Root') as any).default);
   });
 }
