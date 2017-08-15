@@ -31,7 +31,6 @@ class Logout extends React.Component<LogoutDispatchProps & LogoutOwnProps> {
   }
 }
 
-export default connect<{}, LogoutDispatchProps, LogoutOwnProps>(
-  null,
-  {manualLogout},
-)(Logout);
+export default connect<{}, LogoutDispatchProps, LogoutOwnProps>(null, {
+  manualLogout,
+})(Logout);

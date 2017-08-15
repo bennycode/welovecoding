@@ -38,20 +38,72 @@ const Styleguide: React.StatelessComponent<{}> = () => {
               {'Buttons'}
             </Typo.H1>
             <hr />
-            <Button>
+            {'Small'}
+            <Button small>
               {'Default button'}
             </Button>
-            <Button type='primary'>
+            <Button small type="primary">
               {'Primary button'}
             </Button>
-            <Button type='info'>
+            <Button small type="info">
               {'Info button'}
             </Button>
-            <Button type='warning'>
+            <Button small type="warning">
               {'Warning button'}
             </Button>
-            <Button type='success'>
+            <Button small type="success">
               {'Success button'}
+            </Button>
+            <hr />
+            {'Medium'}
+            <Button medium>
+              {'Default button'}
+            </Button>
+            <Button medium type="primary">
+              {'Primary button'}
+            </Button>
+            <Button medium type="info">
+              {'Info button'}
+            </Button>
+            <Button medium type="warning">
+              {'Warning button'}
+            </Button>
+            <Button medium type="success">
+              {'Success button'}
+            </Button>
+            <hr />
+            {'Large'}
+            <Button large>
+              {'Default button'}
+            </Button>
+            <Button large type="primary">
+              {'Primary button'}
+            </Button>
+            <Button large type="info">
+              {'Info button'}
+            </Button>
+            <Button large type="warning">
+              {'Warning button'}
+            </Button>
+            <Button large type="success">
+              {'Success button'}
+            </Button>
+            <hr />
+            {'Ghost'}
+            <Button outline medium>
+              {'Default ghost button'}
+            </Button>
+            <Button outline medium type="primary">
+              {'Primary ghost button'}
+            </Button>
+            <Button outline medium type="info">
+              {'Info ghost button'}
+            </Button>
+            <Button outline medium type="warning">
+              {'Warning ghost button'}
+            </Button>
+            <Button outline medium type="success">
+              {'Success ghost button'}
             </Button>
           </Card>
         </Col>

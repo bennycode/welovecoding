@@ -4,6 +4,7 @@ import {RouteComponentProps} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import * as Cookies from 'cookies-js';
 import Header from 'src/components/modules/Header';
+import Footer from 'src/components/modules/Footer';
 import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {Card} from 'src/components/modules/Layout';
 import Spinner from 'src/components/modules/Spinner';
@@ -40,7 +41,10 @@ const AppLoading: React.StatelessComponent<{}> = () => {
   );
 };
 
-class App extends React.Component<AppStateProps & AppDispatchProps & AppOwnProps, AppState> {
+class App extends React.Component<
+  AppStateProps & AppDispatchProps & AppOwnProps,
+  AppState
+> {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,22 +76,24 @@ class App extends React.Component<AppStateProps & AppDispatchProps & AppOwnProps
       <div>
         <Header />
         {this.state.loading ? <AppLoading /> : null}
-        <div style={{display: this.state.loading ? 'none' : 'block'}}>
-        </div>
+        <div style={{display: this.state.loading ? 'none' : 'block'}} />
         {this.props.children}
+        <Footer />
       </div>
     );
   }
 }
 
 // with router is needed, so the component updates when the location is changed
-export default withRouter(connect<AppStateProps, AppDispatchProps, AppOwnProps>(
-  (state: StoreState) => {
-    return {
-      auth: state.auth,
-    };
-  },
-  {
-    loginViaToken,
-  },
-)(App)) as any;
+export default withRouter(
+  connect<AppStateProps, AppDispatchProps, AppOwnProps>(
+    (state: StoreState) => {
+      return {
+        auth: state.auth,
+      };
+    },
+    {
+      loginViaToken,
+    },
+  )(App),
+) as any;

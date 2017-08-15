@@ -6,12 +6,12 @@ import './Spinner.scss';
 
 const Spinner: React.StatelessComponent<{
   className?: string;
-}> = (props) => {
+}> = props => {
   const bars = [];
 
   for (let i = 0; i < 12; i++) {
     const animationDelay = (i - 12) / 10 + 's';
-    const transform = 'rotate(' + (i * 30) + 'deg) translate(146%)';
+    const transform = 'rotate(' + i * 30 + 'deg) translate(146%)';
     const barStyle = {
       WebkitAnimationDelay: animationDelay,
       animationDelay,
@@ -19,9 +19,7 @@ const Spinner: React.StatelessComponent<{
       transform,
     };
 
-    bars.push(
-      <div style={barStyle} className="react-spinner_bar" key={i} />,
-    );
+    bars.push(<div style={barStyle} className="react-spinner_bar" key={i} />);
   }
 
   return (

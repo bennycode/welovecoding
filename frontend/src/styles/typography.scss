@@ -1,37 +1,42 @@
 @import './constants.scss';
 
-.wlc-fontSize-su {
+.wlc_font-size-su {
   font-size: $font__size_su;
 }
 
-.wlc-fontSize-xxl {
+.wlc_font-size-xxl {
   font-size: $font__size_xxl;
 }
 
-.wlc-fontSize-xl {
+.wlc_font-size-xl {
   font-size: $font__size_xl;
 }
 
-.wlc-fontSize-l {
+.wlc_font-size-l {
   font-size: $font__size_l;
 }
 
-.wlc-fontSize-mPlus {
+.wlc_font-size-mPlus {
   font-size: $font__size_mPlus;
 }
 
-.wlc-fontSize-m {
+.wlc_font-size-m {
   font-size: $font__size_m;
 }
-.wlc-fontSize-sPlus {
+.wlc_font-size-sPlus {
   font-size: $font__size_sPlus;
 }
-.wlc-fontSize-s {
+.wlc_font-size-s {
   font-size: $font__size_s;
 }
-.wlc-fontSize-xs {
+.wlc_font-size-xs {
   font-size: $font__size_xs;
 }
-.wlc-fontSize-mi {
+.wlc_font-size-mi {
   font-size: $font__size_mi;
+}
+
+
+.wlc_font-color-mute {
+  color: $color__grey--darker;
 }

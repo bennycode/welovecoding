@@ -3,25 +3,64 @@ import * as classNames from 'classnames';
 
 import './Button.scss';
 
-type ButtonReactProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+type ButtonReactProps = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
-const Button: React.StatelessComponent<{
-  type?: 'default' | 'primary' | 'info' | 'warning' | 'success';
-  tagName?: string;
-  children: React.ReactNode;
-} &  ButtonReactProps> = ({children, type, tagName, className, ...props}) => {
-  const buttonClasses = classNames('wlc_btn', {
-    'wlc_button--primary': type === 'primary',
-    'wlc_button--info': type === 'info',
-    'wlc_button--warning': type === 'warning',
-    'wlc_button--success': type === 'success',
-  }, className);
+const Button: React.StatelessComponent<
+  {
+    type?:
+      | 'default'
+      | 'primary'
+      | 'info'
+      | 'warning'
+      | 'success'
+      | 'white'
+      | 'grey';
+    tagName?: string;
+    children: React.ReactNode;
+    small?: boolean;
+    medium?: boolean;
+    large?: boolean;
+    outline?: boolean;
+  } & ButtonReactProps
+> = ({
+  children,
+  type,
+  tagName,
+  className,
+  small,
+  medium,
+  large,
+  outline,
+  ...props,
+}) => {
+  const buttonClasses = classNames(
+    'wlc_btn',
+    {
+      'wlc_btn--outline': type === undefined && outline,
+      [`wlc_btn--${outline ? 'outline-' : ''}primary`]: type === 'primary',
+      [`wlc_btn--${outline ? 'outline-' : ''}info`]: type === 'info',
+      [`wlc_btn--${outline ? 'outline-' : ''}warning`]: type === 'warning',
+      [`wlc_btn--${outline ? 'outline-' : ''}success`]: type === 'success',
+      [`wlc_btn--${outline ? 'outline-' : ''}white`]: type === 'white',
+      [`wlc_btn--${outline ? 'outline-' : ''}grey`]: type === 'grey',
+      'wlc_btn--size-small': small,
+      'wlc_btn--size-medium': medium,
+      'wlc_btn--size-large': large,
+    },
+    className,
+  );
   const tag = (tagName as any) || 'button';
-  return React.createElement(tag, {
-    className: buttonClasses,
-    ...props,
-  }, children);
-
+  return React.createElement(
+    tag,
+    {
+      className: buttonClasses,
+      ...props,
+    },
+    children,
+  );
 };
 
 export default Button;

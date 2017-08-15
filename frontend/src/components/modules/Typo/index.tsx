@@ -1,16 +1,21 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 
 const SIZES = {
-  su: 'wlc-fontSize-su',
-  xxl: 'wlc-fontSize-xxl',
-  xl: 'wlc-fontSize-xl',
-  l: 'wlc-fontSize-l',
-  mPlus: 'wlc-fontSize-mPlus',
-  m: 'wlc-fontSize-m',
-  sPlus: 'wlc-fontSize-sPlus',
-  s: 'wlc-fontSize-s',
-  xs: 'wlc-fontSize-xs',
-  mi: 'wlc-fontSize-mi',
+  su: 'wlc_font-size-su',
+  xxl: 'wlc_font-size-xxl',
+  xl: 'wlc_font-size-xl',
+  l: 'wlc_font-size-l',
+  mPlus: 'wlc_font-size-mPlus',
+  m: 'wlc_font-size-m',
+  sPlus: 'wlc_font-size-sPlus',
+  s: 'wlc_font-size-s',
+  xs: 'wlc_font-size-xs',
+  mi: 'wlc_font-size-mi',
+};
+
+const COLORS = {
+  muted: 'wlc_font-color-mute',
 };
 
 type SIZE_TYPE = keyof typeof SIZES;
@@ -50,7 +55,10 @@ const H2: React.StatelessComponent<TypoProps> = ({size = 'l', children}) => {
   );
 };
 
-const H3: React.StatelessComponent<TypoProps> = ({size = 'mPlus', children}) => {
+const H3: React.StatelessComponent<TypoProps> = ({
+  size = 'mPlus',
+  children,
+}) => {
   return (
     <h3 className={SIZES[size]}>
       {children}
@@ -58,8 +66,27 @@ const H3: React.StatelessComponent<TypoProps> = ({size = 'mPlus', children}) => 
   );
 };
 
+const Mute: React.StatelessComponent<TypoProps> = ({size = 's', children}) => {
+  const classes = classNames(SIZES[size], COLORS.muted);
+  return (
+    <span className={classes}>
+      {children}
+    </span>
+  );
+};
+
+const P: React.StatelessComponent<TypoProps> = ({size = 'm', children}) => {
+  return (
+    <p className={SIZES[size]}>
+      {children}
+    </p>
+  );
+};
+
 export default Object.assign(Typo, {
   H1,
   H2,
   H3,
+  P,
+  Mute,
 });

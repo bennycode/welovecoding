@@ -1,0 +1,20 @@
+@import 'src/styles/constants';
+
+.wlc_avatar {
+  background-image: url(http://via.placeholder.com/150x150/DF6C68/ffffff);
+  background-position: center;
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 100px;
+  float: left;
+  margin: $margin__2;
+}
+
+.wlc_avatar-container {
+  display: flex;
+  align-items: center;
+}
+
+.wlc_avatar-text {
+  margin: $margin__2;
+}

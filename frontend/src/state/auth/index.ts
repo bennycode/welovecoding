@@ -65,10 +65,14 @@ function makeUserRequest(method, data, api = '/login') {
 function handleLoginSuccess(dispatch, response) {
   if (response.data.success) {
     // we will save it as a cookie, so we can later sign the user in on the backend
-    Cookies.set('jwt-token', response.data.data.token, {
-      // domain: CONFIG.BACKEND_URL,
-      // secure: true,
-    });
+    Cookies.set(
+      'jwt-token',
+      response.data.data.token,
+      {
+        // domain: CONFIG.BACKEND_URL,
+        // secure: true,
+      },
+    );
     dispatch(
       loginSuccess({
         username: response.data.data.username,

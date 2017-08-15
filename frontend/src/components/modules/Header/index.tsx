@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Grid} from 'src/components/modules/Grid';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {NavLink, withRouter} from 'react-router-dom';
+import {Grid} from 'src/components/modules/Grid';
 
 import {StoreState} from 'src/state/store';
 import {AuthState} from 'src/state/auth';
@@ -14,47 +14,56 @@ const MENU = [
   {
     name: 'Home',
     path: '/',
-    authenticated: false,
+    public: true,
+    private: true,
   },
   {
     name: 'Tutorials',
     path: '/tutorials',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'E-books',
     path: '/ebooks',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'Mach mit!',
     path: '/join',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'Sponsoren',
     path: '/sponsors',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'Styleguide',
     path: '/styleguide',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'User Profile',
     path: '/user/profile',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'Logout',
     path: '/logout',
-    authenticated: true,
+    private: true,
+    public: false,
   },
   {
     name: 'Login',
     path: '/login',
-    authenticated: false,
+    public: true,
+    private: false,
   },
 ];
 
@@ -83,12 +92,14 @@ class Header extends React.Component<HeaderStateProps & HeaderOwnProps> {
               <img src={logos.male} />
             </div>
             <div className="wlc_header-nav">
-              {MENU.filter(m => m.authenticated === auth.authenticated).map(menuItem =>
+              {MENU.filter(
+                m => (auth.authenticated ? m.private : m.public),
+              ).map(menuItem =>
                 <NavLink
                   to={menuItem.path}
                   key={menuItem.path}
-                  className="wlc_header__link"
-                  activeClassName="wlc_header__button-link--active"
+                  className="wlc_btn no-focus"
+                  activeClassName="wlc_btn--primary"
                   exact
                 >
                   <NavigationButton>

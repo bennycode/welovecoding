@@ -67,9 +67,8 @@ $half-gutter-width: $grid-gutter-width * .5;
 
     // Add gutter on cols
     &--gutter-top-bottom {
-        margin-top: $gutter-compensation;
-        margin-bottom: $gutter-compensation;
-        width: calc(100% + 30px);
+        margin-top: $grid-gutter-width;
+        margin-bottom: $grid-gutter-width;
 
         > .fb-col {
             padding-top: $half-gutter-width;
@@ -124,6 +123,11 @@ $regular-bottom-margin: $grid-gutter-width / 2;
     @media only screen and (min-width: $size) {
         .fb-container {
             width: $container;
+        }
+
+        .fb-col {
+          padding-right: $half-gutter-width;
+          padding-left: $half-gutter-width;
         }
 
         .fb-col-#{$name} {
