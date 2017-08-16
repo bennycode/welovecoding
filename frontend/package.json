@@ -50,7 +50,7 @@
     "webpack-dev-server": "2.5.1"
   },
   "engines": {
-    "node": "8.3.0"
+    "node": "8.x.x"
   },
   "main": "index.js",
   "name": "@welovecoding/frontend",

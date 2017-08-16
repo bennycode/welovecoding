@@ -42,7 +42,7 @@
     "tslint": "5.5.0"
   },
   "engines": {
-    "node": "8.3.0"
+    "node": "8.x.x"
   },
   "homepage": "https://github.com/welovecoding/welovecoding#readme",
   "main": "index.js",
