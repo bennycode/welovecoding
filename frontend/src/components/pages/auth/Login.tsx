@@ -1,7 +1,10 @@
 import * as React from 'react';
 import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {connect} from 'react-redux';
-import {Button, TextField} from 'office-ui-fabric-react';
+import {TextField} from 'office-ui-fabric-react';
+
+import Button from 'src/components/modules/Button';
+import Typo from 'src/components/modules/Typo';
 import {Card, Divider} from 'src/components/modules/Layout';
 import {RouteComponentProps} from 'react-router';
 import {manualLogin} from 'src/state/auth';
@@ -59,9 +62,9 @@ class LocalLogin extends React.Component<
   render() {
     return (
       <div>
-        <h2>
+        <Typo.SubHeader margin='medium'>
           {'Login with username/password'}
-        </h2>
+        </Typo.SubHeader>
         <form
           method="post"
           action={CONFIG.API.AUTH_LOCAL_LOGIN}
@@ -80,7 +83,7 @@ class LocalLogin extends React.Component<
             name="password"
             onChanged={this.changePassword}
           />
-          <Button type="submit">
+          <Button type='info'>
             {'Submit'}
           </Button>
           {this.state.error !== ''
@@ -106,10 +109,10 @@ const Login: React.StatelessComponent<
       <Row>
         <Col xs={12} sm={6} xsOffset={3}>
           <Card>
-            <h2>
+            <Typo.SubHeader margin='medium'>
               {'Login with Google'}
-            </h2>
-            <Button href={CONFIG.API.AUTH_GOOGLE_LOGIN}>
+            </Typo.SubHeader>
+            <Button type='info' href={CONFIG.API.AUTH_GOOGLE_LOGIN}>
               {'Login with Google'}
             </Button>
             <Divider />

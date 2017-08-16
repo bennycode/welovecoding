@@ -24,6 +24,7 @@ const Button: React.StatelessComponent<
     medium?: boolean;
     large?: boolean;
     outline?: boolean;
+    href?: string;
   } & ButtonReactProps
 > = ({
   children,
@@ -34,6 +35,7 @@ const Button: React.StatelessComponent<
   medium,
   large,
   outline,
+  href,
   ...props,
 }) => {
   const buttonClasses = classNames(
@@ -52,11 +54,12 @@ const Button: React.StatelessComponent<
     },
     className,
   );
-  const tag = (tagName as any) || 'button';
+  const tag = (tagName as any) || (href !== undefined ? 'a' : 'button');
   return React.createElement(
     tag,
     {
       className: buttonClasses,
+      href,
       ...props,
     },
     children,

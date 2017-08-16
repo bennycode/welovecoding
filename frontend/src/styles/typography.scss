@@ -37,6 +37,45 @@
 }
 
 
+.wlc_font-weight-thin {
+  font-weight: 100;
+}
+.wlc_font-weight-light {
+  font-weight: 200;
+}
+.wlc_font-weight-roman {
+  font-weight: 300;
+}
+.wlc_font-weight-medium {
+  font-weight: 400;
+}
+.wlc_font-weight-bold {
+  font-weight: 500;
+}
+.wlc_font-weight-heavy {
+  font-weight: 600;
+}
+.wlc_font-weight-black {
+  font-weight: 700;
+}
+
+.wlc_font-margin-none {
+  margin: 0;
+}
+.wlc_font-margin-small {
+  margin: $margin__1 0;
+}
+.wlc_font-margin-medium {
+  margin: $margin__2 0;
+}
+.wlc_font-margin-large {
+  margin: $margin__3 0;
+}
+
 .wlc_font-color-mute {
-  color: $color__grey--darker;
+  color: $color__grey--lighter;
+}
+
+.wlc_font-color-grey {
+  color: $color__grey;
 }

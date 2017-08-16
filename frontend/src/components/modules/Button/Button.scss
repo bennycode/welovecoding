@@ -85,7 +85,7 @@ $button__border-radius: 16px;
 
   &:hover {
     outline: none;
-    background-color: $color__grey;
+    background-color: $color__grey--light;
   }
 
   &:focus {
@@ -136,11 +136,11 @@ $button__border-radius: 16px;
 // outline
 
 .wlc_btn--outline-grey {
-  @include button-outline-variant($color__grey--dark);
+  @include button-outline-variant($color__grey);
 }
 
 .wlc_btn--outline-white {
-  @include button-outline-variant($color__white, $color__grey--dark);
+  @include button-outline-variant($color__white, $color__grey);
 }
 
 .wlc_btn--outline-primary {

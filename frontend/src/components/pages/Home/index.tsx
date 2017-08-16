@@ -57,14 +57,14 @@ const Home: React.StatelessComponent<{}> = () => {
         </Grid>
       </div>
       <Grid>
-        <Row between="xs" middle="xs" gutterTopBottom>
+        <Row between="xs" middle='xs' gutterTopBottom>
           <Col>
-            <Typo.H2>
+            <Typo.SubHeader>
               {'Neue Tutorials'}
-            </Typo.H2>
+            </Typo.SubHeader>
           </Col>
           <Col>
-            <Button type="grey" outline>
+            <Button type="grey" outline large>
               {'Alle Tutorials'}
             </Button>
           </Col>

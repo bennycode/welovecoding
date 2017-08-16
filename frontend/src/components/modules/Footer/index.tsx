@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
 import Typo from 'src/components/modules/Typo';
-import Button from 'src/components/modules/Button';
 import Grid from 'src/components/modules/Grid';
 import {logos} from 'src/constants/assets';
 
@@ -43,10 +42,8 @@ const Footer: React.StatelessComponent<{}> = () => {
           <Grid.Col>
             {FOOTER_LINKS.map(({name, link}) => {
               return (
-                <Link to={link} key={name}>
-                  <Button>
-                    {name}
-                  </Button>
+                <Link to={link} key={name} className="wlc_btn no-focus">
+                  {name}
                 </Link>
               );
             })}

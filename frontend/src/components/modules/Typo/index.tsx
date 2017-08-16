@@ -14,37 +14,44 @@ const SIZES = {
   mi: 'wlc_font-size-mi',
 };
 
+const WEIGHTS = {
+  thin: 'wlc_font-weight-thin' ,
+  light: 'wlc_font-weight-light',
+  roman: 'wlc_font-weight-roman',
+  medium: 'wlc_font-weight-medium',
+  bold: 'wlc_font-weight-bold',
+  heavy: 'wlc_font-weight-heavy',
+  black: 'wlc_font-weight-black',
+};
+
 const COLORS = {
   muted: 'wlc_font-color-mute',
+  grey: 'wlc_font-color-grey',
+};
+
+const MARGINS = {
+  none: 'wlc_font-margin-none',
+  small: 'wlc_font-margin-small',
+  medium: 'wlc_font-margin-medium',
+  large: 'wlc_font-margin-large',
 };
 
 type SIZE_TYPE = keyof typeof SIZES;
+type MARGIN_TYPE = keyof typeof MARGINS;
 
 interface TypoProps {
   size?: SIZE_TYPE;
   children: React.ReactNode;
+  tag?: string;
+  margin?: MARGIN_TYPE;
 }
 
-const Typo: React.StatelessComponent<
-  {
-    tag: string;
-  } & TypoProps
-> = ({tag = 'span', size = 'm', children}) => {
-  return React.createElement(
-    tag as any,
-    {
-      className: SIZES[size],
-    },
-    children,
-  );
+const Typo: React.StatelessComponent<TypoProps> = ({tag = 'span', size = 'm', children}) => {
+  return React.createElement(tag as any, {className: SIZES[size]}, children);
 };
 
-const H1: React.StatelessComponent<TypoProps> = ({size = 'xl', children}) => {
-  return (
-    <h1 className={SIZES[size]}>
-      {children}
-    </h1>
-  );
+const H1: React.StatelessComponent<TypoProps> = ({size = 'xl', children, tag = 'h1'}) => {
+  return React.createElement(tag as any, {className: SIZES[size]}, children);
 };
 
 const H2: React.StatelessComponent<TypoProps> = ({size = 'l', children}) => {
@@ -55,32 +62,22 @@ const H2: React.StatelessComponent<TypoProps> = ({size = 'l', children}) => {
   );
 };
 
-const H3: React.StatelessComponent<TypoProps> = ({
-  size = 'mPlus',
-  children,
-}) => {
-  return (
-    <h3 className={SIZES[size]}>
-      {children}
-    </h3>
-  );
+const H3: React.StatelessComponent<TypoProps> = ({size = 'mPlus', children, tag = 'h3'}) => {
+  return React.createElement(tag as any, {className: SIZES[size]}, children);
 };
 
-const Mute: React.StatelessComponent<TypoProps> = ({size = 's', children}) => {
+const Mute: React.StatelessComponent<TypoProps> = ({size = 's', children, tag = 'span'}) => {
   const classes = classNames(SIZES[size], COLORS.muted);
-  return (
-    <span className={classes}>
-      {children}
-    </span>
-  );
+  return React.createElement(tag as any, {className: classes}, children);
 };
 
-const P: React.StatelessComponent<TypoProps> = ({size = 'm', children}) => {
-  return (
-    <p className={SIZES[size]}>
-      {children}
-    </p>
-  );
+const P: React.StatelessComponent<TypoProps> = ({size = 'm', children, tag = 'p'}) => {
+  return React.createElement(tag as any, {className: SIZES[size]}, children);
+};
+
+const SubHeader: React.StatelessComponent<TypoProps> = ({children, tag = 'h3', margin = 'none'}) => {
+  const classes = classNames(SIZES.xl, WEIGHTS.roman, COLORS.grey, MARGINS[margin]);
+  return React.createElement(tag as any, {className: classes}, children);
 };
 
 export default Object.assign(Typo, {
@@ -89,4 +86,5 @@ export default Object.assign(Typo, {
   H3,
   P,
   Mute,
+  SubHeader,
 });
