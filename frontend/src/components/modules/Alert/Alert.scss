@@ -1,0 +1,8 @@
+@import 'src/styles/constants';
+
+.Alert {
+  padding: $margin__2;
+  background-color: $color__red;
+  color: $color__white;
+  margin-top: $margin__2;
+}

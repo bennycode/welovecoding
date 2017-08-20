@@ -1,0 +1,18 @@
+@import 'src/styles/constants';
+
+.wlc_footer {
+  border-top: 3px solid $color__grey--lighter;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: $layout__footer-height;
+  display: flex;
+  align-items: center;
+}
+
+.wlc_footer-logo {
+  height: 30px;
+  img {
+    height: 100%;
+  }
+}

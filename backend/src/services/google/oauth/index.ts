@@ -5,5 +5,5 @@ import YouTubeScopes from './YouTubeScopes';
 export {
   PlusProfile,
   PlusScopes,
-  YouTubeScopes
+  YouTubeScopes,
 };

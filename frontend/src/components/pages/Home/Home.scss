@@ -1,0 +1,20 @@
+@import 'src/styles/constants';
+
+.wlc_hero {
+  height: 300px;
+  width: 100%;
+  background-color: $color__blue;
+  color: $color__white;
+  display: flex;
+  align-items: center;
+}
+
+.wlc_section--white {
+  background-color: $color__white;
+}
+
+.wlc_home-spacer {
+  display: inline-block;
+  margin-left: $margin__2;
+  margin-right: $margin__2;
+}

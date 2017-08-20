@@ -1,0 +1,160 @@
+@import 'src/styles/constants';
+
+$button__border-radius: 16px;
+
+@mixin button-variant($background, $border, $color, $active-background: darken($background, 10%), $active-border: darken($border, 10%)) {
+  background-color: $background;
+  border-color: $border;
+  color: $color;
+
+  &:hover {
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($border, .5);
+  }
+
+  &.no-focus {
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    background-color: $background;
+    border-color: $border;
+  }
+
+  &:active,
+  &.active {
+    background-color: $active-background;
+    border-color: $active-background;
+  }
+}
+
+@mixin button-outline-variant($color, $color-hover: #fff) {
+  color: $color;
+  background-color: transparent;
+  background-image: none;
+  border-color: $color;
+
+  &:hover {
+    color: $color-hover;
+    background-color: $color;
+    border-color: $color;
+  }
+
+  &:focus,
+  &.focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color, .5);
+  }
+
+  &.no-focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $color;
+    background-color: transparent;
+  }
+
+  &:active,
+  &.active {
+    color: $color-hover;
+    background-color: $color;
+    border-color: $color;
+  }
+}
+
+.wlc_btn {
+  font-size: $font__size_s;
+  border: none;
+  background-color: transparent;
+  border-radius: 16px;
+  color: $color__grey--dark;
+  border-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  padding: 4px 8px;
+  text-decoration: none;
+
+  &:hover {
+    outline: none;
+    background-color: $color__grey--light;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// SIZES
+
+.wlc_btn--size-small {
+  padding: 2px 6px;
+  font-size: $font__size_s;
+}
+
+.wlc_btn--size-medium {
+  padding: 4px 8px;
+  font-size: $font__size_sPlus;
+}
+
+.wlc_btn--size-large {
+  padding: 6px 10px;
+  font-size: $font__size_mPlus;
+}
+
+// STYLES
+
+.wlc_btn--primary {
+  @include button-variant($color__red, $color__red, $color__white);
+}
+
+.wlc_btn--info {
+  @include button-variant($color__blue, $color__blue, $color__white);
+}
+
+.wlc_btn--success {
+  @include button-variant($color__green, $color__green, $color__white);
+}
+
+.wlc_btn--warning {
+  @include button-variant($color__orange, $color__orange, $color__white);
+}
+
+.wlc_btn--white {
+  // TODO, do some CSS clipping
+  @include button-variant($color__white, $color__white, $color__blue);
+}
+
+// outline
+
+.wlc_btn--outline-grey {
+  @include button-outline-variant($color__grey);
+}
+
+.wlc_btn--outline-white {
+  @include button-outline-variant($color__white, $color__grey);
+}
+
+.wlc_btn--outline-primary {
+  @include button-outline-variant($color__red);
+}
+
+.wlc_btn--outline-info {
+  @include button-outline-variant($color__blue);
+}
+
+.wlc_btn--outline-success {
+  @include button-outline-variant($color__green);
+}
+
+.wlc_btn--outline-warning {
+  @include button-outline-variant($color__orange);
+}

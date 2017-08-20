@@ -1,0 +1,81 @@
+@import './constants.scss';
+
+.wlc_font-size-su {
+  font-size: $font__size_su;
+}
+
+.wlc_font-size-xxl {
+  font-size: $font__size_xxl;
+}
+
+.wlc_font-size-xl {
+  font-size: $font__size_xl;
+}
+
+.wlc_font-size-l {
+  font-size: $font__size_l;
+}
+
+.wlc_font-size-mPlus {
+  font-size: $font__size_mPlus;
+}
+
+.wlc_font-size-m {
+  font-size: $font__size_m;
+}
+.wlc_font-size-sPlus {
+  font-size: $font__size_sPlus;
+}
+.wlc_font-size-s {
+  font-size: $font__size_s;
+}
+.wlc_font-size-xs {
+  font-size: $font__size_xs;
+}
+.wlc_font-size-mi {
+  font-size: $font__size_mi;
+}
+
+
+.wlc_font-weight-thin {
+  font-weight: 100;
+}
+.wlc_font-weight-light {
+  font-weight: 200;
+}
+.wlc_font-weight-roman {
+  font-weight: 300;
+}
+.wlc_font-weight-medium {
+  font-weight: 400;
+}
+.wlc_font-weight-bold {
+  font-weight: 500;
+}
+.wlc_font-weight-heavy {
+  font-weight: 600;
+}
+.wlc_font-weight-black {
+  font-weight: 700;
+}
+
+.wlc_font-margin-none {
+  margin: 0;
+}
+.wlc_font-margin-small {
+  margin: $margin__1 0;
+}
+.wlc_font-margin-medium {
+  margin: $margin__2 0;
+}
+.wlc_font-margin-large {
+  margin: $margin__3 0;
+}
+
+.wlc_font-color-mute {
+  color: $color__grey--lighter;
+}
+
+.wlc_font-color-grey {
+  color: $color__grey;
+}

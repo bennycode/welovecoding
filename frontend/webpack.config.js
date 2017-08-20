@@ -24,10 +24,23 @@ loaders.tslint = {
 loaders.tsx = {
   test: /\.(tsx?)$/,
   use: [
-    'react-hot-loader/webpack',
     {
-      loader: 'ts-loader',
-      options: {}
+      loader: 'awesome-typescript-loader',
+      options: {
+        useBabel: true,
+        // useCache: true,
+        babelOptions: {
+          presets: [
+            [
+              'es2015', {
+                modules: false
+              }
+            ]
+          ],
+          compact: true,
+          plugins: ['react-hot-loader/babel']
+        }
+      }
     }
   ],
   exclude: /node_modules/
@@ -38,6 +51,15 @@ const extractSass = new ExtractTextPlugin({
   allChunks: true,
   disable: !IS_PRODUCTION
 });
+
+loaders.css = {
+  test: /\.css$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: 'css-loader'
+  }),
+  include: /flexboxgrid/
+};
 
 loaders.scss = {
   test: /\.scss$/,
@@ -92,7 +114,7 @@ loaders.image = {
 // PLUGINS
 //
 
-const sourceMap = (process.env.TEST || process.env.NODE_ENV !== 'production')
+const sourceMap = (process.env.TEST || !IS_PRODUCTION)
   ? [new webpack.SourceMapDevToolPlugin({filename: null, test: /\.tsx?$/})]
   : [];
 
@@ -120,6 +142,13 @@ const devPlugins = [
 ];
 
 const prodPlugins = [
+  new webpack.optimize.UglifyJsPlugin({
+    sourceMap: true,
+    compress: {
+      screw_ie8: true,
+      warnings: false
+    }
+  }),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false
@@ -186,6 +215,7 @@ module.exports = {
 
   module: {
     rules: [
+      loaders.css,
       loaders.scss,
       loaders.tsx,
       loaders.tslint,

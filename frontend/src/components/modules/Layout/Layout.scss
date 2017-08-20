@@ -1,0 +1,19 @@
+@import 'src/styles/constants.scss';
+
+.wlc_card {
+  padding: $margin__3;
+  background-color: $color__white;
+  margin-top: $margin__3;
+  margin-bottom: $margin__3;
+}
+
+.wlc_divider {
+
+  border: none;
+  height: 1px;
+  background-color: $color__grey--lighter;
+  width: 100%;
+  margin-top: $margin__3;
+  margin-bottom: $margin__3;
+
+}
