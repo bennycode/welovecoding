@@ -1,4 +1,5 @@
-import {Table, Column, Model} from 'sequelize-typescript';
+import {Table, Column, Model, HasMany} from 'sequelize-typescript';
+import Playlist from './Playlist';
 
 /**
  * Initially this table had the fields:
@@ -24,6 +25,9 @@ class Category extends Model<Category> {
   @Column color: string;
 
   @Column description: string;
+
+  @HasMany(() => Playlist)
+  playlists: Playlist[];
 }
 
 export default Category;

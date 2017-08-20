@@ -9,7 +9,7 @@ export default class PlaylistDTO extends BaseDTO {
   public language: string;
   public owner: AuthorDTO;
   public providerName: string;
-  private videos: string[] = [];
+  public videos: any[];
 
   constructor(id: number, name: string) {
     super(id, name);
@@ -17,5 +17,27 @@ export default class PlaylistDTO extends BaseDTO {
 
   get numberOfVideos(): number {
     return this.videos.length;
+  }
+
+  toJSON(): object {
+    return {
+      id: this.id,
+      name: this.name,
+      language : this.language,
+      categoryName: this.categoryName,
+      providerName: this.providerName,
+      numberOfVideos: this.numberOfVideos,
+      description : this.description,
+      owner: {
+        name: "Lars Vogel",
+        website: "http://www.vogella.com/",
+        description: null,
+      },
+      status: {
+        playable: true,
+        errorless: true,
+        embeddable: true,
+      },
+    };
   }
 }

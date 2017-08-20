@@ -1,4 +1,7 @@
-import {Table, Column, Model, DataType} from 'sequelize-typescript';
+import {Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany} from 'sequelize-typescript';
+import Category from './Category';
+import Author from './Author';
+import Video from './Video';
 
 const levels = {
   beginner: 'beginner',
@@ -39,6 +42,24 @@ class Playlist extends Model<Playlist> {
   @Column languageCode: string;
 
   @Column provider: string;
+
+  @ForeignKey(() => Category)
+  @Column
+  categoryId: number;
+
+  @BelongsTo(() => Category, 'categoryId')
+  category: Category;
+
+  @ForeignKey(() => Author)
+  @Column
+  authorId: number;
+
+  @BelongsTo(() => Author, 'authorId')
+  author: Author;
+
+  @HasMany(() => Video)
+  videos: Video[];
+
 }
 
 export default Playlist;

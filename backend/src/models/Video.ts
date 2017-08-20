@@ -6,6 +6,7 @@ import {
   ForeignKey,
 } from 'sequelize-typescript';
 import Author from './Author';
+import Playlist from './Playlist';
 
 /**
  * Initially this table had the fields:
@@ -42,6 +43,13 @@ class Video extends Model<Video> {
 
   @BelongsTo(() => Author, 'authorId')
   author: Author;
+
+  @ForeignKey(() => Playlist)
+  @Column
+  playlistId: number;
+
+  @BelongsTo(() => Playlist, 'playlistId')
+  playlist: Playlist;
 }
 
 export default Video;
