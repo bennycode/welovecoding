@@ -31,7 +31,7 @@ export default function Root() {
           />
           <Authenticated>
             <Switch>
-              <Route exact path="/tutorials" component={Tutorials} />
+              <Route path="/tutorials" component={Tutorials} />
               <Route exact path="/join" component={Participate} />
               <Route exact path="/sponsors" component={Sponsors} />
               <Route exact path="/ebooks" component={Ebooks} />

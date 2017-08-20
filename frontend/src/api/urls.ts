@@ -1,5 +1,8 @@
-const BASE_V1 = '/rest/service/v1';
+const BACKEND_URL = process.env.APP_URL_BACKEND;
+const DEPRECATED = BACKEND_URL + '/rest/service/v1';
+const API_BASE = BACKEND_URL + '/api';
 
 export default {
-  CATEGORIES: BASE_V1 + '/categories',
+  CATEGORIES_DEPRECATED: DEPRECATED + '/categories',
+  CATEGORIES: API_BASE + '/categories',
 };
