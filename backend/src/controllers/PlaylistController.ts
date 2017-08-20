@@ -24,3 +24,13 @@ export function getLegacyPlaylists(categoryId: number): Bluebird<PlaylistDTO[]> 
       });
     });
 }
+
+export function getPlaylists(categoryId: number): Bluebird<Playlist[]> {
+  return Category.findById(categoryId)
+  .then((category: Category) => {
+    return category.$get('playlists', {include: [{model: Video}]})
+      .then((playlists: Playlist[]) => {
+        return playlists;
+      });
+    });
+}
