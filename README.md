@@ -38,9 +38,19 @@ Make sure that you have a `.env` configuration file located in `backend/.env`.
 ### 4. Run npm scripts
 
 ```bash
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 - Backend will be accessible at http://localhost:8080/
 - Frontend will be accessible at http://localhost:8081/
+
+### Troubleshooting
+
+If you have problems with the database, do the following:
+
+```bash
+cd backend
+yarn database:reset
+yarn database:populate
+```
