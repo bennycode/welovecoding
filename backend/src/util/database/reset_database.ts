@@ -8,6 +8,8 @@ export default function resetDatabase() {
   // just to make sure we never do this on production
   if (APP_ENV !== POSSIBLE_APP_ENVS.PRODUCTION) {
     console.log('RESETTING DATABASE!');
-    return sequelize.sync({force: true});
+    return sequelize.sync({force: true}).then(() => {
+      console.log('RESETTING DONE!');
+    });
   }
 }

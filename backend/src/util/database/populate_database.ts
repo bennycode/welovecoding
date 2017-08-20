@@ -1,6 +1,7 @@
 import 'src/models';
 import User from 'src/models/User';
 import Category from 'src/models/Category';
+import Playlist from 'src/models/Playlist';
 import Video from 'src/models/Video';
 import Author from 'src/models/Author';
 import * as bluebird from 'bluebird';
@@ -62,7 +63,37 @@ const VIDEOS = [
   'Badass Math',
 ];
 
-export function populateVideos() {
+const PLAYLISTS = [
+  'Super nice playlist',
+  'Hacker playlist',
+  'Good videos',
+];
+
+export function populatePlaylists() {
+  console.log('POPULATING PLAYLISTS');
+  return Category.all().then(categories => {
+    return categories.map(category => {
+      return bluebird.all(
+        PLAYLISTS.map(name => {
+          const playlist = new Playlist({
+            slug: name,
+            name,
+            languageCode: 'de',
+            provider: 'Youtube',
+            description: 'test',
+            level: 'intermediate',
+            categoryId: category.id,
+          });
+          return playlist.save().then((playlist: Playlist) => {
+            return populateVideos(playlist);
+          });
+        }),
+      );
+    });
+  });
+}
+
+export function populateVideos(playlist: Playlist) {
   console.log('POPULATING VIDEOS');
   return bluebird.all(
     VIDEOS.map(name => {
@@ -70,21 +101,24 @@ export function populateVideos() {
         name,
         slug: name,
       });
-      video.save();
-      Author.all().then(authors => {
-        const author: Author = authors[0] as any;
-        video.$set('author', author);
-        return video.save();
+      video.save().then(() => {
+        return Author.all()
+          .then(authors => {
+            const author: Author = authors[0] as any;
+            return video.$set('author', author.id);
+          })
+          .then(() => video.$set('playlist', playlist.id));
       });
     }),
   );
 }
 
 export function populateAll() {
-  return bluebird.all([
-    populateUsers(),
-    populateCategories(),
-    populateAuthors(),
-    populateVideos(),
-  ]);
+  return populateUsers()
+    .then(populateCategories)
+    .then(populateAuthors)
+    .then(populatePlaylists)
+    .then(() => {
+      console.log('POPULATING DONE');
+    });
 }
