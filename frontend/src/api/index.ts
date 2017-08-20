@@ -7,6 +7,6 @@ export class Categories {
   }
 
   public static getPlaylists(id) {
-    return axios.get(`url.CATEGORIES/${id}`);
+    return axios.get(`${urls.CATEGORIES}/${id}`);
   }
 }
