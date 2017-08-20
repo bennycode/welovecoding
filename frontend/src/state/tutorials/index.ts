@@ -4,6 +4,42 @@ import {Categories} from 'src/api';
 const RECEIVE_CATEGORIES = 'tutorials/RECEIVE_CATEGORIES';
 const RECEIVE_PLAYLISTS = 'tutorials/RECEIVE_PLAYLISTS';
 
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  color: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Playlist {
+  id: number;
+  slug: string;
+  description: string;
+  level: string;
+  languageCode: string;
+  provider: string;
+  categoryId: number;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
+  videos: Video[];
+}
+
+export interface Video {
+  id: number;
+  name: string;
+  videoId: string;
+  slug: string;
+  previewImageUrl: string;
+  authorId: number;
+  playlistId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export function getCategories() {
   return dispatch => {
     return Categories.getCategories().then(res => {
@@ -38,9 +74,9 @@ export const getPlaylistsForCategoryFetcher = wrapActionForFetching(
 );
 
 export interface TutorialsState {
-  categories: any[];
+  categories: Category[];
   categoryPlaylists: {
-    [key: string]: {};
+    [key: string]: Playlist[];
   };
 }
 

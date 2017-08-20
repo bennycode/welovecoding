@@ -7,37 +7,62 @@ import {Grid, Row, Col} from 'src/components/modules/Grid';
 import {Card} from 'src/components/modules/Layout';
 import Typo from 'src/components/modules/Typo';
 
-import {getCategoriesFetcher} from 'src/state/tutorials';
+import {
+  getCategoriesFetcher,
+  Category,
+  Playlist,
+  getPlaylistsForCategoryFetcher,
+} from 'src/state/tutorials';
 import {StoreState} from 'src/state/store';
 
 import './Tutorials.scss';
 
 interface TutorialViewStateProps {
-  category: any;
+  category: Category;
+  playlists: Playlist[];
 }
 
 type TutorialViewOwnProps = RouteComponentProps<{id: string}>;
 
-const TutorialView: React.StatelessComponent<TutorialViewOwnProps> = ({match}) => {
-  console.log(match);
+const TutorialView: React.StatelessComponent<
+  TutorialViewOwnProps & TutorialViewStateProps
+> = ({category, playlists}) => {
+  if (category === undefined || playlists === undefined) {
+    return null;
+  }
   return (
     <div>
-      {'Hey'}
+      <Typo.SubHeader>
+        {category.name}
+      </Typo.SubHeader>
+      <ul>
+          {playlists.map(playlist => {
+            return (
+              <li key={playlist.id}>
+                {playlist.slug}
+              </li>
+            );
+          })}
+        </ul>
     </div>
   );
 };
 
-const ConnectedTutorialView = connect<TutorialViewStateProps, {}, TutorialViewOwnProps>(
+const ConnectedTutorialView = fetches(
+  getPlaylistsForCategoryFetcher((props: TutorialViewOwnProps) => props.match.params.id),
+)(connect<TutorialViewStateProps, {}, TutorialViewOwnProps>(
   (state: StoreState, props) => {
+    const categoryId = Number(props.match.params.id);
     return {
-      category: state.tutorials.categories[props.match.params.id],
+      category: state.tutorials.categories.find(c => c.id === categoryId),
+      playlists: state.tutorials.categoryPlaylists[categoryId],
     };
   },
   {},
-)(TutorialView);
+)(TutorialView));
 
 interface TutorialsStateProps {
-  categories: any[];
+  categories: Category[];
 }
 
 type TutorialsOwnProps = RouteComponentProps<{}>;
