@@ -137,9 +137,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/supertest@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@types/supertest/-/supertest-2.0.1.tgz#66e8d84a274ad4bbbeb97d77329e53d90b82f112"
+"@types/supertest@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/supertest/-/supertest-2.0.2.tgz#c81c797c185f5776a236a0884eddadc35280f6f7"
   dependencies:
     "@types/superagent" "*"
 
