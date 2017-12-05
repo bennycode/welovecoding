@@ -2,7 +2,7 @@
   "dependencies": {
     "@welovecoding/backend": "./backend",
     "@welovecoding/frontend": "./frontend",
-    "fs-extra": "4.0.2"
+    "fs-extra": "4.0.3"
   },
   "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
   "devDependencies": {
