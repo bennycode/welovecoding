@@ -9,7 +9,7 @@
     "concurrently": "3.5.0"
   },
   "engines": {
-    "node": "8.x.x"
+    "node": "10"
   },
   "name": "@welovecoding/welovecoding",
   "private": true,
