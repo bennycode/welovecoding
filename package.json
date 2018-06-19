@@ -6,7 +6,7 @@
   },
   "description": "We Love Coding provides a numerous collection of video tutorials for developers.",
   "devDependencies": {
-    "concurrently": "3.5.0"
+    "concurrently": "3.6.0"
   },
   "engines": {
     "node": "8.x.x"
